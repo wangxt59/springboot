@@ -1,0 +1,36 @@
+server:
+  port: 8080
+  context-path: /boot
+# 拦截器  进入mvc的规则  意思是要在请求前加/**
+  servlet-path: /
+  
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+#  resources:
+#    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+
+logging:
+  level: 
+    org.apache.log4j.ConsoleAppender: debug
+#    root: debug
+  pattern:
+    console: -->[%thread] %-5level %logger- %msg%n 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   

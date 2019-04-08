@@ -1,0 +1,5 @@
+system:
+   user:
+      name: wang
+      password: 123456
+      age: 12      
