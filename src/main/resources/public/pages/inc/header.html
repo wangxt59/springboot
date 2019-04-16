@@ -1,0 +1,511 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html>
+	<head>
+	<head>
+		<title>总后台管理中心</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="robots" content="noindex, nofollow">
+		<link href="/css/top_new.css" rel="stylesheet" type="text/css" />
+		<link href="/css/font-awesome.min.css" rel="stylesheet" />
+		<link href="/css/general.css" rel="stylesheet" type="text/css" />
+		<link href="/css/main.css" rel="stylesheet" type="text/css" />
+		<link href="/css/layer.css" rel="stylesheet" type="text/css" />
+		
+		<script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="/js/common.js"></script>
+		<script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+		<script language="JavaScript">
+
+			// 这里把JS用到的所有语言都赋值到这里
+						var process_request = "正在处理您的请求...";
+						var todolist_caption = "记事本";
+						var todolist_autosave = "自动保存";
+						var todolist_save = "保存";
+						var todolist_clear = "清除";
+						var todolist_confirm_save = "是否将更改保存到记事本？";
+						var todolist_confirm_clear = "是否清空内容？";
+						var expand_all = "展开";
+						var collapse_all = "闭合";
+						var shop_name_not_null = "商店名称不能为空";
+						var good_name_not_null = "商品名称不能为空";
+						var good_category_not_null = "商品分类不能为空";
+						var good_number_not_number = "商品数量不是数值";
+						var good_price_not_number = "商品价格不是数值";
+
+		</script>
+	</head>
+<body>
+
+<script type="text/javascript">
+	//帮助系统调用
+	function web_address() {
+		var ne_add = parent.document.getElementById('main-frame');
+		var ne_list = ne_add.contentWindow.document.getElementById('search_id').innerHTML;
+		ne_list.replace('-', '');
+		var arr = ne_list.split('-');
+		window.open('help.php?al='+arr[arr.length - 1],'_blank');
+	}
+	//授权检测回调处理
+	function start_sendmail_Response(result) {
+		// 运行正常
+		if (result.error == 0) {
+		    var str = '';
+			if (result['content']['auth_str'])
+			{
+				str = '<a href="javascript:void(0);" target="_blank">' + result['content']['auth_str'];
+				if (result['content']['auth_type'])
+				{
+					str += '[' + result['content']['auth_type'] + ']';
+				}
+				str += '</a> ';
+			}
+			document.getElementById('license-div').innerHTML = str;
+		}
+	}
+	function modalDialog(url, name, width, height) {
+		if (width == undefined) {
+			width = 400;
+		}
+		if (height == undefined) {
+			height = 300;
+		}
+		if (window.showModalDialog) {
+			window.showModalDialog(url, name, 'dialogWidth=' + (width) + 'px; dialogHeight=' + (height + 5) + 'px; status=off');
+		} else {
+			x = (window.screen.width - width) / 2;
+			y = (window.screen.height - height) / 2;
+
+			window.open(url, name, 'height=' + height + ', width=' + width + ', left=' + x + ', top=' + y + ', toolbar=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, modal=yes');
+		}
+	}
+	function ShowToDoList()
+	{
+		try {
+			var mainFrame = window.top.frames['main_frame'];
+			mainFrame.window.showTodoList(adminId);
+		}
+		catch(ex) {
+
+		}
+	}
+	var adminId = "";
+</script>
+<script>
+	$(document).ready(function(){
+		var time = null;
+		$(".menu-button").hover(function(){
+			clearTimeout(time);
+			k = $(this).attr("key");
+			$(this).addClass("on").siblings().removeClass("on");
+			time = setTimeout(function(){
+				$(".dropdown").show();
+				$("#" + k).siblings().hide();
+				$("#" + k).show();
+				$(".main").addClass("fuzzy");
+			},300);
+		});
+		$(".menu-button-wu").hover(function(){
+			clearTimeout(time);
+			$(this).addClass("on").siblings().removeClass("on");
+			time = setTimeout(function(){
+				$(".dropdown").hide();
+			},300);
+		});
+		$(".submenu").mouseleave(function(){
+			clearTimeout(time);
+			$(".dropdown").hide();
+			$(".menu-button").removeClass("on");
+			$(".menu-button-wu").removeClass("on");
+			$(".main").removeClass("fuzzy");
+		});
+		$(".individual-list").hover(function(){
+			isOut = false;
+		},function(){
+			isOut = true;
+		});
+		$(document).click(function(){
+			if(isOut == true){
+				$(".individual-menu").hide();
+			}else{
+				$(".individual-menu").toggle();
+			}
+		});
+	});
+</script>
+
+<div id="header-div" style="display:block;">
+	<div id="license1-div"></div>
+	<div class="submenu">
+		<!--<div id="logo-div" style="position: absolute;top: 14px;left: 20px;">
+			<img src="/images/admin_logo.png" alt="zzsike" style="width: 130px;"/>
+		</div>
+		--><div class="submenu-list">
+			
+			<div class="menu-button-wu" key="m01_console">
+				<a href="/pages/login/index.jsp">
+					<span class="fa fa-2x fa-box"><img src="/images/icon1.png"/></span>
+					控制台
+				</a>
+			</div>
+			<div class="menu-button" key="m02_product_control">
+				<a href="javascript:void(0);">
+					<span class="fa fa-2x fa-box"><img src="/images/icon1.png"/></span>
+					商品管理
+				</a>
+			</div>
+			<div class="menu-button" key="m03_supplier">
+				<a href="javascript:void(0);">
+					<span class="fa fa-2x fa-box"><img src="/images/icon2.png"/></span>
+					订单管理
+				</a>
+			</div>
+			<div class="menu-button" key="m04_promotion">
+				<a href="javascript:void(0);">
+					<span class="fa fa-2x fa-box"><img src="/images/icon3.png"/></span>
+					会员管理
+				</a>
+			</div>
+			<div class="menu-button" key="m05_order">
+				<a href="javascript:void(0);">
+					<span class="fa fa-2x fa-box"><img src="/images/icon4.png"/></span>
+					交易大厅
+				</a>
+			</div>
+			<div class="menu-button" key="m07_content">
+				<a href="javascript:void(0);">
+					<span class="fa fa-2x fa-box"><img src="/images/icon5.png"/></span>
+					财务管理
+				</a>
+			</div>
+			<div class="menu-button" key="m08_members">
+				<a href="javascript:void(0);">
+					<span class="fa fa-2x fa-box"><img src="/images/icon6.png"/></span>
+					客服管理
+				</a>
+			</div>
+			<div class="menu-button" key="m09_priv_admin">
+				<a href="javascript:void(0);">
+					<span class="fa fa-2x fa-box"><img src="/images/icon7.png"/></span>
+					商家管理
+				</a>
+			</div>
+			<div class="menu-button" key="m10_system">
+				<a href="javascript:void(0);">
+					<span class="fa fa-2x fa-box"><img src="/images/icon8.png"/></span>
+					市场管理
+				</a>
+			</div>
+			<div class="menu-button" key="m11_template">
+				<a href="javascript:void(0);">
+					<span class="fa fa-2x fa-box"><img src="/images/icon9.png"/></span>
+					系统设置
+				</a>
+			</div>
+		</div>
+		<div class="dropdown">
+			<!--商品管理-->
+			<div class="dropdown-list" id="m02_product_control" style="display: none;">
+				<ul>
+					<li>
+						<a href="/goods/selectGoodsList.action" >
+							商品列表						</a>
+					</li>
+					<li>
+						<a href="/category/selectCategoryList.do" >
+							分类管理						</a>
+					</li>
+					<li>
+						<a href="/channel/selectChannelList.do" >
+							兑换频道						</a>
+					</li>
+					<li>
+						<a href="/attributeRelation/selectAttributeRelationList.do" >
+							规格参数						</a>
+					</li>
+					<li>
+						<a href="/goods/selectExtendInfoList.do" >
+							扩展属性						</a>
+					</li>
+					<li>
+						<a href="/brand/selectBrandManageList.do" >
+							品牌管理						</a>
+					</li>
+				</ul>
+			</div>
+			<!--订单管理-->
+			<div class="dropdown-list" id="m03_supplier" style="display: none;">
+				<ul>
+				   <li>
+						<a href="/order/queryOrderList.do" >
+							
+							订单列表						</a>
+					</li>
+					<li>
+						<a href="/order/queryOrderList.do?operation=1&orderStatus=2" >
+							
+							待发货						</a>
+					</li>
+					<li>
+						<a href="/order/queryOrderList.do?operation=2&orderStatus=5" >
+							
+							已取消						</a>
+					</li>
+					<li>
+						<a href="/order/queryOrderList.do?operation=3&orderStatus=1" >
+							
+							冻结中						</a>
+					</li>
+					<!--<li>
+						<a href="/integral/integral.do?pageProperty=usable" >
+							
+							可用积分						</a>
+					</li>
+					<li>
+						<a href="/integral/integral.do?pageProperty=freeze" >
+							
+							待用积分					</a>
+					</li>
+					<li>
+						<a href="/integral/integral.do?pageProperty=shopping" >
+							
+							购物积分					</a>
+					</li>
+					<li>
+						<a href="/integral/integral.do?pageProperty=share" >
+							
+							分享积分					</a>
+					</li>
+					<li>
+						<a href="/integral/integral.do?pageProperty=red" >
+							
+							红分					</a>
+					</li>
+					<li>
+						<a href="/integral/integral.do?pageProperty=multifunctional" >
+							
+							多功能积分						</a>
+					</li>
+					<li>
+						<a href="/integral/integral.do?pageProperty=bond" >
+							
+							债券					</a>
+					</li>
+				--></ul>
+			</div>
+			<!--会员管理-->
+			<div class="dropdown-list" id="m04_promotion" style="display: none;">
+				<ul>
+					<li>
+						<a href="/user/list.do" >
+							会员列表						</a>
+					</li>
+					
+					<li>
+						<a href="/prize/selectPrizeInfoList.do" >
+							满员抽奖列表						</a>
+					</li>
+					<li>
+						<a href="/prizeUser/selectPrizeUserInfoList.do" >
+							参与会员列表						</a>
+					</li>
+					<li>
+						<a href="/user/doublyList.do" >
+							倍增审核						</a>
+					</li>
+				</ul>
+			</div>
+			<!--交易大厅-->
+			<div class="dropdown-list" id="m05_order" style="display: none;">
+				<ul>
+										<li>
+						<a href="/paramTradeHall/selectTradeHallPurchaseList.do" >
+							会员买入积分						</a>
+					</li>
+										<li>
+						<a href="/paramTradeHall/selectTradeHallSellOutList.do" >
+							会员卖出积分						</a>
+					</li>
+				</ul>
+			</div>
+			<!--财务管理-->
+			<div class="dropdown-list" id="m07_content" style="display: none;">
+				<ul>
+					<li>
+						<a href="/ledger/queryLedgerList.do" >
+							资金台账						</a>
+					</li>
+				</ul>
+			</div>
+			<!--客服管理-->
+			<div class="dropdown-list" id="m08_members" style="display: none;">
+				<ul>
+					<li>
+						<a href="/servicebill/serviceBillList.do" >
+							工单列表
+						</a>
+					</li>
+					<li>
+						<a href="/pages/servicebill/add.jsp" >
+							创建工单
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!--商家管理-->
+			<div class="dropdown-list" id="m09_priv_admin" style="display: none;">
+				<ul>
+					<li>
+						<a href="/store/selectStoreList.do" >
+							店铺列表						</a>
+					</li>
+										<li>
+						<a href="/designer/selectMerchantInformation.do" >
+							商家列表						</a>
+					</li>
+					
+					<!--<li>
+						<a href="/agreement/selectAgreementList.do" >
+							合同列表						</a>
+					</li>-->
+				</ul>
+			</div>
+			<!--市场管理-->
+			<div class="dropdown-list" id="m10_system" style="display: none;">
+				<ul>
+				    <li>
+						<a href="/adposition/selectSitemapList.do" >
+							广告位列表						</a>
+					</li>
+					<li>
+						<a href="/template/selectTemplateList.do" >
+							广告位模板列表						</a>
+					</li>
+					<li>
+						<a href="/notice/queryNoticeList.do" >
+							公告管理						</a>
+					</li>
+					<li>
+						<a href="/sysSite/selectSysSiteList.do" >
+							站点管理</a>
+					</li>
+					<li>
+						<a href="third_customer.php?act=list" >
+							底部链接</a>
+					</li>
+				</ul>
+			</div>
+			<!--系统管理-->
+			<div class="dropdown-list" id="m11_template" style="display: none;">
+				<ul>
+					<li>
+						<a href="/paramUserType/selectParamUserTypeList.do" >
+							会员类型参数						</a>
+					</li>
+										<li>
+						<a href="/paramDoubly/selectParamDoublyList.do" >
+							激活倍增参数						</a>
+					</li>
+										<li>
+						<a href="/paramTradeHall/selectParamTradeHallList.do" >
+							交易大厅参数						</a>
+					</li>
+					<li>
+						<a href="/paramTradeHallRate/selectParamTradeHallRateList.do" >
+							积分对价参数						</a>
+					 </li>
+					 <!--
+					<li>
+						<a href="navigator.php?act=list" >
+							
+							供应商返款参数						</a>
+					</li>
+					--><li>
+						<a href="/paramShopping/selectParamShoppingList.do" >
+							购物参数						</a>
+					</li>
+					
+					<li>
+						<a href="/worker/selectWorkerInfoList.do" >
+							用户管理</a>
+					</li>
+					<li>
+						<a href="/role/selectRoleList.do" >
+							角色管理</a>
+					</li>
+					<li>
+						<a href="/group/selectPowerGroupList.do" >
+							权限管理</a>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+				<div id="load-div" style="padding: 5px 0px 0 0; text-align: right; color: #f90; display: none;width:20%;float:right; height:68px; line-height:58px;">
+			正在处理您的请求...		</div>
+	</div>
+	<div class="shortcuts">
+				<div class="individual-list">
+				<div class="list-box">
+					<span class="individual fa"><img src="/images/icon10.png"/></span>
+					<span class="list-word">常用菜单</span>
+				</div>
+				<ul class="individual-menu">
+						<li class="menu-2">
+							<a href="/goods/selectGoodsList.action">
+								<i class="fa icon-2"></i>
+								<span class="title">商品列表</span>
+							</a>
+						</li>
+						<li class="menu-3">
+							<a href="/order/queryOrderList.do">
+								<i class="fa icon-3"></i>
+								<span class="title">订单列表</span>
+							</a>
+						</li>
+						<li class="menu-4">
+							<a href="/user/list.do">
+								<i class="fa icon-4"></i>
+								<span class="title">会员列表</span>
+							</a>
+						</li>
+						<li class="menu-5">
+							<a href="/designer/selectMerchantInformation.do">
+								<i class="fa icon-5"></i>
+								<span class="title">商家列表</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="system">
+				<ul class="system-list">
+					<li class="modif">
+						<a href="/prize/selectPrizeInfoList.do">
+							<span class="fa fa-user"><img src="/images/icon16.png"/></span>
+							<span class="word">抽奖列表</span>
+						</a>
+					</li>
+					<li class="mystore">
+						<a href="/order/queryOrderList.do?operation=1&orderStatus=2" target="_blank">
+							<span class="fa fa-search"><img src="/images/icon17.png"/></span>
+							<span class="word">待发货订单</span>
+						</a>
+					</li>
+					<li class="signout">
+						<a href="/login/loginOut.do">
+							<span class="fa fa-power-off"><img src="/images/icon18.png"/></span>
+							<span class="word">退出</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+</div>	
+<div style="width: 100%;height: 96px;"></div>
+
+<!-- end 升级 -->
+
+
+<!--<script src='/js/echarts-all.js'></script>
+--></body>
+</html>
