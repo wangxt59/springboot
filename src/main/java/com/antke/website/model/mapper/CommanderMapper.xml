@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.website.dao.CommanderMapper">
+	<resultMap id="BaseResultMap"
+		type="com.antke.website.model.bean.Commander">
+		<id column="apply_id" jdbcType="INTEGER" property="applyId" />
+		<result column="apply_date" jdbcType="TIMESTAMP"
+			property="applyDate" />
+		<result column="user_id" jdbcType="INTEGER" property="userId" />
+		<result column="real_name" jdbcType="VARCHAR"
+			property="realName" />
+		<result column="contact" jdbcType="VARCHAR" property="contact" />
+		<result column="id_card_no" jdbcType="INTEGER"
+			property="idCardNo" />
+		<result column="id_card_front" jdbcType="VARCHAR"
+			property="idCardFront" />
+		<result column="id_card_back" jdbcType="VARCHAR"
+			property="idCardBack" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="group_num" jdbcType="INTEGER"
+			property="groupNo" />
+		<result column="community" jdbcType="VARCHAR"
+			property="community" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="create_date" jdbcType="TIMESTAMP"
+			property="createDate" />
+		<result column="update_date" jdbcType="TIMESTAMP"
+			property="updateDate" />
+		<result column="province" jdbcType="VARCHAR"
+			property="province" />
+		<result column="city" jdbcType="VARCHAR" property="city" />
+		<result column="apply_reason" jdbcType="VARCHAR"
+			property="applyReason" />
+		<result column="other_reason" jdbcType="VARCHAR"
+			property="otherReason" />
+		<result column="refuse_reason" jdbcType="VARCHAR"
+			property="refuseReason" />
+	</resultMap>
+	<select id="queryCommanderListCount"
+		parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+		count(*)
+		FROM
+		apply_commander ac
+		LEFT JOIN apply_delivery_point adp ON ac.user_id = adp.user_id
+		LEFT JOIN
+		user_info ui ON ac.user_id = ui.id
+		where 1=1
+		<include refid="Base_where" />
+		GROUP BY
+		ac.apply_id
+	</select>
+
+	<!-- 团长列表 -->
+	<select id="queryUserInfoListByPages"
+		parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+		ac.apply_id,
+		ac.user_id,
+		ac.apply_date,
+		ac.real_name,
+		ac.contact,
+		ac.status,
+		ac.group_num,
+		ac.apply_date,
+		ac.apply_reason,
+		GROUP_CONCAT(adp.point_name
+		SEPARATOR ',') AS point_name,
+		ui.nick_name
+		FROM
+		apply_commander ac
+		LEFT JOIN apply_delivery_point adp ON ac.user_id = adp.user_id
+		LEFT JOIN
+		user_info ui ON ac.user_id = ui.id
+		where 1=1
+		<include refid="Base_where" />
+		GROUP BY
+		ac.apply_id
+		ORDER BY ac.apply_date DESC
+	</select>
+
+	<sql id="Base_where">
+		<if test="real_name != null and real_name != ''">
+			and ac.real_name like CONCAT('%','${real_name}','%' )
+		</if>
+		<if test="contact != null and contact != ''">
+			and ac.contact = #{contact}
+		</if>
+		<if test="city != null and city != ''">
+			and ac.city = #{city}
+		</if>
+		<if test="status != null and status != ''">
+			and ac. status = #{status}
+		</if>
+	</sql>
+
+	<select id="getUserInfoByapplyId" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT
+		*
+		from apply_commander where apply_id = #{apply_id}
+	</select>
+
+	<select id="getCommanderById" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT
+		ac.apply_id,
+		ac.apply_date,
+		ac.address,
+		ac.id_card_front,
+		ac.id_card_back,
+		ac.user_id,
+		ac.real_name,
+		ac.contact,
+		ac.status,
+		ac.group_num,
+		ac.apply_reason,
+		GROUP_CONCAT(adp.point_name
+		SEPARATOR ',') AS point_name,
+		ui.nick_name,
+		ui.user_code,
+		ac.refuse_reason,
+		ui.id_card_no
+		FROM
+		apply_commander ac
+		LEFT JOIN apply_delivery_point adp ON ac.user_id = adp.user_id
+		LEFT JOIN
+		user_info ui ON ac.user_id = ui.id
+		where ac.apply_id = #{apply_id}
+		GROUP BY
+		ac.apply_id
+	</select>
+	<update id="saveReasonById"
+		parameterType="com.antke.website.model.bean.Commander">
+		UPDATE apply_commander ac
+		SET ac.status =
+		#{status},ac.refuse_reason = #{refuseReason}
+		WHERE
+		ac.apply_id =
+		#{applyId}
+	</update>
+
+	<select id="queryReasonById" parameterType="java.lang.Integer"
+		resultType="java.lang.String">
+		select reason_name from apply_reason where id = #{id}
+	</select>
+</mapper>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.power.dao.WorkerInfoDao">
+	
+	<!-- 新增员工信息 -->
+	<insert id="insertWorkerInfo" parameterType="com.antke.power.model.bean.WorkerInfo">
+		insert into bus_worker
+			(
+				<if test="worker_id != null">worker_id,</if>
+				<if test="worker_name != null">worker_name,</if>
+				<if test="worker_code != null">worker_code,</if>
+				<if test="login_name != null">login_name,</if>
+				<if test="password != null">password,</if>
+				<if test="sex != null">sex,</if>
+				<if test="company != null">company,</if>
+				<if test="community != null">community,</if>
+				<if test="professional != null">professional,</if>
+				<if test="contact != null">contact,</if>
+				<if test="fixed_phone != null">fixed_phone,</if>
+				<if test="province != null">province,</if>
+				<if test="city != null">city,</if>
+				<if test="district != null">district,</if>
+				<if test="head_portrait != null">head_portrait,</if>
+				<if test="cert_code != null">cert_code,</if>
+				<if test="email != null">email,</if>
+				<if test="qq != null">qq,</if>
+				<if test="status != null">status,</if>
+				<if test="login_num != null">login_num,</if>
+				<if test="isfirst != null">isfirst,</if>
+				<if test="type != null">type,</if>
+				<if test="store_id != null">store_id,</if>
+				<if test="seller_login_id != null">seller_login_id,</if>
+				<if test="site_id != null and site_id != ''">site_id,</if>
+				<if test="rank != null and rank != ''">rank,</if>
+				<if test="chant_id != null and chant_id != ''">chant_id,</if>
+				create_date,update_date
+			)
+			values
+			(
+				<if test="worker_id != null">#{worker_id},</if>
+				<if test="worker_name != null">#{worker_name},</if>
+				<if test="worker_code != null">#{worker_code},</if>
+				<if test="login_name != null">#{login_name},</if>
+				<if test="password != null">#{password},</if>
+				<if test="sex != null">#{sex},</if>
+				<if test="company != null">#{company},</if>
+				<if test="community != null">#{community},</if>
+				<if test="professional != null">#{professional},</if>
+				<if test="contact != null">#{contact},</if>
+				<if test="fixed_phone != null">#{fixed_phone},</if>
+				<if test="province != null">#{province},</if>
+				<if test="city != null">#{city},</if>
+				<if test="district != null">#{district},</if>
+				<if test="head_portrait != null">#{head_portrait},</if>
+				<if test="cert_code != null">#{cert_code},</if>
+				<if test="email != null">#{email},</if>
+				<if test="qq != null">#{qq},</if>
+				<if test="status != null">#{status},</if>
+				<if test="login_num != null">#{login_num},</if>
+				<if test="isfirst != null">#{isfirst},</if>
+				<if test="type != null">#{type},</if>
+				<if test="store_id != null">#{store_id},</if>
+				<if test="seller_login_id != null">#{seller_login_id},</if>
+				<if test="site_id != null and site_id != ''">#{site_id},</if>
+				<if test="rank != null and rank != ''">#{rank},</if>
+				<if test="chant_id != null and chant_id != ''">#{chant_id},</if>
+				#{create_date},#{update_date}
+			)
+			
+	</insert>
+
+	<!-- 更新员工信息 -->
+	<update id="updateWorkerInfo" parameterType="com.antke.power.model.bean.WorkerInfo">
+		update bus_worker 
+		<set>
+			<if test="worker_name != null and worker_name != ''">worker_name = #{worker_name},</if>
+			<if test="worker_code != null and worker_code != ''">worker_code = #{worker_code},</if>
+			<if test="login_name != null and login_name != ''">login_name = #{login_name},</if>
+			<if test="password != null and password != ''">password = #{password},</if>
+			<if test="sex != null and sex != ''">sex = #{sex},</if>
+			<if test="company != null and company != ''">company = #{company},</if>
+			<if test="community != null and community != ''">community = #{community},</if>
+			<if test="professional != null and professional != ''">professional = #{professional},</if>
+			<if test="contact != null and contact != ''">contact = #{contact},</if>
+			<if test="fixed_phone != null and fixed_phone != ''">fixed_phone = #{fixed_phone},</if>
+			<if test="province != null and province != ''">province = #{province},</if>
+			<if test="city != null and city != ''">city = #{city},</if>
+			<if test="district != null and district != ''">district = #{district},</if>
+			<if test="head_portrait != null and head_portrait != ''">head_portrait = #{head_portrait},</if>
+			<if test="cert_code != null and cert_code != ''">cert_code = #{cert_code},</if>
+			<if test="email != null and email != ''">email = #{email},</if>
+			<if test="qq != null and qq != ''">qq = #{qq},</if>
+			<if test="status != null and status != ''">status = #{status},</if>
+			<if test="login_num != null and login_num != ''">login_num = #{login_num},</if>
+			<if test="isfirst != null and isfirst != ''">isfirst = #{isfirst},</if>
+			<if test="type != null and type != ''">type = #{type},</if>
+			<if test="store_id != null and store_id != ''">store_id = #{store_id},</if>
+			<if test="seller_login_id != null and seller_login_id != ''">seller_login_id = #{seller_login_id},</if>
+			<if test="site_id != null and site_id != ''">site_id=#{site_id},</if>
+			<if test="rank != null and rank != ''">rank=#{rank},</if>
+			update_date = #{update_date}
+		</set>
+		where 
+		worker_id = #{worker_id}
+	</update>
+	
+	<!--查询员工信息 -->
+	<select id="queryWorkerInfo" parameterType="java.util.Map"  resultType="com.antke.power.model.bean.WorkerInfo">
+			select worker_id, worker_name, worker_code, login_name,
+			password, sex, company, community, professional, contact,
+			fixed_phone, province, city, district, head_portrait,
+			cert_code, email, qq, status, login_num, isfirst,type,
+			create_date,update_date,store_id,site_id,chant_id,rank from bus_worker
+			where
+				<if test="worker_name != null and worker_name != ''">worker_name like CONCAT('%','${worker_name}','%' ) and</if>
+				<if test="worker_code != null and worker_code != ''">worker_code like CONCAT('%','${worker_code}','%' ) and</if>
+				<if test="worker_id != null"> worker_id = #{worker_id} and </if>
+				<if test ="login_name != null and login_name != ''">login_name = #{login_name} and</if>
+				<if test="password != null"> password =BINARY #{password} and </if>
+				<if test ="create_date != null">create_date = #{create_date} and</if>
+				<if test="company != null and company != ''">company like CONCAT('%','${company}','%' ) and</if>
+				<if test="community != null and community != ''">community like CONCAT('%','${community}','%' ) and</if>
+				<if test="professional != null and professional != ''">professional like CONCAT('%','${professional}','%' ) and</if>
+				<if test ="province != null">province = #{province} and</if>
+				<if test ="city != null">city = #{city} and</if>
+				<if test ="district != null">district = #{district} and</if>
+				<if test ="status != null and status != ''">status = #{status} and</if>
+				<if test ="type != null and type != ''">type = #{type} and</if>
+				<if test ="store_id != null and store_id != ''">store_id = #{store_id} and</if>
+				<if test ="seller_login_id != null and seller_login_id != ''">seller_login_id = #{seller_login_id} and</if>
+				<if test="site_id != null and site_id != ''">#{site_id},</if>
+			1 = 1 
+	</select>
+	<!-- 查询员工编号是否存在 -->
+	<select id="queryWorkerCodeIsExist" parameterType="java.lang.String" resultType="com.antke.power.model.bean.WorkerInfo">
+		select worker_id, worker_name, worker_code, login_name,
+			password, sex, company, community, professional, contact,
+			fixed_phone, province, city, district, head_portrait,
+			cert_code, email, qq, status, login_num, isfirst,type,
+			create_date,update_date,store_id,chant_id from bus_worker
+			where
+			login_name = #{login_name}
+	</select>
+	<!-- 查询员工登录名是否存在 -->
+	<select id="queryLoginNameIsExist" parameterType="java.lang.String" resultType="com.antke.power.model.bean.WorkerInfo">
+		select worker_id, worker_name, worker_code, login_name,
+			password, sex, company, community, professional, contact,
+			fixed_phone, province, city, district, head_portrait,
+			cert_code, email, qq, status, login_num, isfirst,type,
+			create_date,update_date,store_id,chant_id from bus_worker
+			where
+			login_name = #{login_name}
+	</select>
+	
+	<!--查询员工信息 -->
+	<select id="queryWorkerInfoList" parameterType="java.util.Map"  resultType="com.antke.power.model.bean.WorkerInfo">
+			select worker_id, worker_name, worker_code, login_name,
+			password, sex, company, community, professional, contact,
+			fixed_phone, province, city, district, head_portrait,
+			cert_code, email, qq, status, login_num, isfirst,type,
+			create_date,update_date,store_id,site_id,chant_id,rank from bus_worker
+			where
+				<if test="worker_name != null and worker_name != ''">worker_name like CONCAT('%','${worker_name}','%' ) and</if>
+				<if test="worker_code != null and worker_code != ''">worker_code like CONCAT('%','${worker_code}','%' ) and</if>
+				<if test="worker_id != null"> worker_id = #{worker_id} and </if>
+				<if test="login_name != null and login_name != ''">login_name = #{login_name} and</if>
+				<if test="password != null"> password = #{password} and </if>
+				<if test ="create_date != null">create_date = #{create_date} and</if>
+				<if test="company != null and company != ''">company like CONCAT('%','${company}','%' ) and</if>
+				<if test="community != null and community != ''">community like CONCAT('%','${community}','%' ) and</if>
+				<if test="professional != null and professional != ''">professional like CONCAT('%','${professional}','%' ) and</if>
+				<if test ="province != null">province = #{province} and</if>
+				<if test ="city != null">city = #{city} and</if>
+				<if test ="district != null">district = #{district} and</if>
+				<if test ="status != null">status = #{status} and</if>
+				<if test ="type != null and type != ''">type = #{type} and</if>
+				<if test ="store_id != null and store_id != ''">store_id = #{store_id} and</if>
+				<if test ="seller_login_id != null and seller_login_id != ''">seller_login_id = #{seller_login_id} and</if>
+				<if test="site_id != null and site_id != ''">#{site_id},</if>
+			1 = 1 
+	</select>
+	
+	<!--查询员工总数 -->
+	<select id="queryWorkerInfoListCount" parameterType="java.util.Map"  resultType="int">
+			select count(1) from bus_worker
+			where
+				<if test="worker_name != null and worker_name != ''">worker_name like CONCAT('%','${worker_name}','%' ) and</if>
+				<if test="worker_code != null and worker_code != ''">worker_code like CONCAT('%','${worker_code}','%' ) and</if>
+				<if test="worker_id != null"> worker_id = #{worker_id} and </if>
+				<if test="chant_id != null"> chant_id = #{chant_id} and </if>
+				<if test="login_name != null and login_name != ''">login_name = #{login_name} and</if>
+				<if test="password != null"> password = #{password} and </if>
+				<if test ="create_date != null">create_date = #{create_date} and</if>
+				<if test="company != null and company != ''">company like CONCAT('%','${company}','%' ) and</if>
+				<if test="community != null and community != ''">community like CONCAT('%','${community}','%' ) and</if>
+				<if test="professional != null and professional != ''">professional like CONCAT('%','${professional}','%' ) and</if>
+				<if test ="province != null">province = #{province} and</if>
+				<if test ="city != null">city = #{city} and</if>
+				<if test ="district != null">district = #{district} and</if>
+				<if test ="status != null and status != ''">status = #{status} and</if>
+				<if test ="type != null and type != ''">type = #{type} and</if>
+				<if test ="store_id != null and store_id != ''">store_id = #{store_id} and</if>
+				<if test ="seller_login_id != null and seller_login_id != ''">seller_login_id = #{seller_login_id} and</if>
+				<if test ="chant_id != null and chant_id != ''">chant_id = #{chant_id} and</if>
+				<if test="site_id != null and site_id != ''">#{site_id},</if>
+			1 = 1 
+	</select>
+	
+	<!--查询员工列表带分页 -->
+	<select id="queryWorkerInfoListByPage" parameterType="java.util.Map"  resultType="java.util.Map">
+			select  b.worker_id, b.worker_name, b.worker_code, b.login_name,b.password, b.sex, b.company, b.community, b.professional, b.contact,
+					b.fixed_phone, b.province, b.city, b.district, b.head_portrait,b.cert_code, b.email, b.qq, b.status, b.login_num, b.isfirst,type,
+					b.create_date,b.update_date,b.store_id,b.site_id,b.chant_id,b.rank
+			from bus_worker b
+			where
+				<if test="worker_name != null and worker_name != ''">b.worker_name like CONCAT('%','${worker_name}','%' ) and</if>
+				<if test="worker_code != null and worker_code != ''">b.worker_code like CONCAT('%','${worker_code}','%' ) and</if>
+				<if test="worker_id != null"> b.worker_id = #{worker_id} and </if>
+				<if test="login_name != null and login_name != ''">b.login_name = #{login_name} and</if>
+				<if test="password != null"> b.password = #{password} and </if>
+				<if test ="create_date != null">b.create_date = #{create_date} and</if>
+				<if test="company != null and company != ''">b.company like CONCAT('%','${company}','%' ) and</if>
+				<if test="community != null and community != ''">b.community like CONCAT('%','${community}','%' ) and</if>
+				<if test="professional != null and professional != ''">b.professional like CONCAT('%','${professional}','%' ) and</if>
+				<if test ="province != null">b.province = #{province} and</if>
+				<if test ="city != null">b.city = #{city} and</if>
+				<if test ="district != null">b.district = #{district} and</if>
+				<if test ="status != null and status != ''">b.status = #{status} and</if>
+				<if test ="type != null and type != ''">b.type = #{type} and</if>
+				<if test ="store_id != null and store_id != ''">b.store_id = #{store_id} and</if>
+				<if test ="seller_login_id != null and seller_login_id != ''">b.seller_login_id = #{seller_login_id} and</if>
+				<if test ="chant_id != null and chant_id != ''">b.chant_id = #{chant_id} and</if>
+				<if test="site_id != null and site_id != ''">b.site_id = #{site_id},</if>
+			1 = 1 
+			GROUP BY b.worker_id
+			order by b.update_date DESC
+	</select>
+	
+ 
+	
+	<!--根据worker_id查询员工 -->
+	<select id="selectWorkerByWorkerId" parameterType="String"  resultType="com.antke.power.model.bean.WorkerInfo">
+			select  worker_id, worker_name, worker_code, login_name,password, sex, company, community, professional, contact,
+					fixed_phone, province, city, district, head_portrait,cert_code, email, qq, status, login_num, isfirst,type,
+					create_date,update_date,store_id,site_id,chant_id, rank 
+			from bus_worker
+			where
+				worker_id = #{worker_id} and 
+			1 = 1 
+	</select>
+	
+	<delete id="deleteWorkerInfo" parameterType="java.lang.String">
+		delete from bus_worker where worker_id = #{worker_id}
+	</delete>
+	
+	<!-- 验证管理员手机号是否重复 -->
+	<select id="selectWorkerByContact" parameterType="String"
+		resultType="com.antke.power.model.bean.WorkerInfo">
+		SELECT
+		worker_id,
+		worker_name,
+		worker_code,
+		login_name,
+		PASSWORD,
+		sex,
+		company,
+		community,
+		professional,
+		contact,
+		fixed_phone,
+		province,
+		city,
+		district,
+		head_portrait,
+		cert_code,
+		email,
+		qq,
+		STATUS,
+		login_num,
+		isfirst,
+		create_date,
+		update_date,
+		type,
+		store_id,
+		seller_login_id,
+		site_id,
+		chant_id
+		FROM
+		bus_worker
+		WHERE
+		contact = #{contact} and
+		1=1
+	</select>
+	
+</mapper>

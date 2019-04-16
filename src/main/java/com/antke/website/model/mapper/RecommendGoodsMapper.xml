@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.website.dao.RecommendGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.RecommendGoods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="recommend_goods_id" jdbcType="INTEGER" property="recommendGoodsId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, goods_id, recommend_goods_id, create_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recommend_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.antke.website.model.bean.RecommendGoods">
+    insert into recommend_goods (id, goods_id, recommend_goods_id, 
+      create_date)
+    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{recommendGoodsId,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.antke.website.model.bean.RecommendGoods">
+    insert into recommend_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="recommendGoodsId != null">
+        recommend_goods_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="recommendGoodsId != null">
+        #{recommendGoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.RecommendGoods">
+    update recommend_goods
+    <set>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="recommendGoodsId != null">
+        recommend_goods_id = #{recommendGoodsId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.RecommendGoods">
+    update recommend_goods
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      recommend_goods_id = #{recommendGoodsId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <select id="getRecommendGoodsListById" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		 SELECT
+			rg.*, gi.goods_name
+		FROM
+			recommend_goods rg
+		LEFT JOIN goods_info gi ON rg.recommend_goods_id = gi.goods_id
+		WHERE
+			rg.goods_id = #{goods_id}
+	</select>
+	
+	<delete id="deleteRecommendGoodsByGoodsId" parameterType="java.lang.Integer">
+      delete
+		from recommend_goods
+		where
+		goods_id = #{goods_id} 
+   </delete>
+</mapper>

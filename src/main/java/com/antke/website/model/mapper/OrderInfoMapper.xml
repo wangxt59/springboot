@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.website.dao.OrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.OrderInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+    <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="order_total" jdbcType="DOUBLE" property="orderTotal" />
+    <result column="goods_count" jdbcType="INTEGER" property="goodsCount" />
+    <result column="delivery_type" jdbcType="INTEGER" property="deliveryType" />
+    <result column="delivery_fee" jdbcType="DOUBLE" property="deliveryFee" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_code" jdbcType="VARCHAR" property="payCode" />
+    <result column="pay_type" jdbcType="INTEGER" property="payType" />
+    <result column="team_id" jdbcType="INTEGER" property="teamId" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="address_id" jdbcType="VARCHAR" property="addressId" />
+    <result column="point_id" jdbcType="VARCHAR" property="pointId" />
+    <result column="receive_date" jdbcType="TIMESTAMP" property="receiveDate" />
+    <result column="refund_amount" jdbcType="DOUBLE" property="refundAmount" />
+    <result column="order_desc" jdbcType="VARCHAR" property="orderDesc" />
+    <result column="header" jdbcType="VARCHAR" property="header" />
+    <result column="goods_total" jdbcType="DOUBLE" property="goodsTotal" />
+    <result column="vip_order" jdbcType="INTEGER" property="vipOrder" />
+    <result column="vip_fee" jdbcType="DOUBLE" property="vipFee" />
+    <result column="refund_date" jdbcType="TIMESTAMP" property="refundDate" />
+  </resultMap>
+  <resultMap id="OrderBaseResultMap" type="com.antke.website.model.bean.OrderInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+    <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="order_total" jdbcType="DOUBLE" property="orderTotal" />
+    <result column="goods_count" jdbcType="INTEGER" property="goodsCount" />
+    <result column="delivery_type" jdbcType="INTEGER" property="deliveryType" />
+    <result column="delivery_fee" jdbcType="DOUBLE" property="deliveryFee" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_code" jdbcType="VARCHAR" property="payCode" />
+    <result column="pay_type" jdbcType="INTEGER" property="payType" />
+    <result column="team_id" jdbcType="INTEGER" property="teamId" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="address_id" jdbcType="VARCHAR" property="addressId" />
+    <result column="point_id" jdbcType="VARCHAR" property="pointId" />
+    <result column="receive_date" jdbcType="TIMESTAMP" property="receiveDate" />
+    <result column="refund_amount" jdbcType="DOUBLE" property="refundAmount" />
+    <result column="order_desc" jdbcType="VARCHAR" property="orderDesc" />
+    <result column="header" jdbcType="VARCHAR" property="header" />
+    <result column="goods_total" jdbcType="DOUBLE" property="goodsTotal" />
+    <result column="vip_order" jdbcType="INTEGER" property="vipOrder" />
+    <result column="vip_fee" jdbcType="DOUBLE" property="vipFee" />
+    <result column="refund_date" jdbcType="TIMESTAMP" property="refundDate" />
+    <collection property="orderItemsList" column="id" 
+		javaType="ArrayList" ofType="com.antke.website.model.bean.OrderItems" select="com.antke.website.dao.OrderItemsMapper.selectOrderItemsById">
+	</collection>
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, order_code, trade_no, order_total, goods_count, delivery_type, delivery_fee, 
+    user_id, user_name, status, create_date, update_date, pay_time, pay_code, pay_type, 
+    team_id, contact, address_id, point_id, receive_date, refund_amount, order_desc,
+    goods_total,vip_order,vip_fee,refund_date
+  </sql>
+ <!--++++++++++++++++++++++++++++ wxt +++++++++++++++++++++++++++++++++++-->
+  <select id="orderListByPages" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+		oi.id id,
+		oi.order_code order_code,
+		tb.team_name team_name,
+		ui.nick_name nick_name,
+		ui.contact contact,
+		oi.user_name user_name,
+		oi.create_date create_date,
+		oi.order_total order_total,
+		oi.refund_amount refund_amount,
+		oi.receive_date receive_date,
+		oi.pay_time pay_time,
+		oi.delivery_fee delivery_fee,
+		dp.point_name point_name,
+		oi.status status,
+		oi.trade_no trade_no,
+		oi.delivery_type delivery_type,
+		tb.logistics_type logistics_type
+		FROM order_info oi left join delivery_point dp
+		on oi.point_id=dp.id
+		left join team_buying tb on oi.team_id=tb.id
+		left join user_info ui on tb.user_id=ui.id
+		WHERE 
+		<if test="id != null and id != ''">
+			oi.id = #{id} and
+		</if>
+		<if test="order_code != null and order_code != ''">
+			oi.order_code = #{order_code} and
+		</if>
+		<if test="user_name != null and user_name != ''">
+			oi.user_name = #{user_name} and
+		</if>
+		<if test="nick_name != null and nick_name != ''">
+			ui.nick_name = #{nick_name} and
+		</if>
+		<if test="team_name != null and team_name != ''">
+			tb.team_name = #{team_name} and
+		</if>
+		<if test="status != null and status != ''">
+			oi.status = #{status} and
+		</if>
+		<if test="delivery_type != null and delivery_type != ''">
+			oi.delivery_type = #{delivery_type} and
+		</if>
+		<if test="logistics_type != null and logistics_type != ''">
+			tb.logistics_type = #{logistics_type} and
+		</if>
+		<if test="satrt_date != null and satrt_date != ''">
+			oi.create_date > #{satrt_date} and
+		</if>
+		<if test="end_date != null and end_date != ''">
+			#{end_date} > oi.create_date and
+		</if>
+		1=1 order by oi.create_date desc
+	</select>
+  
+   <!--++++++++++++++++++++++++++++ wxt +++++++++++++++++++++++++++++++++++-->
+  <!-- <select id="queryOrderListCount" parameterType="java.util.Map" resultType="int">
+		SELECT
+			count(*) 
+		FROM
+			order_info oi
+		LEFT JOIN order_items ot ON oi.flow_no = ot.flow_no
+		where
+		<include refid="Base_where"></include>  
+		1=1
+	</select>
+ 
+	<select id="queryOrderListByPages" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+		    oi.order_id,
+			oi.flow_no,
+			oi.user_id,
+			oi.create_date,
+			oi.pay_time,
+			ot.card_type,
+			oi.goods_code,
+			oi.goods_num,
+			oi.total,
+			oi.share_id,
+			oi.bonus_amount,
+			oi.status
+		FROM
+			order_info oi
+		LEFT JOIN order_items ot ON oi.flow_no = ot.flow_no
+		where
+		<include refid="Base_where"></include>  
+		1=1
+		order by oi.create_date desc
+	</select>
+	
+	<sql id="Base_where">
+	    <if test="card_type != null and card_type != ''">
+			ot.card_type = #{card_type} and
+		</if>
+		<if test="user_id != null and user_id != ''">
+			oi.user_id = #{user_id} and
+		</if>
+		 <if test="flow_no != null and flow_no != ''">
+			oi.flow_no LIKE CONCAT('%','${flow_no}','%' ) and 
+		</if>
+		 <if test="status != null and status != ''">
+			oi.status = #{status} and
+		</if>
+		<if test="create_date_start !=null and create_date_start != ''">oi.create_date &gt;=#{create_date_start} and</if>
+		<if test="create_date_end !=null and create_date_end != ''">oi.create_date &lt;=#{create_date_end} and</if>
+	</sql> -->
+	
+	
+	<select id="queryTradeOrderSum" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			SUM(coin_num) AS coin_num,SUM(order_total) AS order_total
+		FROM trade_order t,user_info u,user_info u2
+		WHERE t.seller_id = u.id AND t.buyer_id = u2.id and
+		<include refid="Base_where"></include>  
+		1=1
+	</select>
+	
+	
+	<select id="queryOrderListCount" parameterType="java.util.Map" resultType="int">
+		SELECT
+			count(*) 
+		FROM trade_order t,user_info u,user_info u2
+		WHERE t.seller_id = u.id AND t.buyer_id = u2.id and
+		<include refid="Base_where"></include>  
+		1=1
+	</select>
+ 
+	<select id="queryOrderListByPages" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT t.order_code,t.coin_num,t.coin_price,t.order_total,t.create_date,t.trade_date,
+		u.real_name AS seller_name,u2.real_name AS buyer_name ,t.`status`
+		FROM trade_order t,user_info u,user_info u2
+		WHERE t.seller_id = u.id AND t.buyer_id = u2.id and
+		<include refid="Base_where"></include>
+		1=1
+		ORDER BY t.create_date DESC,`status` ;
+	</select>
+	
+	<sql id="Base_where">
+	    <if test="buyer_name != null and buyer_name != ''">
+			u2.real_name = #{buyer_name} and
+		</if>
+		<if test="seller_name != null and seller_name != ''">
+			u.real_name = #{seller_name} and
+		</if>
+		 <if test="status != null and status != ''">
+			t.status = #{status} and
+		</if>
+		<if test="create_date_start !=null and create_date_start != ''">t.trade_date &gt;=#{create_date_start} and</if>
+		<if test="create_date_end !=null and create_date_end != ''">t.trade_date &lt;=#{create_date_end} and</if>
+	</sql>
+	
+	
+	<select id="orderStatisticsListCount" parameterType="java.util.Map" resultType="int">
+		SELECT
+			count(*) 
+		FROM
+		(SELECT SUM(t.order_total) as buyer_sum,count(*) as buyer_count,u.real_name,u.contact,u.id,t.trade_date FROM trade_order t,user_info u
+		WHERE 
+		t.buyer_id = u.id AND
+		<if test="real_name != null and real_name != ''">
+			u.real_name = #{real_name} and
+		</if>
+		<if test="create_date_start !=null and create_date_start != ''">t.trade_date &gt;=#{create_date_start} and</if>
+		<if test="create_date_end !=null and create_date_end != ''">t.trade_date &lt;=#{create_date_end} and</if>
+		t.`status`=2 
+		GROUP BY u.id) a,
+		(SELECT SUM(t.order_total) as seller_sum,count(*) as seller_count,u.real_name,u.contact,u.id FROM trade_order t,user_info u
+		WHERE 
+			t.seller_id = u.id AND u.id!=1376 AND  u.id!=1378 AND
+		<if test="real_name != null and real_name != ''">
+			u.real_name = #{real_name} and
+		</if>
+		<if test="create_date_start !=null and create_date_start != ''">t.trade_date &gt;=#{create_date_start} and</if>
+		<if test="create_date_end !=null and create_date_end != ''">t.trade_date &lt;=#{create_date_end} and</if>
+		t.`status`=2 
+		GROUP BY u.id) b
+		WHERE
+		a.id = b.id
+	</select>
+ 
+	<select id="orderStatisticsList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			a.id,a.real_name,a.contact,a.buyer_sum,a.buyer_count,b.seller_sum,b.seller_count,a.trade_date
+		FROM
+		(SELECT SUM(t.order_total) as buyer_sum,count(*) as buyer_count,u.real_name,u.contact,u.id,t.trade_date FROM trade_order t,user_info u
+		WHERE 
+		t.buyer_id = u.id AND
+		<if test="real_name != null and real_name != ''">
+			u.real_name = #{real_name} and
+		</if>
+		<if test="create_date_start !=null and create_date_start != ''">t.trade_date &gt;=#{create_date_start} and</if>
+		<if test="create_date_end !=null and create_date_end != ''">t.trade_date &lt;=#{create_date_end} and</if>
+		t.`status`=2 
+		GROUP BY u.id) a,
+		(SELECT SUM(t.order_total) as seller_sum,count(*) as seller_count,u.real_name,u.contact,u.id FROM trade_order t,user_info u
+		WHERE 
+		t.seller_id = u.id  AND  u.id!=1376 AND  u.id!=1378 AND
+		<if test="real_name != null and real_name != ''">
+			u.real_name = #{real_name} and
+		</if>
+		<if test="create_date_start !=null and create_date_start != ''">t.trade_date &gt;=#{create_date_start} and</if>
+		<if test="create_date_end !=null and create_date_end != ''">t.trade_date &lt;=#{create_date_end} and</if>
+		t.`status`=2 
+		GROUP BY u.id) b
+		WHERE
+		a.id = b.id ORDER BY a.trade_date DESC;
+	</select>
+	
+	
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <insert id="insert" parameterType="com.antke.website.model.bean.OrderInfo">
+    insert into order_info (id, order_code, trade_no, 
+      order_total, goods_count, delivery_type, 
+      delivery_fee, user_id, user_name, 
+      status, create_date, update_date, 
+      pay_time, pay_code, pay_type, 
+      team_id, contact, address_id, 
+      point_id, receive_date, refund_amount, 
+      order_desc)
+    values (#{id,jdbcType=INTEGER}, #{orderCode,jdbcType=VARCHAR}, #{tradeNo,jdbcType=VARCHAR}, 
+      #{orderTotal,jdbcType=DOUBLE}, #{goodsCount,jdbcType=INTEGER}, #{deliveryType,jdbcType=INTEGER}, 
+      #{deliveryFee,jdbcType=DOUBLE}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{payCode,jdbcType=VARCHAR}, #{payType,jdbcType=INTEGER}, 
+      #{teamId,jdbcType=INTEGER}, #{contact,jdbcType=VARCHAR}, #{addressId,jdbcType=VARCHAR}, 
+      #{pointId,jdbcType=VARCHAR}, #{receiveDate,jdbcType=TIMESTAMP}, #{refundAmount,jdbcType=DOUBLE}, 
+      #{orderDesc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.antke.website.model.bean.OrderInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderCode != null">
+        order_code,
+      </if>
+      <if test="tradeNo != null">
+        trade_no,
+      </if>
+      <if test="orderTotal != null">
+        order_total,
+      </if>
+      <if test="goodsCount != null">
+        goods_count,
+      </if>
+      <if test="deliveryType != null">
+        delivery_type,
+      </if>
+      <if test="deliveryFee != null">
+        delivery_fee,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="payCode != null">
+        pay_code,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="teamId != null">
+        team_id,
+      </if>
+      <if test="contact != null">
+        contact,
+      </if>
+      <if test="addressId != null">
+        address_id,
+      </if>
+      <if test="pointId != null">
+        point_id,
+      </if>
+      <if test="receiveDate != null">
+        receive_date,
+      </if>
+      <if test="refundAmount != null">
+        refund_amount,
+      </if>
+      <if test="orderDesc != null">
+        order_desc,
+      </if>
+       <if test="goodsTotal != null">
+        goods_total,
+      </if>
+      <if test="vipOrder != null">
+        vip_order,
+      </if>
+      <if test="vipFee != null">
+        vip_fee,
+      </if>
+       <if test="refundDate != null">
+        refund_date,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTotal != null">
+        #{orderTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsCount != null">
+        #{goodsCount,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryType != null">
+        #{deliveryType,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryFee != null">
+        #{deliveryFee,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payCode != null">
+        #{payCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="teamId != null">
+        #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null">
+        #{addressId,jdbcType=VARCHAR},
+      </if>
+      <if test="pointId != null">
+        #{pointId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveDate != null">
+        #{receiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundAmount != null">
+        #{refundAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="orderDesc != null">
+        #{orderDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsTotal != null">
+        #{goodsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="vipOrder != null">
+        #{vipOrder,jdbcType=INTEGER},
+      </if>
+      <if test="vipFee != null">
+        #{vipFee,jdbcType=DOUBLE},
+      </if>
+       <if test="refundDate != null">
+        #{refundDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.OrderInfo">
+    update order_info
+    <set>
+      <if test="orderCode != null">
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null">
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTotal != null">
+        order_total = #{orderTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsCount != null">
+        goods_count = #{goodsCount,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryType != null">
+        delivery_type = #{deliveryType,jdbcType=INTEGER},
+      </if>
+      <if test="deliveryFee != null">
+        delivery_fee = #{deliveryFee,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payCode != null">
+        pay_code = #{payCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="teamId != null">
+        team_id = #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="contact != null">
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null">
+        address_id = #{addressId,jdbcType=VARCHAR},
+      </if>
+      <if test="pointId != null">
+        point_id = #{pointId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveDate != null">
+        receive_date = #{receiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refundAmount != null">
+        refund_amount = #{refundAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="orderDesc != null">
+        order_desc = #{orderDesc,jdbcType=VARCHAR},
+      </if>
+       <if test="goodsTotal != null">
+        goods_total = #{goodsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="vipOrder != null">
+        vip_order = #{vipOrder,jdbcType=INTEGER},
+      </if>
+      <if test="vipFee != null">
+        vip_fee = #{vipFee,jdbcType=DOUBLE},
+      </if>
+       <if test="refundDate != null">
+        refund_date = #{refundDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.OrderInfo">
+    update order_info
+    set order_code = #{orderCode,jdbcType=VARCHAR},
+      trade_no = #{tradeNo,jdbcType=VARCHAR},
+      order_total = #{orderTotal,jdbcType=DOUBLE},
+      goods_count = #{goodsCount,jdbcType=INTEGER},
+      delivery_type = #{deliveryType,jdbcType=INTEGER},
+      delivery_fee = #{deliveryFee,jdbcType=DOUBLE},
+      user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_code = #{payCode,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=INTEGER},
+      team_id = #{teamId,jdbcType=INTEGER},
+      contact = #{contact,jdbcType=VARCHAR},
+      address_id = #{addressId,jdbcType=VARCHAR},
+      point_id = #{pointId,jdbcType=VARCHAR},
+      receive_date = #{receiveDate,jdbcType=TIMESTAMP},
+      refund_amount = #{refundAmount,jdbcType=DOUBLE},
+      order_desc = #{orderDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectOrderCountByMap" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select 
+    	count(*)
+    from order_info
+    where
+    	<if test="userId != null">
+  	 		user_id = #{userId,jdbcType=INTEGER} and
+  	 	</if>
+  	 	<if test="tradeNo != null">
+  	 		trade_no = #{tradeNo} and
+  	 	</if>
+  	 	<if test="status != null">
+  	 		status = #{status} and
+  	 	</if>
+    1=1
+  </select>
+  
+  <select id="selectOrderInfoByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where
+  	 	<if test="tradeNo != null">
+  	 		trade_no = #{tradeNo} and
+  	 	</if>
+  	 	<if test="status != null">
+  	 		status = #{status} and
+  	 	</if>
+    1=1 order by update_date desc
+  </select>
+  
+  <select id="selectOrderListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    	o.*,u.header
+    from order_info o, user_info u
+    where o.user_id = u.id and
+    	<if test="userId != null">
+  	 		o.user_id = #{userId} and
+  	 	</if>
+  	 	<if test="teamId != null">
+  	 		o.team_id = #{teamId} and
+  	 	</if>
+  	 	<if test="status != null">
+  	 		o.status = #{status} and
+  	 	</if>
+  	 	<if test="type != null">
+  	 		o.type = #{type} and
+  	 	</if>
+    1=1 order by o.update_date desc
+  </select> 
+  
+   <select id="getOrderInfoListAndIteamsCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select 
+    	count(o.user_id)
+    from order_info o, user_info u
+    where o.user_id = u.id and
+    	<if test="userId != null">
+  	 		o.user_id = #{userId} and
+  	 	</if>
+  	 	<if test="teamId != null">
+  	 		o.team_id = #{teamId} and
+  	 	</if>
+  	 	<if test="status != null">
+  	 		o.status = #{status} and
+  	 	</if>
+  	 	<if test="type != null">
+  	 		o.type = #{type} and
+  	 	</if>
+  	 	<if test="teamIdStr != null">
+  	 		o.team_id in (#{teamIdStr}) and
+  	 	</if>
+    1=1 order by o.update_date desc
+  </select> 
+  <select id="getOrderInfoListAndIteamsList" parameterType="java.util.Map" resultMap="OrderBaseResultMap">
+    select 
+    	o.*,u.header
+    from order_info o, user_info u
+    where o.user_id = u.id and
+    	<if test="userId != null">
+  	 		o.user_id = #{userId} and
+  	 	</if>
+  	 	<if test="teamId != null">
+  	 		o.team_id = #{teamId} and
+  	 	</if>
+  	 	<if test="status != null">
+  	 		o.status = #{status} and
+  	 	</if>
+  	 	<if test="type != null">
+  	 		o.type = #{type} and
+  	 	</if>
+  	 	<if test="teamIdStr != null">
+  	 		o.team_id in (#{teamIdStr}) and
+  	 	</if>
+    1=1 order by o.update_date desc
+  </select> 
+  <select id="countOrderInfoByTeamLeader" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select 
+    count(1)
+    from order_info 
+    where 
+    	<if test="userId != null">
+  	 		user_id = #{userId} and
+  	 	</if>
+  	 	<if test="teamId != null">
+  	 		team_id = #{teamId} and
+  	 	</if>
+  	 	<if test="status != null">
+  	 		status = #{status} and
+  	 	</if>
+  	 	<if test="teamIdStr != null">
+  	 		team_id in (#{teamIdStr}) and
+  	 	</if>
+    1=1
+  </select> 
+   <select id="selecOrderInfoByTime" parameterType="java.util.Map" resultType="java.util.Map">
+    select 
+     DATE_FORMAT(update_date,'%Y-%m-%d') date,
+     SUM(order_total) order_total,
+     count(1) num
+    from order_info 
+    where 
+    	<if test="start_time != null">
+  	 		update_date >= #{start_time} and
+  	 	</if>
+  	 	<if test="end_time != null">
+  	 		#{end_time} >= update_date and
+  	 	</if>
+    	<if test="userId != null">
+  	 		user_id = #{userId} and
+  	 	</if>
+  	 	<if test="teamId != null">
+  	 		team_id = #{teamId} and
+  	 	</if>
+  	 	<if test="status != null">
+  	 		status = #{status} and
+  	 	</if>
+  	 	<if test="teamIdStr != null">
+  	 		team_id in (#{teamIdStr}) and
+  	 	</if>
+    1=1 GROUP BY DATE_FORMAT(update_date,'%Y-%m-%d')
+  </select> 
+  
+<select id="selecTeamNumByTime" parameterType="java.util.Map" resultType="java.util.Map">
+    select 
+     DATE_FORMAT(update_date,'%Y-%m-%d') date,
+     count(DISTINCT  user_id ) num
+    from order_info 
+    where 
+    	<if test="start_time != null">
+  	 		update_date >= #{start_time} and
+  	 	</if>
+  	 	<if test="end_time != null">
+  	 		#{end_time} >= update_date and
+  	 	</if>
+  	 	<if test="status != null">
+  	 		status = #{status} and
+  	 	</if>
+  	 	<if test="teamIdStr != null">
+  	 		team_id in (#{teamIdStr}) and
+  	 	</if>
+    1=1 GROUP BY DATE_FORMAT(update_date,'%Y-%m-%d')
+  </select> 
+ <select id="selecTeamNumCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select 
+     count(DISTINCT  user_id ) num
+    from order_info 
+    where 
+    	<if test="start_time != null">
+  	 		update_date >= #{start_time} and
+  	 	</if>
+  	 	<if test="end_time != null">
+  	 		#{end_time} >= update_date and
+  	 	</if>
+  	 	<if test="status != null">
+  	 		status = #{status} and
+  	 	</if>
+  	 	<if test="teamIdStr != null">
+  	 		team_id in (#{teamIdStr}) and
+  	 	</if>
+    1=1 
+  </select> 
+  <!--已购用户，新用户， 支付总额  status=2 -->
+  <select id="selecTeamBuynum" parameterType="java.util.Map" resultType="java.util.Map">
+    select 
+  	sum(order_total) order_total,
+  	
+    (SELECT
+	count( * ) 
+	FROM
+	( SELECT user_id FROM order_info GROUP BY  user_id ) aa) num,
+	
+    ( SELECT
+	count( * ) 
+	FROM
+	( SELECT user_id FROM order_info GROUP BY 1 HAVING COUNT( * ) = 1 ) aa) newnum 
+    from order_info 
+    where 
+    	<if test="start_time != null">
+  	 		update_date >= #{start_time} and
+  	 	</if>
+  	 	<if test="end_time != null">
+  	 		#{end_time} >= update_date and
+  	 	</if>
+  	 	<if test="status != null">
+  	 		status = #{status} and
+  	 	</if>
+  	 	<if test="team_id != null">
+  	 		team_id =#{team_id} and
+  	 	</if>
+    1=1 
+  </select> 
+  <!--下单总额status=1 -->
+  <select id="selecTeamBuyTotle" parameterType="java.util.Map" resultType="java.lang.String">
+    select 
+  	sum(order_total) order_total
+    from order_info 
+    where 
+  	 	<if test="status != null">
+  	 		status = #{status} and
+  	 	</if>
+  	 	<if test="team_id != null">
+  	 		team_id =#{team_id} and
+  	 	</if>
+    1=1 
+  </select> 
+  
+  <!--已浏览未购买-->
+  <select id="browseNotBuy" parameterType="java.util.Map" resultType="java.lang.String">
+    SELECT count(*) 
+    FROM team_browse
+	WHERE user_id not in (
+	SELECT user_id FROM order_info WHERE 
+	<if test="team_id != null">
+  	 	team_id=#{team_id} and 
+  	</if>
+	1=1 
+	GROUP BY user_id
+	)
+	and 
+	<if test="team_id != null">
+  	 	team_id=#{team_id} and 
+  	</if>
+  	1=1
+  </select> 
+ <!--高复购未购买-->
+  <select id="thisTimeNotBuy" parameterType="java.util.Map" resultType="java.lang.String">
+    SELECT count(*) 
+    FROM order_info
+	WHERE user_id not in (
+	SELECT user_id FROM order_info WHERE 
+	<if test="team_id != null">
+  	 	team_id=#{team_id} and 
+  	</if>
+	1=1 
+	GROUP BY user_id
+	)
+	and 
+	<if test="teamStr != null">
+  	 	team_id in  (#{teamStr}) and 
+  	</if>
+  	1=1
+  </select> 
+</mapper>

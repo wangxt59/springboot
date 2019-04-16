@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.website.dao.CategoryDao">
+	
+	<!-- 新增分类信息 -->
+	<insert id="insertCategory" parameterType="com.antke.website.model.bean.Category">
+		INSERT INTO goods_category
+		(
+			<if test="category_name != null">category_name,</if>
+			<if test="category_pic != null">category_pic,</if>
+			<if test="parent_id != null">parent_id,</if>
+			<if test="rank != null">rank,</if>
+			<if test="status != null ">status,</if>
+			<if test="is_show != null ">is_show,</if>
+			<if test="sort_order != null ">sort_order,</if>
+			<if test="operator != null ">operator,</if>
+			create_date,update_date
+		)
+		values(
+			<if test="category_name != null">#{category_name},</if>
+			<if test="category_pic != null">#{category_pic},</if>
+			<if test="parent_id != null">#{parent_id},</if>
+			<if test="rank != null">#{rank},</if>
+			<if test="status !=null ">#{status},</if>
+			<if test="is_show !=null ">#{is_show},</if>
+			<if test="sort_order !=null ">#{sort_order},</if>
+			<if test="operator != null ">#{operator},</if>
+			#{create_date},#{update_date}
+		)
+			
+	</insert>
+
+	<!-- 更新分类信息 -->
+	<update id="updateCategory" parameterType="com.antke.website.model.bean.Category">
+		update goods_category 
+		<set>
+			<if test="category_name != null and category_name != ''">category_name = #{category_name},</if>
+			<if test="category_pic != null and category_pic != ''">category_pic = #{category_pic},</if>
+			<if test="create_date != null and create_date != ''">create_date = #{create_date},</if>
+			<if test="status != null ">status = #{status},</if>
+			<if test="rank != null and rank != ''">rank = #{rank},</if>
+			<if test="sort_order != null and sort_order != ''">sort_order = #{sort_order},</if>
+			<if test="is_show != null and is_show != ''">is_show = #{is_show},</if>
+			<if test="operator != null ">operator=#{operator},</if>
+			<if test="parent_id != null ">parent_id=#{parent_id},</if>
+			update_date = #{update_date}
+		</set>
+		where category_id = #{category_id}
+	</update>
+	
+	<!--查询分类信息list -->
+	<select id="queryCategoryList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+			select 
+			a.category_id,a.category_name,a.category_pic,a.parent_id,a.rank,a.status,a.sort_order,a.is_show,
+			a.create_date,a.update_date,a.operator,b.category_name as parent_name
+			from goods_category a left join goods_category b on a.parent_id = b.category_id  
+		where
+		<if test="category_id != null and category_id != ''"> a.category_id = #{category_id} and</if>
+		<if test="category_name != null and category_name != ''"> a.category_name like CONCAT('%','${category_name}','%' ) and</if>
+		<if test="is_show != null"> a.is_show = #{is_show} and</if>
+		<if test="status != null"> a.status = #{status} and</if>
+		<if test="rank != null"> a.rank = #{rank} and</if>
+		<if test="parent_id != null and parent_id != ''"> a.parent_id = #{parent_id} and</if>
+		 1=1 order by a.create_date DESC
+	</select>
+	
+	<!--查询分类信息 -->
+	<select id="queryCategory" parameterType="java.util.Map"
+		resultType="com.antke.website.model.bean.Category">
+			select 
+			category_id,category_name,category_pic,parent_id,rank,status,sort_order,is_show,create_date,update_date,operator
+			from goods_category
+		where
+		<if test="category_id != null and category_id != ''"> category_id = #{category_id} and</if>
+		<if test="parent_id != null and parent_id != ''"> parent_id = #{parent_id} and</if>
+		<if test="category_name != null and category_name != ''"> category_name like CONCAT('%','${category_name}','%' ) and</if>
+		<if test="is_show != null"> is_show = #{is_show} and</if>
+		<if test="status != null"> status = #{status} and</if>
+		<if test="rank != null"> rank = #{rank} and</if>
+		1=1
+	</select>
+	
+	<!--查询分类总数 -->
+	<select id="queryCategoryListCount" parameterType="java.util.Map"  resultType="int">
+		select count(1) 
+		from goods_category a
+        LEFT JOIN goods_category ca ON  ca.category_id=a.parent_id 
+		where
+		<if test="category_id != null and category_id != ''"> a.category_id = #{category_id} and</if>
+		<if test="category_name != null and category_name != ''"> a.category_name like CONCAT('%','${category_name}','%' ) and</if>
+		<if test="is_show != null"> a.is_show = #{is_show} and</if>
+		<if test="status != null"> a.status = #{status} and</if>
+		<if test="rank != null"> a.rank = #{rank} and</if>
+		<if test="parent_id != null and parent_id != ''"> ca.category_id=#{parent_id} and</if>
+		 1=1 
+	</select>
+	
+	<!--查询分类列表带分页 -->
+	<select id="queryCategoryListByPage" parameterType="java.util.Map"  resultType="java.util.Map">
+		select 
+			a.category_id,a.category_name,a.category_pic,a.parent_id,a.rank,a.status,a.sort_order,a.is_show,
+			a.create_date,a.update_date,a.operator,ca.category_name as parent_name
+			from goods_category a
+            LEFT JOIN goods_category ca ON  ca.category_id=a.parent_id 
+		where
+		<if test="category_id != null and category_id != ''"> a.category_id = #{category_id} and</if>
+		<if test="category_name != null and category_name != ''"> a.category_name like CONCAT('%','${category_name}','%' ) and</if>
+		<if test="is_show != null"> a.is_show = #{is_show} and</if>
+		<if test="status != null"> a.status = #{status} and</if>
+		<if test="rank != null"> a.rank = #{rank} and</if>
+		<if test="parent_id != null and parent_id != ''"> ca.category_id=#{parent_id} and</if>
+		 1=1 order by a.create_date asc
+	</select>
+	<!-- 级联查询分类列表 -->
+	<select id="selectByPrimaryKey1" parameterType="java.lang.String" resultMap="BaseResultMap1">
+    select 
+    *
+    from goods_category
+    where parent_id = #{category_id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPrimaryKey2" parameterType="java.lang.String" resultMap="BaseResultMap2">
+    select 
+    *
+    from goods_category
+    where parent_id = #{category_id,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- Result Map -->
+    <resultMap id="CategoryResultMap" type="com.antke.website.model.bean.Category">
+        <id column="category_id" jdbcType="VARCHAR" property="category_id" />
+    <result column="category_name" jdbcType="VARCHAR" property="category_name" />
+    <result column="category_pic" jdbcType="VARCHAR" property="category_pic" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parent_id" />
+    <result column="rank" jdbcType="INTEGER" property="rank" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_date" jdbcType="DATE" property="create_date" />
+    <result column="update_date" jdbcType="DATE" property="update_date" />
+    <result column="sort_order" jdbcType="INTEGER" property="sort_order" />
+    <result column="is_show" jdbcType="INTEGER" property="is_show" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="parent_name" jdbcType="VARCHAR" property="parent_name" />
+    <result column="child_id" jdbcType="VARCHAR" property="child_id" />
+    <result column="check" jdbcType="VARCHAR" property="check" />
+         <collection property="categoryList"  ofType="com.antke.website.model.bean.Category"  
+         select="selectByPrimaryKey1" column="category_id"   >  
+         </collection> 
+    </resultMap>
+
+   <resultMap id="BaseResultMap1" type="com.antke.website.model.bean.Category">
+    <id column="category_id" jdbcType="VARCHAR" property="category_id" />
+    <result column="category_name" jdbcType="VARCHAR" property="category_name" />
+    <result column="category_pic" jdbcType="VARCHAR" property="category_pic" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parent_id" />
+    <result column="rank" jdbcType="INTEGER" property="rank" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_date" jdbcType="DATE" property="create_date" />
+    <result column="update_date" jdbcType="DATE" property="update_date" />
+    <result column="sort_order" jdbcType="INTEGER" property="sort_order" />
+    <result column="is_show" jdbcType="INTEGER" property="is_show" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="parent_name" jdbcType="VARCHAR" property="parent_name" />
+    <result column="child_id" jdbcType="VARCHAR" property="child_id" />
+    <result column="check" jdbcType="VARCHAR" property="check" />
+    <collection property="thridList"  ofType="com.antke.website.model.bean.Category"  
+         select="selectByPrimaryKey2" column="category_id"   >  
+         </collection>
+  </resultMap>
+  
+   <resultMap id="BaseResultMap2" type="com.antke.website.model.bean.Category">
+    <id column="category_id" jdbcType="VARCHAR" property="category_id" />
+    <result column="category_name" jdbcType="VARCHAR" property="category_name" />
+    <result column="category_pic" jdbcType="VARCHAR" property="category_pic" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parent_id" />
+    <result column="rank" jdbcType="INTEGER" property="rank" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_date" jdbcType="DATE" property="create_date" />
+    <result column="update_date" jdbcType="DATE" property="update_date" />
+    <result column="sort_order" jdbcType="INTEGER" property="sort_order" />
+    <result column="is_show" jdbcType="INTEGER" property="is_show" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="parent_name" jdbcType="VARCHAR" property="parent_name" />
+    <result column="child_id" jdbcType="VARCHAR" property="child_id" />
+    <result column="check" jdbcType="VARCHAR" property="check" />
+  </resultMap>
+  
+  <!--查询分类信息list包含扩展属性 -->
+	<select id="queryCategoryLists" parameterType="java.util.Map"
+		resultMap="CategoryResultMap">
+			select 
+			*
+			from goods_category a 
+		where
+		<if test="category_id != null and category_id != ''"> a.category_id = #{category_id} and</if>
+		<if test="category_name != null and category_name != ''"> a.category_name like CONCAT('%','${category_name}','%' ) and</if>
+		<if test="is_show != null"> a.is_show = #{is_show} and</if>
+		<if test="status != null"> a.status = #{status} and</if>
+		<if test="rank != null"> a.rank = #{rank} and</if>
+		<if test="parent_id != null and parent_id != ''"> a.parent_id = #{parent_id} and</if>
+		 1=1 order by a.create_date DESC
+	</select>
+	<!-- 新增头部导航 -->
+	<insert id="addHeaderTarget" parameterType="java.util.Map">
+	    insert into header_target (content,name,title,status,create_date)
+        values (#{content},#{name},#{title},#{status},#{create_date})
+	</insert>
+	 <!--查询头部导航列表  -->
+	<select id="getHeaderTarget" parameterType="java.util.Map" resultType="java.util.Map">
+        select id,content,name,title,status,create_date from header_target
+        <where>
+              <if test="id!=null and id!=''"> id=#{id}</if>
+        </where>
+         order by create_date DESC
+	</select>
+	 <!--修改头部导航  -->
+	<update id="updateHeaderTarget" parameterType="java.util.Map">
+		update header_target
+	set content=#{content} , title=#{title},status=#{status} where id=#{id}
+	</update>
+	<!--修改头部导航 状态 -->
+	<update id="updateHeaderTargetStatus">
+		update header_target
+	    set status=2
+	</update>
+	
+	<!-- 删除头部导航 -->
+	<delete id="deleteHeaderTarget" parameterType="java.util.Map">
+	delete from header_target where id=#{id}
+	</delete>
+</mapper>

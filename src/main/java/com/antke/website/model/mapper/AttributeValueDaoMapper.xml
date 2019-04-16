@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.website.dao.AttributeValueDao">
+
+	<!-- 新增属性值信息 -->
+	<insert id="insertAttributeValue" parameterType="com.antke.website.model.bean.AttributeValue"  useGeneratedKeys="true" keyProperty="value_id">
+		INSERT INTO attribute_value
+		(
+		<if test="value_name != null">value_name,</if>
+		<if test="upload_person != null">upload_person,</if>
+		create_date,update_date
+		)
+		values(
+		<if test="value_name != null">#{value_name},</if>
+		<if test="upload_person != null">#{upload_person},</if>
+		#{create_date},#{update_date}
+		)
+	</insert>
+
+	<!-- 更新属性值信息 -->
+	<update id="updateAttributeValue" parameterType="com.antke.website.model.bean.AttributeValue">
+		update attribute_value
+		<set>
+			<if test="value_name != null and value_name != ''">value_name = #{value_name},</if>
+			<if test="create_date != null and create_date != ''">create_date = #{create_date},</if>
+			<if test="upload_person != null and upload_person != ''">upload_person = #{upload_person},</if>
+			update_date = #{update_date}
+		</set>
+		where value_id = #{value_id}
+	</update>
+	
+	<!-- 查询属性值 -->
+	<select id="queryAttributeValue" parameterType="java.util.Map"
+		resultType="com.antke.website.model.bean.AttributeValue">
+		Select
+		value_id,value_name,create_date,update_date,upload_person
+		from attribute_value
+		where
+		<if test="value_id != null and value_id != ''">value_id= #{value_id} and</if>
+		<if test="value_name != null and value_name != ''">value_name = #{value_name} and</if>		
+		<if test="create_date != null and create_date != ''">create_date = #{create_date} and</if>		
+		<if test="update_date != null and update_date !=''">update_date = #{update_date} and</if>		
+		1=1 
+	</select>
+	
+	<!--查询属性值信息列表 -->
+	<select id="queryAttributeValueList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		Select
+		value_name, iar.value_id,iar.relation_id
+		from attribute_value as iav left join attribute_relation as iar on iar.value_id = iav.value_id  left join attribute as ia on ia.attr_id = iar.attr_id
+		where
+		<if test="attr_id != null and attr_id != ''">ia.attr_id= #{attr_id} and</if>
+		<if test="value_name != null and value_name != ''">value_name = #{value_name} and</if>		
+		1=1
+	</select>
+	
+	<!--   查询单个属性值 -->
+		<select id="queryAttributeValue1" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		Select
+		value_name
+		from attribute_value
+		where
+		<if test="value_id != null and value_id != ''">value_id= #{value_id} and</if>
+		1=1
+	</select>
+
+		<select id="deleteAttributeValue" parameterType="java.util.Map"
+			resultType="com.antke.website.model.bean.AttributeValue">
+			delete
+			from attribute_value
+			where
+			<if test="value_id != null and value_id != ''">value_id = #{value_id}</if>
+		</select>
+		
+    <delete id="delAttributeValue" parameterType="java.util.Map">
+       delete
+			from attribute_value
+			where
+			<if test="value_id != null and value_id != ''">value_id = #{value_id}</if>  
+    
+    </delete>
+
+
+
+
+	<!-- 接口方法调用 -->
+	
+	<!-- 根据属性id查询属性值列表 -->
+	<select id="queryAttributeValueListAtIF" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT DISTINCT
+			iav.value_id,iav.value_name,iar.relation_id
+		FROM attribute_value AS iav
+		LEFT JOIN attribute_relation AS iar ON iar.value_id = iav.value_id
+		WHERE 
+			<if test="attr_id != null and attr_id != ''">iar.attr_id = #{attr_id} and</if>
+		1=1 ORDER BY iav.value_name ASC
+	</select>
+
+</mapper>
