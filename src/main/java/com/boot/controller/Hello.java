@@ -3,6 +3,8 @@ package com.boot.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -32,13 +34,14 @@ public class Hello {
 
     @RequestMapping("/hello")
     @ResponseBody
-    public Map<String, Object> hello() {
+    public Map<String, Object> hello(HttpServletRequest request) {
     	Map<String, Object> map=new HashMap<String, Object>();
 //    	map.put("portString", portString);
     	map.put("Ypeople", Ypeople);
     	
     	map.put("peoplename", peoplename);
     	map.put("Ppeople", Ppeople);
+    	map.put("path", request.getParameter("url"));
         return map;
     }
 
