@@ -3,12 +3,14 @@ package com.antke.power.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
 import com.antke.power.model.bean.Menu;
 
 @Repository
+@Mapper
 public interface MenuDao {
 	
 	/**

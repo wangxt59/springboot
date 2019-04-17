@@ -23,8 +23,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 import javassist.ClassPath;
 
-@ComponentScan(basePackages= {})
-@SpringBootApplication(exclude={}) // Spring Boot项目的核心注解，主要目的是开启自动配置
+//@ComponentScan(basePackages= {})
+@SpringBootApplication // Spring Boot项目的核心注解，主要目的是开启自动配置
 //exclude={}用来排除不用的依赖
 @Controller // 标明这是一个SpringMVC的Controller控制器
 //@ImportResource(value={"classpath:config/applicationContext.xml"})//引入xml配置文件

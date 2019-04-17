@@ -60,7 +60,7 @@ public class Hello {
     	
 //    	map.put("peoplename", peoplename);
     	map.put("Ppeople", Ppeople);
-    	map.put("mysql", mysql);
+    	map.put("mysqldata", mysql);
     	map.put("path", request.getParameter("url"));
         return map;
     }

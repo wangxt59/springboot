@@ -1,25 +1,30 @@
 server:
   port: 80
-  context-path: /
+  context-path: /boot
 # 拦截器  进入mvc的规则  意思是要在请求前加/**
   servlet-path: /
   
 mybatis:  config-location: classpath:config/mybatis-config.xml
   mapper-locations:  - classpath:mapper/*.xml
 
-  
+
 spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/
-      suffix: .jsp#  datasource:#    url: jdbc:mysql://localhost:3306/social_shopping?useUnicode=true&characterEncoding=utf8
+  devtools:
+    restart:      enabled: true
+      additional-paths:      - src/main/java
+      exclude: WEB-INF/**#  mvc:
+#    view:
+#      prefix: /pages/
+#      suffix: .jsp#  datasource:#    url: jdbc:mysql://localhost:3306/social_shopping?useUnicode=true&characterEncoding=utf8
 #    username: root
 #    password: 
 #    driverClassName: com.mysql.jdbc.Driver
 #    type: com.alibaba.druid.pool.DruidDataSource
-    
-#  resources:
-#    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  resources:
+    static-locations: 
+    - classpath:/public/
+  thymeleaf:    cache: false
+    enabled: false
 
 logging:
   level: 

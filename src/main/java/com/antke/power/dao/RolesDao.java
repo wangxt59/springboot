@@ -3,6 +3,7 @@ package com.antke.power.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,7 @@ import com.antke.power.model.bean.RUMaping;
 import com.antke.power.model.bean.RolesInfo;
 
 @Repository
+@Mapper
 public interface RolesDao {
 
 	/**
