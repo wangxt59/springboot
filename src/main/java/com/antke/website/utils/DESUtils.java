@@ -9,8 +9,9 @@ import java.security.SecureRandom;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 
-import com.cloopen.rest.sdk.utils.encoder.BASE64Decoder;
-import com.cloopen.rest.sdk.utils.encoder.BASE64Encoder;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
 
 
 public class DESUtils

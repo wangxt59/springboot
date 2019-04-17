@@ -8,12 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONArray;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -24,6 +20,12 @@ import com.antke.power.service.IPowerGroupService;
 import com.antke.website.action.BaseAction;
 import com.antke.website.model.bean.PageInfo;
 import com.antke.website.utils.CommonsUtil;
+import com.fasterxml.jackson.*;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import net.sf.json.JSONArray;
 
 @Controller
 @Scope("prototype")

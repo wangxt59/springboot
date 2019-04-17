@@ -26,9 +26,9 @@ import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.CellRangeAddress;
-import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.ss.util.CellReference;
 import org.springframework.beans.factory.annotation.Autowired;
 
 //import com.sun.org.apache.commons.collections.CollectionUtils;
@@ -199,9 +199,9 @@ public class ExcelUtil {
         style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);  // 垂直    
         style.setAlignment(HSSFCellStyle.ALIGN_CENTER);             // 水平    
         String s_will = sheet.getRow(startRow).getCell(cellLine).getStringCellValue();  // 获取第一行的数据,以便后面进行比较    
-        int count = 0;    
+        int count = 0;
         Set<Integer> set = new HashSet<Integer>();  
-        org.apache.commons.collections.CollectionUtils.addAll(set, mergeBasis);  
+//        org.apache.commons.collections.CollectionUtils.addAll(set, mergeBasis);  
         for (int i = 2; i <= endRow; i++) {    
             String s_current = sheet.getRow(i).getCell(cellLine).getStringCellValue();    
             if (s_will.equals(s_current)) {   

@@ -14,7 +14,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
-import common.Logger;
+import jxl.common.Logger;
+
 
 public class POIUtils {
 	private static Logger logger = Logger.getLogger(POIUtils.class);

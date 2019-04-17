@@ -10,9 +10,12 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.lang3.StringUtils;
+
+import com.alibaba.fastjson.JSONObject;
+
+//import net.sf.json.JSONObject;
+
 
  
 
@@ -167,7 +170,7 @@ public class BaiduMapUtil {
 		JSONObject obj = null;
 		// StringUtils.isBlank(str)判断转化后的str是否为空字符串
 		if (!StringUtils.isBlank(str)) {
-			obj = JSONObject.fromObject(str);
+			obj = JSONObject.parseObject(str);
 		}
 		return obj;
 	}

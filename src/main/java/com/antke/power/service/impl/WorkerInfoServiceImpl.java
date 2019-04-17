@@ -20,7 +20,7 @@ import com.antke.power.service.IWorkerInfoService;
 import com.antke.website.model.bean.PageInfo;
 import com.antke.website.utils.CommonsUtil;
 import com.antke.website.utils.DateUtil;
-import com.antke.website.utils.MD5;
+//import com.antke.website.utils.MD5;
 @Service
 public class WorkerInfoServiceImpl implements IWorkerInfoService{
 	
@@ -48,7 +48,8 @@ public class WorkerInfoServiceImpl implements IWorkerInfoService{
 			worker.setCity("test");
 			worker.setDistrict("test");*/
 	//		设置员工初始信息
-			worker.setPassword(MD5.encode(worker.getPassword(), null));
+//			worker.setPassword(MD5.encode(worker.getPassword(), null));
+			worker.setPassword(worker.getPassword());
 			worker.setWorker_id(worker_id);
 			worker.setStatus("0");
 			worker.setLogin_num(0);
@@ -107,7 +108,8 @@ public class WorkerInfoServiceImpl implements IWorkerInfoService{
 		worker.setUpdate_date(update_date);
 		try {
 			if(worker.getPassword()!=null && !"".equals(worker.getPassword()) && !"null".equals(worker.getPassword()) ){
-				worker.setPassword(MD5.encode(worker.getPassword(), null));
+//				worker.setPassword(MD5.encode(worker.getPassword(), null));
+				worker.setPassword(worker.getPassword());
 			}
 			String roleId = worker.getRoleId();	
 			count = workerInfoDao.updateWorkerInfo(worker);

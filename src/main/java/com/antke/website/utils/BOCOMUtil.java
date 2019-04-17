@@ -2,7 +2,6 @@ package com.antke.website.utils;
 
 import com.infosec.NetSignServer;
 
-
 public class BOCOMUtil {
 	
 	

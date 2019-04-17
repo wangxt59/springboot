@@ -26,7 +26,6 @@ import com.antke.website.service.IGoodsInfoService;
 import com.antke.website.service.IPlatTeamRegionService;
 import com.antke.website.service.IPlatTeamService;
 import com.antke.website.utils.CommonsUtil;
-import com.antke.website.utils.POIUtils;
 
 @Service
 public class PlatTeamServiceImpl implements IPlatTeamService {
@@ -147,35 +146,35 @@ public class PlatTeamServiceImpl implements IPlatTeamService {
 	 */
 	@Override
 	public int export(MultipartFile file, Map<String, Object> param) throws IOException {
-		List<String[]> rowList = POIUtils.readExcel(file);
+//		List<String[]> rowList = POIUtils.readExcel(file);
 		PlatTeamRegion region = new PlatTeamRegion();
 		region.setRebateType(1);
 		region.setUpdateDate(new Date());
-		for (String[] strings : rowList) {
-			region.setPteamId(Integer.valueOf(param.get("plaTeamId") + ""));
-			if (CommonsUtil.isNotEmpty(strings[0])) {
-				region.setRegionId(Integer.valueOf(strings[0]));
-//				region.setRegionName(strings[1]);
-			}
-			region.setGoodsId(Integer.valueOf(strings[2]));
-			
-			if (CommonsUtil.isNotEmpty(strings[5])) {
-				region.setRegionPrice(Double.valueOf(strings[5]));
-			}
-			if (CommonsUtil.isNotEmpty(strings[6])) {
-				region.setVipPrice(Double.valueOf(strings[6]));
-			}
-			if (CommonsUtil.isNotEmpty(strings[7])) {
-				region.setRebateValue(Double.valueOf(strings[7]));
-			}
-			if (CommonsUtil.isNotEmpty(strings[8])) {
-				region.setStock(Integer.valueOf(strings[8]));
-			}else{
-				region.setStock(999999);
-			}
-			region.setUpdateDate(new Date());
-			platTeamRegionService.updateSelective(region);
-		}
+//		for (String[] strings : rowList) {
+//			region.setPteamId(Integer.valueOf(param.get("plaTeamId") + ""));
+//			if (CommonsUtil.isNotEmpty(strings[0])) {
+//				region.setRegionId(Integer.valueOf(strings[0]));
+////				region.setRegionName(strings[1]);
+//			}
+//			region.setGoodsId(Integer.valueOf(strings[2]));
+//			
+//			if (CommonsUtil.isNotEmpty(strings[5])) {
+//				region.setRegionPrice(Double.valueOf(strings[5]));
+//			}
+//			if (CommonsUtil.isNotEmpty(strings[6])) {
+//				region.setVipPrice(Double.valueOf(strings[6]));
+//			}
+//			if (CommonsUtil.isNotEmpty(strings[7])) {
+//				region.setRebateValue(Double.valueOf(strings[7]));
+//			}
+//			if (CommonsUtil.isNotEmpty(strings[8])) {
+//				region.setStock(Integer.valueOf(strings[8]));
+//			}else{
+//				region.setStock(999999);
+//			}
+//			region.setUpdateDate(new Date());
+//			platTeamRegionService.updateSelective(region);
+//		}
 		return 1;
 	}
 }

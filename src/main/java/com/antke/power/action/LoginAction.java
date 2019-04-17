@@ -14,9 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.sf.json.JSONObject;
+//import net.sf.json.JSONObject;
 
 import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,7 @@ import com.antke.website.model.bean.PageInfo;
 import com.antke.website.service.ILoginLogService;
 import com.antke.website.utils.CommonsUtil;
 import com.antke.website.utils.DateUtil;
-import com.antke.website.utils.MD5;
+//import com.antke.website.utils.MD5;
 
 /**
  * 员工信息类
@@ -86,7 +87,8 @@ public class LoginAction {
 			}
 			
 			//验证用户密码
-			String pwd = MD5.encode(worker.getPassword(), null);
+//			String pwd = MD5.encode(worker.getPassword(), null);
+			String pwd = worker.getPassword();
 			System.out.println(pwd);
 			String password = workerInfo.getPassword();
 			if(password!=null && pwd!=null && !password.equals(pwd)){

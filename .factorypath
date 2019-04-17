@@ -32,29 +32,4 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot-autoconfigure/1.5.6.RELEASE/spring-boot-autoconfigure-1.5.6.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot-configuration-processor/1.5.6.RELEASE/spring-boot-configuration-processor-1.5.6.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/annotations-api.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/catalina-ant.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/catalina-ha.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/catalina-storeconfig.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/catalina-tribes.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/catalina.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/ecj-4.5.1.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/el-api.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/jasper-el.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/jasper.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/jaspic-api.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/jsp-api.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/servlet-api.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/tomcat-api.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/tomcat-coyote.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/tomcat-dbcp.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/tomcat-i18n-es.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/tomcat-i18n-fr.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/tomcat-i18n-ja.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/tomcat-jdbc.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/tomcat-jni.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/tomcat-util-scan.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/tomcat-util.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/tomcat-websocket.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/com.genuitec.eclipse.server.embedded.tomcat.core_13.0.0.me201612211440/tomcat85/lib/websocket-api.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>
