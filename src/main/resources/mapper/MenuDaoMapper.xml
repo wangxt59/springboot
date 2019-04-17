@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.power.dao.MenuDao">
+	
+	<!-- 新增菜单信息 -->
+	<insert id="insertMenu" parameterType="com.antke.power.model.bean.Menu">
+		insert into bus_menu
+			(
+				<if test="m_id != null and m_id != ''">m_id,</if>
+				<if test="menu_id != null and menu_id != ''">menu_id,</if>
+				<if test="menu_name != null and menu_name != ''">menu_name,</if>
+				<if test="parentid != null and parentid != ''">parentid,</if>
+				<if test="levels != null and levels != ''">levels,</if>
+				<if test="model != null and model != ''">model,</if>
+				<if test="xmlid != null and xmlid != ''">xmlid,</if>
+				<if test="url != null and url != ''">url,</if>
+				<if test="relate_sub_id != null and relate_sub_id != ''">relate_sub_id,</if>
+				<if test="menu_desciption != null and menu_desciption != ''">menu_desciption,</if>
+				
+				<if test="status != null and status != ''">status,</if>
+				<if test="operator != null and operator != ''">operator,</if>
+				<if test="icon_url != null and icon_url != ''">icon_url,</if>
+				create_date,update_date
+			)
+			values
+			(
+				<if test="m_id != null and m_id != ''">#{m_id},</if>
+				<if test="menu_id != null and menu_id != ''">#{menu_id},</if>
+				<if test="menu_name != null and menu_name != ''">#{menu_name},</if>
+				<if test="parentid != null and parentid != ''">#{parentid},</if>
+				<if test="levels != null and levels != ''">#{levels},</if>
+				<if test="model != null and model != ''">#{model},</if>
+				<if test="xmlid != null and xmlid != ''">#{xmlid},</if>
+				<if test="url != null and url != ''">#{url},</if>
+				<if test="relate_sub_id != null and relate_sub_id != ''">#{relate_sub_id},</if>
+				<if test="menu_desciption != null and menu_desciption != ''">#{menu_desciption},</if>
+				<if test="status != null and status != ''">#{status},</if>
+				<if test="operator != null and operator != ''">#{operator},</if>
+				<if test="icon_url != null and icon_url != ''">#{icon_url},</if>
+				#{create_date},#{update_date}
+			)
+			
+	</insert>
+
+	<!-- 更新菜单信息 -->
+	<update id="updateMenu" parameterType="com.antke.power.model.bean.Menu">
+		update bus_menu 
+		<set>
+			<if test="menu_id != null and menu_id != ''">menu_id = #{menu_id},</if>
+			<if test="menu_name != null and menu_name != ''">menu_name = #{menu_name},</if>
+			<if test="parentid != null and parentid != ''">parentid = #{parentid},</if>
+			<if test="levels != null and levels != ''">levels = #{levels},</if>
+			<if test="model != null and model != ''">model = #{model},</if>
+			<if test="xmlid != null and xmlid != ''">xmlid = #{xmlid},</if>
+			<if test="url != null and url != ''">url = #{url},</if>
+			<if test="relate_sub_id != null and relate_sub_id != ''">relate_sub_id = #{relate_sub_id},</if>
+			<if test="menu_desciption != null and menu_desciption != ''">menu_desciption = #{menu_desciption},</if>
+			<if test="status != null and status != ''">status = #{status},</if>
+			<if test="operator != null and operator != ''">operator=#{operator},</if>
+			<if test="icon_url != null and icon_url != ''">icon_url=#{icon_url},</if>
+			update_date = #{update_date}
+		</set>
+		where m_id = #{m_id}
+	</update>
+	
+	<!--查询菜单信息list -->
+	<select id="queryMenuList" parameterType="java.util.Map"
+		resultType="com.antke.power.model.bean.Menu">
+			select 
+				m_id,menu_id,menu_name,parentid,levels,model,xmlid,url,relate_sub_id,menu_desciption,
+				status,operator,create_date,update_date,icon_url 
+			from bus_menu
+		where
+		<if test="menu_id != null and menu_id != ''"> menu_id = #{menu_id} and</if>
+		<if test="parentid != null and parentid != ''"> parentid = #{parentid} and</if>
+		<if test="menu_name != null and menu_name != ''"> menu_name like CONCAT('%','${menu_name}','%' ) and</if>
+		<if test="operator != null and operator != ''"> operator like CONCAT('%','${operator}','%' ) and</if>
+		<if test="status != null"> status = #{status} and</if>
+		<if test="levels != null and levels != ''"> levels = #{levels} and</if>
+		<if test="start_create_date != null and start_create_date != ''"> g.create_date %gt;= #{start_create_date} and</if>
+		<if test="end_create_date != null and end_create_date != ''"> g.create_date %lt;= #{end_create_date} and</if>
+		<if test="start_update_date != null and start_update_date != ''"> g.update_date %gt;= #{start_update_date} and</if>
+		<if test="end_update_date != null and end_update_date != ''"> g.update_date %lt;= #{end_update_date} and</if>
+		 1=1 order by levels,sort,create_date DESC
+	</select>
+	
+	<!--查询菜单信息 -->
+	<select id="queryMenu" parameterType="java.util.Map" 	resultType="com.antke.power.model.bean.Menu">
+			select 
+				m_id,menu_id,menu_name,parentid,levels,model,xmlid,url,relate_sub_id,menu_desciption,
+				status,operator,create_date,update_date,icon_url 
+			from bus_menu
+		where
+		<if test="m_id != null and m_id != ''"> m_id = #{m_id} and</if>
+		<if test="parentid != null and parentid != ''"> parentid = #{parentid} and</if>
+		<if test="status != null"> status = #{status} and</if>
+		1=1
+	</select>
+	
+	<!--查询菜单总数 -->
+	<select id="queryMenuListCount" parameterType="java.util.Map"  resultType="int">
+			select count(1) from bus_menu
+		where 
+		<if test="menu_id != null and menu_id != ''"> menu_id = #{menu_id} and</if>
+		<if test="parentid != null and parentid != ''"> parentid = #{parentid} and</if>
+		<if test="menu_name != null and menu_name != ''"> menu_name like CONCAT('%','${menu_name}','%' ) and</if>
+		<if test="operator != null and operator != ''"> operator like CONCAT('%','${operator}','%' ) and</if>
+		<if test="status != null"> status = #{status} and</if>
+		<if test="levels != null and levels != ''"> levels = #{levels} and</if>
+		<if test="start_create_date != null and start_create_date != ''"> g.create_date %gt;= #{start_create_date} and</if>
+		<if test="end_create_date != null and end_create_date != ''"> g.create_date %lt;= #{end_create_date} and</if>
+		<if test="start_update_date != null and start_update_date != ''"> g.update_date %gt;= #{start_update_date} and</if>
+		<if test="end_update_date != null and end_update_date != ''"> g.update_date %lt;= #{end_update_date} and</if>
+		 1=1 
+	</select>
+	
+	<!--查询菜单列表带分页 -->
+	<select id="queryMenuListByPage" parameterType="java.util.Map"  resultType="java.util.Map">
+			select 
+				m_id,menu_id,menu_name,parentid,levels,model,xmlid,url,relate_sub_id,menu_desciption,
+				status,operator,create_date,update_date,icon_url
+			from bus_menu
+		where 
+		<if test="menu_id != null and menu_id != ''"> menu_id = #{menu_id} and</if>
+		<if test="parentid != null and parentid != ''"> parentid = #{parentid} and</if>
+		<if test="menu_name != null and menu_name != ''"> menu_name like CONCAT('%','${menu_name}','%' ) and</if>
+		<if test="operator != null and operator != ''"> operator like CONCAT('%','${operator}','%' ) and</if>
+		<if test="status != null"> status = #{status} and</if>
+		<if test="levels != null and levels != ''"> levels = #{levels} and</if>
+		<if test="start_create_date != null and start_create_date != ''"> g.create_date %gt;= #{start_create_date} and</if>
+		<if test="end_create_date != null and end_create_date != ''"> g.create_date %lt;= #{end_create_date} and</if>
+		<if test="start_update_date != null and start_update_date != ''"> g.update_date %gt;= #{start_update_date} and</if>
+		<if test="end_update_date != null and end_update_date != ''"> g.update_date %lt;= #{end_update_date} and</if>
+		 1=1 order by create_date DESC
+	</select>
+	
+	<!-- 删除菜单 -->
+	<delete id="deleteMenu" parameterType="java.util.Map">
+		delete from bus_menu where m_id = #{m_id}
+	</delete>
+	
+	
+	
+</mapper>

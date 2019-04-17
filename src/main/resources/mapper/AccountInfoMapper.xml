@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.website.dao.AccountInfoMapper">
+  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.AccountInfo">
+    <id column="account_id" jdbcType="INTEGER" property="accountId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="cash_balance" jdbcType="DOUBLE" property="cashBalance" />
+    <result column="frozen_balance" jdbcType="DOUBLE" property="frozenBalance" />
+    <result column="thawing_balance" jdbcType="DOUBLE" property="thawingBalance" />
+    <result column="sales_rebate_bonus" jdbcType="DOUBLE" property="salesRebateBonus" />
+    <result column="rebate_bonus" jdbcType="DOUBLE" property="rebateBonus" />
+    <result column="red_bonus" jdbcType="DOUBLE" property="redBonus" />
+    <result column="medal_bonus" jdbcType="DOUBLE" property="medalBonus" />
+    <result column="medal_amount" jdbcType="INTEGER" property="medalAmount" />
+    <result column="medal_totle" jdbcType="INTEGER" property="medalTotle" />
+    <result column="box_bonus" jdbcType="DOUBLE" property="boxBonus" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="account_total" jdbcType="DOUBLE" property="accountTotal" />
+    <result column="sales_balance" jdbcType="DOUBLE" property="salesBalance" />
+    <result column="pay_password" jdbcType="VARCHAR" property="payPassword" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    account_id, user_id, cash_balance, frozen_balance, thawing_balance, sales_rebate_bonus, 
+    rebate_bonus, red_bonus, medal_bonus, medal_amount, medal_totle, box_bonus, status, 
+    create_date, update_date, account_total, sales_balance, pay_password
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account_info
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.antke.website.model.bean.AccountInfo">
+    insert into account_info (account_id, user_id, cash_balance, 
+      frozen_balance, thawing_balance, sales_rebate_bonus, 
+      rebate_bonus, red_bonus, medal_bonus, 
+      medal_amount, medal_totle, box_bonus, 
+      status, create_date, update_date, 
+      account_total, sales_balance, pay_password
+      )
+    values (#{accountId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{cashBalance,jdbcType=DOUBLE}, 
+      #{frozenBalance,jdbcType=DOUBLE}, #{thawingBalance,jdbcType=DOUBLE}, #{salesRebateBonus,jdbcType=DOUBLE}, 
+      #{rebateBonus,jdbcType=DOUBLE}, #{redBonus,jdbcType=DOUBLE}, #{medalBonus,jdbcType=DOUBLE}, 
+      #{medalAmount,jdbcType=INTEGER}, #{medalTotle,jdbcType=INTEGER}, #{boxBonus,jdbcType=DOUBLE}, 
+      #{status,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{accountTotal,jdbcType=DOUBLE}, #{salesBalance,jdbcType=DOUBLE}, #{payPassword,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.antke.website.model.bean.AccountInfo">
+    insert into account_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="cashBalance != null">
+        cash_balance,
+      </if>
+      <if test="frozenBalance != null">
+        frozen_balance,
+      </if>
+      <if test="thawingBalance != null">
+        thawing_balance,
+      </if>
+      <if test="salesRebateBonus != null">
+        sales_rebate_bonus,
+      </if>
+      <if test="rebateBonus != null">
+        rebate_bonus,
+      </if>
+      <if test="redBonus != null">
+        red_bonus,
+      </if>
+      <if test="medalBonus != null">
+        medal_bonus,
+      </if>
+      <if test="medalAmount != null">
+        medal_amount,
+      </if>
+      <if test="medalTotle != null">
+        medal_totle,
+      </if>
+      <if test="boxBonus != null">
+        box_bonus,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="accountTotal != null">
+        account_total,
+      </if>
+      <if test="salesBalance != null">
+        sales_balance,
+      </if>
+      <if test="payPassword != null">
+        pay_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="cashBalance != null">
+        #{cashBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="frozenBalance != null">
+        #{frozenBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="thawingBalance != null">
+        #{thawingBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="salesRebateBonus != null">
+        #{salesRebateBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="rebateBonus != null">
+        #{rebateBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="redBonus != null">
+        #{redBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="medalBonus != null">
+        #{medalBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="medalAmount != null">
+        #{medalAmount,jdbcType=INTEGER},
+      </if>
+      <if test="medalTotle != null">
+        #{medalTotle,jdbcType=INTEGER},
+      </if>
+      <if test="boxBonus != null">
+        #{boxBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountTotal != null">
+        #{accountTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="salesBalance != null">
+        #{salesBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="payPassword != null">
+        #{payPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.AccountInfo">
+    update account_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="cashBalance != null">
+        cash_balance = #{cashBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="frozenBalance != null">
+        frozen_balance = #{frozenBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="thawingBalance != null">
+        thawing_balance = #{thawingBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="salesRebateBonus != null">
+        sales_rebate_bonus = #{salesRebateBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="rebateBonus != null">
+        rebate_bonus = #{rebateBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="redBonus != null">
+        red_bonus = #{redBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="medalBonus != null">
+        medal_bonus = #{medalBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="medalAmount != null">
+        medal_amount = #{medalAmount,jdbcType=INTEGER},
+      </if>
+      <if test="medalTotle != null">
+        medal_totle = #{medalTotle,jdbcType=INTEGER},
+      </if>
+      <if test="boxBonus != null">
+        box_bonus = #{boxBonus,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountTotal != null">
+        account_total = #{accountTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="salesBalance != null">
+        sales_balance = #{salesBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="payPassword != null">
+        pay_password = #{payPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.AccountInfo">
+    update account_info
+    set user_id = #{userId,jdbcType=VARCHAR},
+      cash_balance = #{cashBalance,jdbcType=DOUBLE},
+      frozen_balance = #{frozenBalance,jdbcType=DOUBLE},
+      thawing_balance = #{thawingBalance,jdbcType=DOUBLE},
+      sales_rebate_bonus = #{salesRebateBonus,jdbcType=DOUBLE},
+      rebate_bonus = #{rebateBonus,jdbcType=DOUBLE},
+      red_bonus = #{redBonus,jdbcType=DOUBLE},
+      medal_bonus = #{medalBonus,jdbcType=DOUBLE},
+      medal_amount = #{medalAmount,jdbcType=INTEGER},
+      medal_totle = #{medalTotle,jdbcType=INTEGER},
+      box_bonus = #{boxBonus,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      account_total = #{accountTotal,jdbcType=DOUBLE},
+      sales_balance = #{salesBalance,jdbcType=DOUBLE},
+      pay_password = #{payPassword,jdbcType=VARCHAR}
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </update>
+   <select id="getAccountInfoByUserId" parameterType="String" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM account_info
+	    where user_id = #{userId,jdbcType=VARCHAR} 
+  </select>
+</mapper>

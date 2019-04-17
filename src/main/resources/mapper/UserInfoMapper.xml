@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.website.dao.UserInfoMapper">
+	<resultMap id="BaseResultMap" type="com.antke.website.model.bean.UserInfo">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="user_code" jdbcType="VARCHAR" property="userCode" />
+		<result column="real_name" jdbcType="VARCHAR" property="realName" />
+		<result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+		<result column="id_card_front" jdbcType="VARCHAR" property="idCardFront" />
+		<result column="id_card_back" jdbcType="VARCHAR" property="idCardBack" />
+		<result column="id_card_no" jdbcType="VARCHAR" property="idCardNo" />
+		<result column="login_name" jdbcType="VARCHAR" property="loginName" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<result column="contact" jdbcType="VARCHAR" property="contact" />
+		<result column="header" jdbcType="VARCHAR" property="header" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+		<result column="login_date" jdbcType="TIMESTAMP" property="loginDate" />
+		<result column="assemble_num" jdbcType="INTEGER" property="assembleNum" />
+		<result column="role" jdbcType="INTEGER" property="role" />
+		<result column="level" jdbcType="INTEGER" property="level" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="community" jdbcType="VARCHAR" property="community" />
+		<result column="longitude" jdbcType="VARCHAR" property="longitude" />
+		<result column="latitude" jdbcType="VARCHAR" property="latitude" />
+		<result column="ascription_user" jdbcType="INTEGER" property="ascriptionUser" />
+		<result column="openid" jdbcType="VARCHAR" property="openid" />
+		<result column="unionid" jdbcType="VARCHAR" property="unionid" />
+		<result column="direct_superior" jdbcType="INTEGER" property="directSuperior" />
+		<result column="direct_name" jdbcType="VARCHAR" property="directName" />
+		<result column="indirect_name" jdbcType="VARCHAR" property="indirectName" />
+		<result column="rebate_totle" jdbcType="DOUBLE" property="rebateTotle" />
+		<result column="vip" jdbcType="INTEGER" property="vip" />
+		<result column="vip_validity" jdbcType="TIMESTAMP" property="vipValidity" />
+		<result column="group_num" jdbcType="INTEGER" property="groupNum" />
+		<result column="province" jdbcType="VARCHAR" property="province" />
+		<result column="city" jdbcType="VARCHAR" property="city" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, real_name, login_name, password, contact, header,
+		status,
+		create_date, update_date , openid,rank,direct_superior
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user_info
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="queryUserInfo" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user_info
+		where
+		<if test="contact != null and login_name != ''">
+			contact = #{contact} and
+		</if>
+		1=1
+	</select>
+
+	<insert id="insert" parameterType="com.antke.website.model.bean.UserInfo">
+		insert into user_info (id,
+		real_name, login_name,
+		password, contact, header, status, create_date,
+		update_date, openid,rank
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{realName,jdbcType=VARCHAR},
+		#{loginName,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR},
+		#{header,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{updateDate,jdbcType=TIMESTAMP},
+		#{openid,jdbcType=VARCHAR},
+		#{userPhone,jdbcType=VARCHAR},
+		#{isWord,jdbcType=INTEGER},
+		#{isQuestion,jdbcType=INTEGER}
+		,
+		#{rank,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.antke.website.model.bean.UserInfo">
+		insert into user_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="realName != null">
+				real_name,
+			</if>
+			<if test="loginName != null">
+				login_name,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="contact != null">
+				contact,
+			</if>
+			<if test="header != null">
+				header,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="updateDate != null">
+				update_date,
+			</if>
+			<if test="openid != null">
+				openid,
+			</if>
+			<if test="rank != null">
+				rank,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="realName != null">
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="loginName != null">
+				#{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null">
+				#{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="header != null">
+				#{header,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="openid != null">
+				#{openid,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhone != null">
+				#{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="isWord != null">
+				#{isWord,jdbcType=INTEGER},
+			</if>
+			<if test="isQuestion != null">
+				#{isQuestion,jdbcType=INTEGER},
+			</if>
+			<if test="rank != null">
+				#{rank,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.UserInfo">
+		update user_info
+		<set>
+			<if test="realName != null">
+				real_name = #{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="loginName != null">
+				login_name = #{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null">
+				contact = #{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="header != null">
+				header = #{header,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="openid != null">
+				openid = #{openid,jdbcType=VARCHAR},
+			</if>
+			<if test="role != null">
+				role = #{role,jdbcType=INTEGER},
+			</if>
+			<if test="rank != null">
+				rank = #{rank,jdbcType=INTEGER},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="community != null">
+				community = #{community,jdbcType=VARCHAR},
+			</if>
+			<if test="idCardFront != null">
+				id_card_front = #{idCardFront,jdbcType=VARCHAR},
+			</if>
+			<if test="idCardBack != null">
+				id_card_back = #{idCardBack,jdbcType=VARCHAR},
+			</if>
+			<if test="idCardNo != null">
+				id_card_no = #{idCardNo,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.UserInfo">
+		update user_info
+		set real_name = #{realName,jdbcType=VARCHAR},
+		login_name =
+		#{loginName,jdbcType=VARCHAR},
+		password = #{password,jdbcType=VARCHAR},
+		contact = #{contact,jdbcType=VARCHAR},
+		header =
+		#{header,jdbcType=VARCHAR},
+		status = #{status,jdbcType=INTEGER},
+		create_date = #{createDate,jdbcType=TIMESTAMP},
+		update_date =
+		#{updateDate,jdbcType=TIMESTAMP},
+		openid = #{openid,jdbcType=VARCHAR},
+		rank = #{rank,jdbcType=INTEGER}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="queryListCount" parameterType="java.util.Map"
+		resultType="int">
+		SELECT
+		count(*)
+		from user_info ui
+		where
+		<include refid="Base_where" />
+		ui.id!=1376 AND ui.id!=1378
+	</select>
+
+	<select id="queryUserInfoList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select * from user_info ui
+		where
+		<include refid="Base_where" />
+		ui.id!=1376 AND ui.id!=1378
+		order by ui.create_date desc
+	</select>
+
+	<select id="queryUserInfoListCount" parameterType="java.util.Map"
+		resultType="int">
+		SELECT
+		count(*)
+		from user_info ui,user_info u2 ,user_info u3
+		where
+		ui.direct_superior = u2.id AND
+		ui.indirect_superior = u3.id and
+		<include refid="Base_where" />
+		ui.id!=1376 AND ui.id!=1378
+	</select>
+
+	<select id="queryUserInfoListByPages" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select ui.*,u2.real_name as direct_name,u3.real_name as indirect_name
+		from user_info ui,user_info u2 ,user_info u3
+		where
+		ui.direct_superior =
+		u2.id AND
+		ui.indirect_superior = u3.id and
+		<include refid="Base_where" />
+		ui.id!=1376 AND ui.id!=1378
+		order by ui.create_date desc
+	</select>
+
+	<sql id="Base_where">
+		<if test="id != null and id != ''">
+			ui.id = #{id} and
+		</if>
+		<if test="real_name != null and id != ''">
+			ui.real_name LIKE concat(concat('%',#{real_name}),'%') and
+		</if>
+		<if test="contact != null and login_name != ''">
+			ui.contact LIKE concat(concat('%',#{contact}),'%') and
+		</if>
+		<if test="role != null and role != ''">
+			ui.role = #{role} and
+		</if>
+		<if test="indirect_name != null and indirect_name != ''">
+			u3.real_name LIKE concat(concat('%',#{indirect_name}),'%')
+			and
+		</if>
+		<if test="direct_name != null and direct_name != ''">
+			u2.real_name LIKE concat(concat('%',#{direct_name}),'%')
+			and
+		</if>
+	</sql>
+</mapper>

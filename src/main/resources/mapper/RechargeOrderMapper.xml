@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.website.dao.RechargeOrderMapper">
+  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.RechargeOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
+    <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="total" jdbcType="DOUBLE" property="total" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="pay_type" jdbcType="INTEGER" property="payType" />
+    <result column="order_name" jdbcType="VARCHAR" property="orderName" />
+    <result column="transaction_id" jdbcType="VARCHAR" property="transactionId" />
+    <result column="product_code" jdbcType="VARCHAR" property="productCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, telephone, order_code, trade_no, total, status, pay_time, create_date, 
+    update_date, pay_type, order_name, transaction_id, product_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recharge_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.antke.website.model.bean.RechargeOrder">
+    insert into recharge_order (id, user_id, telephone, 
+      order_code, trade_no, total, 
+      status, pay_time, create_date, 
+      update_date, pay_type, order_name, 
+      transaction_id, product_code)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{telephone,jdbcType=VARCHAR}, 
+      #{orderCode,jdbcType=VARCHAR}, #{tradeNo,jdbcType=VARCHAR}, #{total,jdbcType=DOUBLE}, 
+      #{status,jdbcType=INTEGER}, #{payTime,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{payType,jdbcType=INTEGER}, #{orderName,jdbcType=VARCHAR}, 
+      #{transactionId,jdbcType=VARCHAR}, #{productCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.antke.website.model.bean.RechargeOrder">
+    insert into recharge_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="orderCode != null">
+        order_code,
+      </if>
+      <if test="tradeNo != null">
+        trade_no,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="orderName != null">
+        order_name,
+      </if>
+      <if test="transactionId != null">
+        transaction_id,
+      </if>
+      <if test="productCode != null">
+        product_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null">
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="orderName != null">
+        #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null">
+        #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null">
+        #{productCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.RechargeOrder">
+    update recharge_order
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null">
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null">
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="orderName != null">
+        order_name = #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null">
+        transaction_id = #{transactionId,jdbcType=VARCHAR},
+      </if>
+      <if test="productCode != null">
+        product_code = #{productCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.RechargeOrder">
+    update recharge_order
+    set user_id = #{userId,jdbcType=INTEGER},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      order_code = #{orderCode,jdbcType=VARCHAR},
+      trade_no = #{tradeNo,jdbcType=VARCHAR},
+      total = #{total,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      pay_type = #{payType,jdbcType=INTEGER},
+      order_name = #{orderName,jdbcType=VARCHAR},
+      transaction_id = #{transactionId,jdbcType=VARCHAR},
+      product_code = #{productCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="queryRechargeOrderListCount" parameterType="java.util.Map" resultType="int">
+		SELECT
+		  count(*) 
+		FROM
+			recharge_order ro
+		LEFT JOIN recharge_product rp ON ro.product_code = rp.product_code
+		where
+		<include refid="Base_where"></include>  
+		1=1
+	</select>
+ 
+	<select id="queryRechargeOrderListByPages" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			ro.*, rp.product_name,
+			rp.face_value,
+			rp.province,
+			rp.operator
+		FROM
+			recharge_order ro
+		LEFT JOIN recharge_product rp ON ro.product_code = rp.product_code
+		where
+		<include refid="Base_where"></include>  
+		1=1
+	</select>
+	
+	<sql id="Base_where">
+	    <if test="product_code != null and product_code != ''">
+			ro.product_code = #{product_code} and
+		</if>
+	    <if test="product_name != null and product_name != ''">
+			rp.product_name = #{product_name} and
+		</if>
+		<if test="user_id != null and user_id != ''">
+			ro.user_id = #{user_id} and
+		</if>
+		<if test="telephone != null and telephone != ''">
+			ro.telephone = #{telephone} and
+		</if>
+		 <if test="order_code != null and order_code != ''">
+			ro.order_code = #{order_code} and
+		</if>
+		 <if test="trade_no != null and trade_no != ''">
+			ro.trade_no = #{trade_no} and
+		</if>
+		 <if test="status != null and status != ''">
+			ro.status = #{status} and
+		</if>
+		<if test="create_date_start !=null and create_date_start != ''">ro.create_date &gt;=#{create_date_start} and</if>
+		<if test="create_date_end !=null and create_date_end != ''">ro.create_date &lt;=#{create_date_end} and</if>
+	</sql>
+</mapper>

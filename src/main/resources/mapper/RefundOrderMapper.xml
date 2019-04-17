@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.website.dao.RefundOrderMapper">
+  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.RefundOrder">
+    <id column="refund_id" jdbcType="INTEGER" property="refundId" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="refund_amount" jdbcType="DOUBLE" property="refundAmount" />
+    <result column="goods_total" jdbcType="DOUBLE" property="goodsTotal" />
+    <result column="goods_count" jdbcType="DOUBLE" property="goodsCount" />
+    <result column="delivery_fee" jdbcType="DOUBLE" property="deliveryFee" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="contact" jdbcType="VARCHAR" property="contact" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="team_id" jdbcType="INTEGER" property="teamId" />
+    <result column="refund_date" jdbcType="TIMESTAMP" property="refundDate" />
+    <result column="order_desc" jdbcType="VARCHAR" property="orderDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    refund_id, order_id, refund_amount, goods_total, goods_count, delivery_fee, user_id, 
+    user_name, contact, status, create_date, update_date, team_id, refund_date, order_desc
+  </sql>
+  
+  <!--++++++++++++++++++++++++++++ wxt +++++++++++++++++++++++++++++++++++-->
+  <select id="orderListByPages" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+		ro.refund_id id,
+		ro.order_id order_id,
+		tb.team_name team_name,
+		ui.nick_name nick_name,
+		ui.contact contact,
+		ro.user_name user_name,
+		ro.create_date create_date,
+		ro.goods_total goods_total,
+		ro.goods_count goods_count,
+		ro.contact usercontact,
+		ro.refund_date refund_date,
+		ro.delivery_fee delivery_fee,
+		ro.status status,
+		roi.goods_name goods_name,
+		roi.goods_num goods_num,
+		roi.total_money total_money,
+		oi.pay_code pay_code,
+		oi.pay_time  pay_time,
+		oi.receive_date receive_date,
+		oi.delivery_type delivery_type,
+		dp.point_name point_name,
+		tb.logistics_type logistics_type
+		FROM refund_order ro 
+		left join refund_order_items roi on ro.refund_id=roi.refund_id
+		left join team_buying tb on ro.team_id=tb.id
+		left join user_info ui on tb.user_id=ui.id
+		left join order_info oi on oi.order_code=ro.order_id
+		left join delivery_point dp on oi.point_id=dp.id
+		WHERE 
+		<if test="id != null and id != ''">
+			ro.refund_id = #{id} and
+		</if>
+		<if test="order_id != null and order_id != ''">
+			ro.order_id = #{order_id} and
+		</if>
+		<if test="user_name != null and user_name != ''">
+			ro.user_name = #{user_name} and
+		</if>
+		<if test="nick_name != null and nick_name != ''">
+			ui.nick_name = #{nick_name} and
+		</if>
+		<if test="team_name != null and team_name != ''">
+			tb.team_name = #{team_name} and
+		</if>
+		<if test="status != null and status != ''">
+			ro.status = #{status} and
+		</if>
+		<if test="logistics_type != null and logistics_type != ''">
+			tb.logistics_type = #{logistics_type} and
+		</if>
+		<if test="satrt_date != null and satrt_date != ''">
+			ro.create_date > #{satrt_date} and
+		</if>
+		<if test="end_date != null and end_date != ''">
+			#{end_date} > ro.create_date and
+		</if>
+		1=1 order by create_date desc
+	</select>
+  
+   <!--++++++++++++++++++++++++++++ wxt +++++++++++++++++++++++++++++++++++-->
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from refund_order
+    where refund_id = #{refundId,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.antke.website.model.bean.RefundOrder">
+    insert into refund_order (refund_id, order_id, refund_amount, 
+      goods_total, goods_count, delivery_fee, 
+      user_id, user_name, contact, 
+      status, create_date, update_date, 
+      team_id, refund_date, order_desc
+      )
+    values (#{refundId,jdbcType=INTEGER}, #{orderId,jdbcType=VARCHAR}, #{refundAmount,jdbcType=DOUBLE}, 
+      #{goodsTotal,jdbcType=DOUBLE}, #{goodsCount,jdbcType=DOUBLE}, #{deliveryFee,jdbcType=DOUBLE}, 
+      #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{teamId,jdbcType=INTEGER}, #{refundDate,jdbcType=TIMESTAMP}, #{orderDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.antke.website.model.bean.RefundOrder">
+    insert into refund_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="refundId != null">
+        refund_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="refundAmount != null">
+        refund_amount,
+      </if>
+      <if test="goodsTotal != null">
+        goods_total,
+      </if>
+      <if test="goodsCount != null">
+        goods_count,
+      </if>
+      <if test="deliveryFee != null">
+        delivery_fee,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="contact != null">
+        contact,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="teamId != null">
+        team_id,
+      </if>
+      <if test="refundDate != null">
+        refund_date,
+      </if>
+      <if test="orderDesc != null">
+        order_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="refundId != null">
+        #{refundId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="refundAmount != null">
+        #{refundAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsTotal != null">
+        #{goodsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsCount != null">
+        #{goodsCount,jdbcType=DOUBLE},
+      </if>
+      <if test="deliveryFee != null">
+        #{deliveryFee,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teamId != null">
+        #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="refundDate != null">
+        #{refundDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderDesc != null">
+        #{orderDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.RefundOrder">
+    update refund_order
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="refundAmount != null">
+        refund_amount = #{refundAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsTotal != null">
+        goods_total = #{goodsTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsCount != null">
+        goods_count = #{goodsCount,jdbcType=DOUBLE},
+      </if>
+      <if test="deliveryFee != null">
+        delivery_fee = #{deliveryFee,jdbcType=DOUBLE},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teamId != null">
+        team_id = #{teamId,jdbcType=INTEGER},
+      </if>
+      <if test="refundDate != null">
+        refund_date = #{refundDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderDesc != null">
+        order_desc = #{orderDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where refund_id = #{refundId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.RefundOrder">
+    update refund_order
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      refund_amount = #{refundAmount,jdbcType=DOUBLE},
+      goods_total = #{goodsTotal,jdbcType=DOUBLE},
+      goods_count = #{goodsCount,jdbcType=DOUBLE},
+      delivery_fee = #{deliveryFee,jdbcType=DOUBLE},
+      user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      team_id = #{teamId,jdbcType=INTEGER},
+      refund_date = #{refundDate,jdbcType=TIMESTAMP},
+      order_desc = #{orderDesc,jdbcType=VARCHAR}
+    where refund_id = #{refundId,jdbcType=INTEGER}
+  </update>
+</mapper>

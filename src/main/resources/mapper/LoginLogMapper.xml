@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.antke.website.dao.LoginLogMapper">
+	<resultMap id="BaseResultMap" type="com.antke.website.model.bean.LoginLog">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="chant_id" property="chantId" jdbcType="INTEGER" />
+		<result column="worker_id" property="workerId" jdbcType="VARCHAR" />
+		<result column="worker_name" property="workerName" jdbcType="VARCHAR" />
+		<result column="role" property="role" jdbcType="INTEGER" />
+		<result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, chant_id, worker_id, worker_name, role, login_ip, status,
+		create_date, update_date
+  </sql>
+  
+  <!-- ======================================================================================================================= -->
+  
+  	<!-- 1. 查询登录日志集合 -->
+  	<select id="selectLoginLogs" parameterType="java.util.Map" resultType="com.antke.website.model.bean.LoginLog">
+		SELECT  id,chant_id as chantId,worker_id as workerId,worker_name as workerName,role,status,login_ip as loginIp,
+				create_date as createDate,update_date as updateDate
+		FROM login_log
+		WHERE
+			<if test="chant_id != null">chant_id = #{chant_id} and</if>
+			<if test="worker_id != null and worker_id != ''">worker_id = #{worker_id} and</if>
+		1=1 and status = 0
+	</select>
+  
+  <!-- ======================================================================================================================= -->
+  
+  	<!-- 2.分页查询 -->
+	<select id="selectLoginLogListByPage" parameterType="java.util.Map"
+		resultType="com.antke.website.model.bean.LoginLog">
+		SELECT	id,chant_id as chantId,worker_id as workerId,worker_name as workerName,role,status,login_ip as loginIp,
+				create_date as createDate,update_date as updateDate
+		FROM
+			login_log
+		WHERE
+			<if test="chant_id != null">chant_id = #{chant_id} and</if>
+			<if test="worker_id != null and worker_id != ''">worker_id = #{worker_id} and</if>
+			<if test="create_date_start !=null and create_date_start != ''">create_date &gt;=#{create_date_start} and</if>
+			<if test="create_date_end !=null and create_date_end != ''">update_date &lt;=#{create_date_end} and</if>
+		1=1 ORDER BY create_date DESC
+	</select>
+	
+	<!-- 2.1查询总数 -->
+	<select id="selectLoginLogCount" parameterType="java.util.Map" resultType="int">
+		select count(id) from login_log
+		where
+			<if test="chant_id != null">chant_id = #{chant_id} and</if>
+			<if test="worker_id != null and worker_id != ''">worker_id = #{worker_id} and</if>
+			<if test="create_date_start !=null and create_date_start != ''">create_date &gt;=#{create_date_start} and</if>
+			<if test="create_date_end !=null and create_date_end != ''">update_date &lt;=#{create_date_end} and</if>
+		1=1
+	</select>
+  
+  <!-- ======================================================================================================================= -->
+  <!-- ======================================================================================================================= -->
+  
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from login_log
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.antke.website.model.bean.LoginLog">
+		insert into login_log (id, chant_id, worker_id,
+		worker_name, role, login_ip,
+		status, create_date, update_date
+		)
+		values (#{id,jdbcType=INTEGER}, #{chantId,jdbcType=INTEGER},
+		#{workerId,jdbcType=VARCHAR},
+		#{workerName,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{loginIp,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP},
+		#{updateDate,jdbcType=TIMESTAMP}
+		)
+  </insert>
+	<insert id="insertSelective" parameterType="com.antke.website.model.bean.LoginLog">
+		insert into login_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+      </if>
+			<if test="chantId != null">
+				chant_id,
+      </if>
+			<if test="workerId != null">
+				worker_id,
+      </if>
+			<if test="workerName != null">
+				worker_name,
+      </if>
+			<if test="role != null">
+				role,
+      </if>
+			<if test="loginIp != null">
+				login_ip,
+      </if>
+			<if test="status != null">
+				status,
+      </if>
+			<if test="createDate != null">
+				create_date,
+      </if>
+			<if test="updateDate != null">
+				update_date,
+      </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+      </if>
+			<if test="chantId != null">
+				#{chantId,jdbcType=INTEGER},
+      </if>
+			<if test="workerId != null">
+				#{workerId,jdbcType=VARCHAR},
+      </if>
+			<if test="workerName != null">
+				#{workerName,jdbcType=VARCHAR},
+      </if>
+			<if test="role != null">
+				#{role,jdbcType=INTEGER},
+      </if>
+			<if test="loginIp != null">
+				#{loginIp,jdbcType=VARCHAR},
+      </if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+      </if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+      </if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+      </if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.LoginLog">
+		update login_log
+		<set>
+			<if test="chantId != null">
+				chant_id = #{chantId,jdbcType=INTEGER},
+      </if>
+			<if test="workerId != null">
+				worker_id = #{workerId,jdbcType=VARCHAR},
+      </if>
+			<if test="workerName != null">
+				worker_name = #{workerName,jdbcType=VARCHAR},
+      </if>
+			<if test="role != null">
+				role = #{role,jdbcType=INTEGER},
+      </if>
+			<if test="loginIp != null">
+				login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+			<if test="status != null">
+				status = #{status,jdbcType=INTEGER},
+      </if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.LoginLog">
+		update login_log
+		set chant_id = #{chantId,jdbcType=INTEGER},
+		worker_id = #{workerId,jdbcType=VARCHAR},
+		worker_name = #{workerName,jdbcType=VARCHAR},
+		role = #{role,jdbcType=INTEGER},
+		login_ip = #{loginIp,jdbcType=VARCHAR},
+		status = #{status,jdbcType=INTEGER},
+		create_date = #{createDate,jdbcType=TIMESTAMP},
+		update_date = #{updateDate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.website.dao.DeliveryPointMapper">
+	<resultMap id="BaseResultMap"
+		type="com.antke.website.model.bean.DeliveryPoint">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="user_id" jdbcType="INTEGER" property="userId" />
+		<result column="point_name" jdbcType="VARCHAR"
+			property="pointName" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="longitude" jdbcType="VARCHAR"
+			property="longitude" />
+		<result column="latitude" jdbcType="VARCHAR"
+			property="latitude" />
+		<result column="contact" jdbcType="VARCHAR" property="contact" />
+		<result column="create_date" jdbcType="TIMESTAMP"
+			property="createDate" />
+		<result column="update_date" jdbcType="TIMESTAMP"
+			property="updateDate" />
+		<result column="province_id" jdbcType="VARCHAR"
+			property="provinceId" />
+		<result column="city_id" jdbcType="VARCHAR" property="cityId" />
+		<result column="district_id" jdbcType="VARCHAR"
+			property="districtId" />
+		<result column="province" jdbcType="VARCHAR"
+			property="province" />
+		<result column="city" jdbcType="VARCHAR" property="city" />
+		<result column="district" jdbcType="VARCHAR"
+			property="district" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
+		<result column="refuse_reason" jdbcType="VARCHAR" property="refuseReason" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_id, point_name, address, longitude, latitude,
+		contact,
+		create_date, update_date,
+		province_id, city_id, district_id,
+		province, city, district, status
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from delivery_point
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert"
+		parameterType="com.antke.website.model.bean.DeliveryPoint">
+		insert into delivery_point (id, user_id, point_name,
+		address, longitude, latitude,
+		contact, create_date, update_date,
+		province_id, city_id, district_id,
+		province, city, district,
+		status)
+		values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+		#{pointName,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},
+		#{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR},
+		#{contact,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+		#{updateDate,jdbcType=TIMESTAMP},
+		#{provinceId,jdbcType=VARCHAR},
+		#{cityId,jdbcType=VARCHAR}, #{districtId,jdbcType=VARCHAR},
+		#{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+		#{district,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.antke.website.model.bean.DeliveryPoint">
+		insert into delivery_point
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="pointName != null">
+				point_name,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="longitude != null">
+				longitude,
+			</if>
+			<if test="latitude != null">
+				latitude,
+			</if>
+			<if test="contact != null">
+				contact,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="updateDate != null">
+				update_date,
+			</if>
+			<if test="provinceId != null">
+				province_id,
+			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="districtId != null">
+				district_id,
+			</if>
+			<if test="province != null">
+				province,
+			</if>
+			<if test="city != null">
+				city,
+			</if>
+			<if test="district != null">
+				district,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="pointName != null">
+				#{pointName,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				#{longitude,jdbcType=VARCHAR},
+			</if>
+			<if test="latitude != null">
+				#{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null">
+				#{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="provinceId != null">
+				#{provinceId,jdbcType=VARCHAR},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="districtId != null">
+				#{districtId,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				#{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+			</if>
+			<if test="district != null">
+				#{district,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.antke.website.model.bean.DeliveryPoint">
+		update delivery_point
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="pointName != null">
+				point_name = #{pointName,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="longitude != null">
+				longitude = #{longitude,jdbcType=VARCHAR},
+			</if>
+			<if test="latitude != null">
+				latitude = #{latitude,jdbcType=VARCHAR},
+			</if>
+			<if test="contact != null">
+				contact = #{contact,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="provinceId != null">
+				province_id = #{provinceId,jdbcType=VARCHAR},
+			</if>
+			<if test="cityId != null">
+				city_id = #{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="districtId != null">
+				district_id = #{districtId,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="district != null">
+				district = #{district,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="refuseReason != null">
+				refuse_reason = #{refuseReason,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.antke.website.model.bean.DeliveryPoint">
+		update delivery_point
+		set user_id =
+		#{userId,jdbcType=INTEGER},
+		point_name = #{pointName,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+		longitude =
+		#{longitude,jdbcType=VARCHAR},
+		latitude = #{latitude,jdbcType=VARCHAR},
+		contact = #{contact,jdbcType=VARCHAR},
+		create_date =
+		#{createDate,jdbcType=TIMESTAMP},
+		update_date =
+		#{updateDate,jdbcType=TIMESTAMP},
+		province_id =
+		#{provinceId,jdbcType=VARCHAR},
+		city_id = #{cityId,jdbcType=VARCHAR},
+		district_id = #{districtId,jdbcType=VARCHAR},
+		province =
+		#{province,jdbcType=VARCHAR},
+		city = #{city,jdbcType=VARCHAR},
+		district
+		= #{district,jdbcType=VARCHAR},
+		status = #{status,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<insert id="savePoint">
+		insert into delivery_point (user_id, point_name,
+		address, longitude, latitude,
+		contact, create_date, update_date,
+		province_id, city_id, district_id,
+		province, city, district,
+		status)
+		values (#{user_id,jdbcType=INTEGER}, #{point_name,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR},
+		#{latitude,jdbcType=VARCHAR},
+		#{contact,jdbcType=VARCHAR},
+		#{create_date,jdbcType=TIMESTAMP}, #{update_date,jdbcType=TIMESTAMP},
+		#{province_id,jdbcType=VARCHAR}, #{city_id,jdbcType=VARCHAR},
+		#{district_id,jdbcType=VARCHAR},
+		#{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR})
+	</insert>
+
+	<select id="queryPointByParam" parameterType="java.util.Map"
+		resultType="int">
+		select
+		count(id)
+		from delivery_point
+		where
+		<if test="user_id != null and user_id != ''">
+			user_id = #{user_id} and
+		</if>
+		<if test="point_name != null and point_name != ''">
+			point_name = #{point_name} and
+		</if>
+		<if test="address != null and address != ''">
+			address = #{address} and
+		</if>
+		<if test="longitude != null and longitude != ''">
+			longitude = #{longitude} and
+		</if>
+		<if test="latitude != null and latitude != ''">
+			latitude = #{latitude} and
+		</if>
+		<if test="contact != null and contact != ''">
+			contact = #{contact} and
+		</if>
+		<if test="province_id != null and province_id != ''">
+			province_id = #{province_id} and
+		</if>
+		<if test="city_id != null and city_id != ''">
+			city_id = #{city_id} and
+		</if>
+		<if test="district_id != null and district_id != ''">
+			district_id = #{district_id} and
+		</if>
+		<if test="province != null and province != ''">
+			province = #{province} and
+		</if>
+		<if test="city != null and city != ''">
+			city = #{city} and
+		</if>
+		<if test="district != null and district != ''">
+			district = #{district} and
+		</if>
+		1=1
+	</select>
+	<select id="querySeMePointList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		dp.id,
+		dp.user_id,
+		dp.contact,
+		dp.point_name,
+		dp.address,
+		dp.refuse_reason,
+		dp.status,
+		ui.nick_name,
+		ui.real_name
+		FROM
+		delivery_point dp
+		LEFT JOIN
+		user_info ui
+		ON
+		dp.user_id = ui.id
+		where 1=1
+		<if test="contact != null and contact != ''">
+			and dp.contact = #{contact} 
+		</if>
+		<if test="status != null and status != ''">
+			and dp.status = #{status} 
+		</if>
+		<if test="real_name != null and real_name != ''">
+			and ui.real_name = #{real_name} 
+		</if>
+		ORDER BY dp.update_date DESC
+	</select>
+	
+	<select id="getDeliveryPoint" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		dp.*,
+		ui.nick_name,
+		ui.real_name
+		FROM
+		delivery_point dp
+		LEFT JOIN
+		user_info ui
+		ON
+		dp.user_id = ui.id
+		where 1=1
+		<if test="id != null and id != ''">
+			and dp.id = #{id} 
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.antke.website.dao.RankBrokerageMapper">
+  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.RankBrokerage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rank" jdbcType="INTEGER" property="rank" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <result column="integral" jdbcType="DOUBLE" property="integral" />
+    <result column="brokerage_ratio" jdbcType="DOUBLE" property="brokerageRatio" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, rank, amount, integral, brokerage_ratio, create_date, update_date, operator
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rank_brokerage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.antke.website.model.bean.RankBrokerage">
+    insert into rank_brokerage (id, rank, amount, 
+      integral, brokerage_ratio, create_date, 
+      update_date, operator)
+    values (#{id,jdbcType=INTEGER}, #{rank,jdbcType=INTEGER}, #{amount,jdbcType=DOUBLE}, 
+      #{integral,jdbcType=DOUBLE}, #{brokerageRatio,jdbcType=DOUBLE}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.antke.website.model.bean.RankBrokerage">
+    insert into rank_brokerage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="rank != null">
+        rank,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="integral != null">
+        integral,
+      </if>
+      <if test="brokerageRatio != null">
+        brokerage_ratio,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="rank != null">
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="integral != null">
+        #{integral,jdbcType=DOUBLE},
+      </if>
+      <if test="brokerageRatio != null">
+        #{brokerageRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.RankBrokerage">
+    update rank_brokerage
+    <set>
+      <if test="rank != null">
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="integral != null">
+        integral = #{integral,jdbcType=DOUBLE},
+      </if>
+      <if test="brokerageRatio != null">
+        brokerage_ratio = #{brokerageRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.RankBrokerage">
+    update rank_brokerage
+    set rank = #{rank,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DOUBLE},
+      integral = #{integral,jdbcType=DOUBLE},
+      brokerage_ratio = #{brokerageRatio,jdbcType=DOUBLE},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      operator = #{operator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <select id="getBrokerageByRank" parameterType="java.lang.Integer"  resultMap="BaseResultMap" >
+		SELECT
+			*
+		FROM rank_brokerage
+	    where rank = #{rank,jdbcType=INTEGER}
+	  </select>
+</mapper>
