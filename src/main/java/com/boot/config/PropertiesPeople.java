@@ -1,14 +1,14 @@
-package com.boot.entity;
+package com.boot.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.support.PropertySourceFactory;
 import org.springframework.stereotype.Component;
 
-import com.boot.utils.YamlPropertySourceFactory;
-
 @Component
-//@PropertySource(value = "classpath:myconfig.yml", factory = YamlPropertySourceFactory.class)
+//@Configuration
+@PropertySource(value = "classpath:myconfig.properties",factory=PropertySourceFactory.class)
 //@ConfigurationProperties(prefix="system.user")
 @ConfigurationProperties(prefix="people")
 public class PropertiesPeople {
@@ -35,4 +35,9 @@ public class PropertiesPeople {
 	public void setAge(int age) {
 		this.age = age;
 	}
+//	@Override
+//	public String toString() {
+//		return "PropertiesPeople [name=" + name + ", password=" + password + ", age=" + age + "]";
+//	}
+	
 }

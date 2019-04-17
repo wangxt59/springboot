@@ -4,11 +4,14 @@ import java.util.Map;
 
 import javax.print.attribute.standard.Severity;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.FileSystemResource;
@@ -18,11 +21,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import javassist.ClassPath;
 
+@ComponentScan(basePackages= {})
 @SpringBootApplication(exclude={}) // Spring Boot项目的核心注解，主要目的是开启自动配置
 //exclude={}用来排除不用的依赖
 @Controller // 标明这是一个SpringMVC的Controller控制器
-@ImportResource(value={})//引入xml配置文件
+//@ImportResource(value={"classpath:config/applicationContext.xml"})//引入xml配置文件
+@MapperScan({"com.antke.*.dao"})
 public class Application {
 //public class Application extends WebMvcConfigurationSupport{
 	

@@ -1,4 +1,4 @@
-package com.boot.entity;
+package com.boot.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -35,4 +35,8 @@ public class YmlPeople {
 	public void setAge(int age) {
 		this.age = age;
 	}
+//	@Override
+//	public String toString() {
+//		return "YmlPeople [name=" + name + ", password=" + password + ", age=" + age + "]";
+//	}
 }
