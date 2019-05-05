@@ -20,6 +20,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @PropertySource(value = "classpath:druid.properties")
+@ConfigurationProperties
 public class DruidConfiguration {
 
     @Bean(destroyMethod = "close", initMethod = "init")

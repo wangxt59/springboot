@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antke.website.dao.FrequencyMapper">
-  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.Frequency">
+<mapper namespace="com.website.dao.FrequencyMapper">
+  <resultMap id="BaseResultMap" type="com.website.model.bean.Frequency">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
@@ -25,7 +25,7 @@
     from frequency
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.antke.website.model.bean.Frequency">
+  <insert id="insert" parameterType="com.website.model.bean.Frequency">
     insert into frequency (id, name, pic_url, 
       is_home_show, status, create_date, 
       update_date, create_user_id,relation_type)
@@ -33,7 +33,7 @@
       #{isHomeShow,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
       #{updateDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{relationType,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.antke.website.model.bean.Frequency" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertSelective" parameterType="com.website.model.bean.Frequency" useGeneratedKeys="true" keyProperty="id">
     insert into frequency
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -94,7 +94,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.Frequency">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.Frequency">
     update frequency
     <set>
       <if test="name != null">
@@ -124,7 +124,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.Frequency">
+  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.Frequency">
     update frequency
     set name = #{name,jdbcType=VARCHAR},
       pic_url = #{picUrl,jdbcType=VARCHAR},

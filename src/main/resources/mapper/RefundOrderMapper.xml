@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antke.website.dao.RefundOrderMapper">
-  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.RefundOrder">
+<mapper namespace="com.website.dao.RefundOrderMapper">
+  <resultMap id="BaseResultMap" type="com.website.model.bean.RefundOrder">
     <id column="refund_id" jdbcType="INTEGER" property="refundId" />
     <result column="order_id" jdbcType="VARCHAR" property="orderId" />
     <result column="refund_amount" jdbcType="DOUBLE" property="refundAmount" />
@@ -93,7 +93,7 @@
     from refund_order
     where refund_id = #{refundId,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.antke.website.model.bean.RefundOrder">
+  <insert id="insert" parameterType="com.website.model.bean.RefundOrder">
     insert into refund_order (refund_id, order_id, refund_amount, 
       goods_total, goods_count, delivery_fee, 
       user_id, user_name, contact, 
@@ -107,7 +107,7 @@
       #{teamId,jdbcType=INTEGER}, #{refundDate,jdbcType=TIMESTAMP}, #{orderDesc,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.antke.website.model.bean.RefundOrder">
+  <insert id="insertSelective" parameterType="com.website.model.bean.RefundOrder">
     insert into refund_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="refundId != null">
@@ -204,7 +204,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.RefundOrder">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.RefundOrder">
     update refund_order
     <set>
       <if test="orderId != null">
@@ -252,7 +252,7 @@
     </set>
     where refund_id = #{refundId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.RefundOrder">
+  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.RefundOrder">
     update refund_order
     set order_id = #{orderId,jdbcType=VARCHAR},
       refund_amount = #{refundAmount,jdbcType=DOUBLE},

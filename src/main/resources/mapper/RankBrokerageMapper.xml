@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antke.website.dao.RankBrokerageMapper">
-  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.RankBrokerage">
+<mapper namespace="com.website.dao.RankBrokerageMapper">
+  <resultMap id="BaseResultMap" type="com.website.model.bean.RankBrokerage">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="rank" jdbcType="INTEGER" property="rank" />
     <result column="amount" jdbcType="DOUBLE" property="amount" />
@@ -20,7 +20,7 @@
     from rank_brokerage
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.antke.website.model.bean.RankBrokerage">
+  <insert id="insert" parameterType="com.website.model.bean.RankBrokerage">
     insert into rank_brokerage (id, rank, amount, 
       integral, brokerage_ratio, create_date, 
       update_date, operator)
@@ -28,7 +28,7 @@
       #{integral,jdbcType=DOUBLE}, #{brokerageRatio,jdbcType=DOUBLE}, #{createDate,jdbcType=TIMESTAMP}, 
       #{updateDate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.antke.website.model.bean.RankBrokerage">
+  <insert id="insertSelective" parameterType="com.website.model.bean.RankBrokerage">
     insert into rank_brokerage
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -83,7 +83,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.RankBrokerage">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.RankBrokerage">
     update rank_brokerage
     <set>
       <if test="rank != null">
@@ -110,7 +110,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.RankBrokerage">
+  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.RankBrokerage">
     update rank_brokerage
     set rank = #{rank,jdbcType=INTEGER},
       amount = #{amount,jdbcType=DOUBLE},

@@ -24,7 +24,7 @@
 	</bean>
 <!--    
    定时任务：待用积分转可用积分
-    <bean id="myTaskXml" class="com.antke.website.action.TimingAction"></bean>  
+    <bean id="myTaskXml" class="com.website.action.TimingAction"></bean>  
     <bean id="reset" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail">
 			<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">

@@ -1,6 +1,6 @@
 server:
-  port: 80
-  context-path: /boot
+  port: 8070
+  context-path: /
 # 拦截器  进入mvc的规则  意思是要在请求前加/**
   servlet-path: /
   
@@ -12,9 +12,9 @@ spring:
   devtools:
     restart:      enabled: true
       additional-paths:      - src/main/java
-      exclude: WEB-INF/**#  mvc:
-#    view:
-#      prefix: /pages/
+      exclude: WEB-INF/**  mvc:
+    view:
+      prefix: /pages/
 #      suffix: .jsp#  datasource:#    url: jdbc:mysql://localhost:3306/social_shopping?useUnicode=true&characterEncoding=utf8
 #    username: root
 #    password: 
@@ -22,9 +22,13 @@ spring:
 #    type: com.alibaba.druid.pool.DruidDataSource
   resources:
     static-locations: 
-    - classpath:/public/
+    - classpath:/resource/
   thymeleaf:    cache: false
     enabled: false
+  messages:
+    encoding: UTF-8
+    basename: i18n/messages
+#    cache-seconds: -1
 
 logging:
   level: 

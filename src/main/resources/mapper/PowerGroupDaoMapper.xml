@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antke.power.dao.PowerGroupDao">
+<mapper namespace="com.power.dao.PowerGroupDao">
 	
 	<!-- 新增权限组信息 -->
-	<insert id="insertPowerGroup" parameterType="com.antke.power.model.bean.PowerGroup">
+	<insert id="insertPowerGroup" parameterType="com.power.model.bean.PowerGroup">
 		insert into bus_powergroup
 			(
 				<if test="pgroup_id != null and pgroup_id != ''">pgroup_id,</if>
@@ -28,7 +28,7 @@
 	</insert>
 
 	<!-- 更新权限组信息 -->
-	<update id="updatePowerGroup" parameterType="com.antke.power.model.bean.PowerGroup">
+	<update id="updatePowerGroup" parameterType="com.power.model.bean.PowerGroup">
 		update bus_powergroup 
 		<set>
 			<if test="groups_name != null and groups_name != ''">groups_name = #{groups_name},</if>
@@ -62,7 +62,7 @@
 	
 	<!--查询权限组信息 -->
 	<select id="queryPowerGroup" parameterType="java.util.Map"
-		resultType="com.antke.power.model.bean.PowerGroup">
+		resultType="com.power.model.bean.PowerGroup">
 			select 
 				pgroup_id,groups_name,groups_desc,status,operator,create_date,update_date
 			from bus_powergroup
@@ -139,7 +139,7 @@
 	</insert>
 	
 	<!-- 新增菜单权限组关系信息 -->
-	<insert id="insertGroupMenu" parameterType="com.antke.power.model.bean.GMMaping">
+	<insert id="insertGroupMenu" parameterType="com.power.model.bean.GMMaping">
 		insert into bus_gmmaping
 			(
 				<if test="gm_id != null and gm_id != ''">gm_id,</if>

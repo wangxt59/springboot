@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antke.website.dao.AttributeRelationDao">
+<mapper namespace="com.website.dao.AttributeRelationDao">
 
 	<!-- 新增属性信息 -->
-	<insert id="insertAttributeRelation" parameterType="com.antke.website.model.bean.AttributeRelation">
+	<insert id="insertAttributeRelation" parameterType="com.website.model.bean.AttributeRelation">
 		INSERT INTO attribute_relation
 		(
 		<if test="relation_id != null">relation_id,</if>
@@ -20,7 +20,7 @@
 	</insert>
 
 	<!-- 更新属性信息 -->
-	<update id="updateAttributeRelation" parameterType="com.antke.website.model.bean.AttributeRelation">
+	<update id="updateAttributeRelation" parameterType="com.website.model.bean.AttributeRelation">
 		update attribute_relation
 		<set>
 			<if test="value_id != null and value_id != ''">value_id = #{value_id},</if>
@@ -34,7 +34,7 @@
 	
 	<!--查询分类属性列表 -->
 	<!-- <select id="queryAttributeList" parameterType="java.util.Map"
-		resultType="com.antke.website.model.bean.Attribute">
+		resultType="com.website.model.bean.Attribute">
 		select distinct a.attr_id,a.attr_name from 
 		attribute_relation ar,attribute a where ar.attr_id = a.attr_id and
 		<if test="category_id != null and category_id != ''">ar.category_id = #{category_id} and</if>
@@ -45,7 +45,7 @@
 	
 	<!--查询属性信息列表 -->
 	<!-- <select id="queryAttributeRelationList" parameterType="java.util.Map"
-		resultType="com.antke.website.model.bean.AttributeRelation">
+		resultType="com.website.model.bean.AttributeRelation">
 		select  ar.relation_id,a.attr_id,a.attr_name,a.status,a.create_date,a.update_date,a.upload_person,av.value_id, av.value_name,ar.category_id 
 		from attribute a ,attribute_relation  ar , attribute_value av
  		where a.attr_id = ar.attr_id and  ar.value_id = av.value_id and
@@ -76,7 +76,7 @@
 	<!-- 查询属性信息 -->
 	            
 	<!-- <select id="queryAttributeRelation" parameterType="java.util.Map"
-		resultType="com.antke.website.model.bean.AttributeRelation">
+		resultType="com.website.model.bean.AttributeRelation">
 		Select
 		iar.relation_id,iar.category_id, ia.attr_name, iav.value_name,ia.status,ia.create_date,ia.update_date,ia.upload_person,ia.attr_id,iav.value_id
 		from attribute_relation as iar left join attribute_value as iav on iav.value_id = iar.value_id left join attribute as ia on ia.attr_id = iar.attr_id
@@ -108,7 +108,7 @@
 
 	<!-- 查询属性信息列表带分页 -->
 	<!-- <select id="queryAttributeRelationListByPage" parameterType="java.util.Map"
-		resultType="com.antke.website.model.bean.AttributeRelation">
+		resultType="com.website.model.bean.AttributeRelation">
 		Select
 		a.attr_id,a.attr_name,a.create_date,a.update_date,a.status,
 		c.parent_id,ar.category_id,c.category_name,w.worker_name as upload_person,av.value_name
@@ -133,7 +133,7 @@
 	    	relation_id = #{relation_id}
 		</select>
 	
-	<select id="queryAttributeValueList" parameterType="java.util.Map" resultType="com.antke.website.model.bean.AttributeValue">
+	<select id="queryAttributeValueList" parameterType="java.util.Map" resultType="com.website.model.bean.AttributeValue">
 		SELECT
 	    	ar.relation_id,
 			ar.value_id,
@@ -146,7 +146,7 @@
 		 1=1 
 	</select>
 	
-		<select id="queryCateExtendAttrIsExist" parameterType="java.lang.String" resultType="com.antke.website.model.bean.AttributeRelation">
+		<select id="queryCateExtendAttrIsExist" parameterType="java.lang.String" resultType="com.website.model.bean.AttributeRelation">
 		SELECT
 	    	*
 		FROM

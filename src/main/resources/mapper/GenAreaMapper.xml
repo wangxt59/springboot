@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antke.website.dao.GenAreaMapper">
-  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.GenArea">
+<mapper namespace="com.website.dao.GenAreaMapper">
+  <resultMap id="BaseResultMap" type="com.website.model.bean.GenArea">
     <result column="AREA_ID" jdbcType="INTEGER" property="areaId" />
     <result column="AREA_NO" jdbcType="VARCHAR" property="areaNo" />
     <result column="AREA_NAME" jdbcType="VARCHAR" property="areaName" />

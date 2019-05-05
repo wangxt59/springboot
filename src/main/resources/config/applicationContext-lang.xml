@@ -9,7 +9,7 @@
                             http://www.springframework.org/schema/mvc 
                             http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
  
-    <context:component-scan base-package="com.antke.* *.action" />
+    <context:component-scan base-package="com.* *.action" />
  
     <context:annotation-config />  <!-- 激活Bean中定义的注解 -->
     <mvc:annotation-driven />
@@ -27,9 +27,13 @@
     <bean id="messageSource"
         class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basename" value="classpath:/config/messages" />
+        <!-- 如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称  -->               
+        <property name="useCodeAsDefaultMessage" value="true" />  
     </bean>
  
     <mvc:interceptors>
+    <!-- 该拦截器通过名为”lang”的参数来拦截HTTP请求，使其重新设置页面的区域化信息 -->
+        <!-- <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />  -->
         <bean id="localeChangeInterceptor"
             class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <property name="paramName" value="lang" />

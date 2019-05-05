@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antke.website.dao.PlatTeamRegionMapper">
-  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.PlatTeamRegion">
+<mapper namespace="com.website.dao.PlatTeamRegionMapper">
+  <resultMap id="BaseResultMap" type="com.website.model.bean.PlatTeamRegion">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="pteam_id" jdbcType="INTEGER" property="pteamId" />
     <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
@@ -53,7 +53,7 @@
        GROUP BY  region_id 
   </select>
   
-  <insert id="insert" parameterType="com.antke.website.model.bean.PlatTeamRegion">
+  <insert id="insert" parameterType="com.website.model.bean.PlatTeamRegion">
     insert into plat_team_region (id, pteam_id, goods_id, 
       goods_name, goods_pic, region_id, 
       region_name, market_price, region_price, 
@@ -67,7 +67,7 @@
       #{stock,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.antke.website.model.bean.PlatTeamRegion">
+  <insert id="insertSelective" parameterType="com.website.model.bean.PlatTeamRegion">
     insert into plat_team_region
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -164,7 +164,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.PlatTeamRegion">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.PlatTeamRegion">
     update plat_team_region
     <set>
       <if test="pteamId != null">
@@ -212,7 +212,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.PlatTeamRegion">
+  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.PlatTeamRegion">
     update plat_team_region
     set pteam_id = #{pteamId,jdbcType=INTEGER},
       goods_id = #{goodsId,jdbcType=INTEGER},
@@ -232,7 +232,7 @@
   </update>
 	
 
-	<insert id="newPlatTeamRegion" parameterType="com.antke.website.model.bean.PlatTeamRegion">
+	<insert id="newPlatTeamRegion" parameterType="com.website.model.bean.PlatTeamRegion">
 		insert into plat_team_region
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null and id  !=''">
@@ -330,7 +330,7 @@
 		</trim>
 	</insert>
 	
-	<update id="updateSelective" parameterType="com.antke.website.model.bean.PlatTeamRegion">
+	<update id="updateSelective" parameterType="com.website.model.bean.PlatTeamRegion">
 		update plat_team_region
 		<set>
 			<if test="goodsName != null">
@@ -370,11 +370,11 @@
 	</update>
 	
 	
-	<select id="getRegionById" parameterType="Integer" resultType="com.antke.website.model.bean.PlatTeamRegion">
+	<select id="getRegionById" parameterType="Integer" resultType="com.website.model.bean.PlatTeamRegion">
 		select * from plat_team_region
 		where id = #{id}
 	</select>
-	<update id="updateRegion" parameterType="com.antke.website.model.bean.PlatTeamRegion">
+	<update id="updateRegion" parameterType="com.website.model.bean.PlatTeamRegion">
 		UPDATE plat_team_region ptr
 		SET ptr.region_price = #{regionPrice},ptr.stock = #{stock}, ptr.rebate_value =#{rebateValue},ptr.rebate_type = #{rebateType}
 			WHERE

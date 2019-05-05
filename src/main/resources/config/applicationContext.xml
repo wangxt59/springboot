@@ -19,21 +19,21 @@
 	--><!-- 采用注释的方式配置bean -->
 	<context:annotation-config />
 	
-	<context:component-scan base-package="com.antke.power.service.impl"/>
-	<context:component-scan base-package="com.antke.power.service"/>
-	<context:component-scan base-package="com.antke.power.action" />
+	<context:component-scan base-package="com.power.service.impl"/>
+	<context:component-scan base-package="com.power.service"/>
+	<context:component-scan base-package="com.power.action" />
 	
-	<context:component-scan base-package="com.antke.promotion.service.impl"/>
-	<context:component-scan base-package="com.antke.promotion.service"/>
-	<context:component-scan base-package="com.antke.promotion.action" />
+	<context:component-scan base-package="com.promotion.service.impl"/>
+	<context:component-scan base-package="com.promotion.service"/>
+	<context:component-scan base-package="com.promotion.action" />
 	
-	<context:component-scan base-package="com.antke.website.service.impl"/>
-	<context:component-scan base-package="com.antke.website.service"/>
-	<context:component-scan base-package="com.antke.website.action" />
-	<context:component-scan base-package="com.antke.website.thirdparty" />
-	<context:component-scan base-package="com.antke.website.thirdparty.ali" />
-	<context:component-scan base-package="com.antke.website.thirdparty.wx" />
-	<context:component-scan base-package="com.antke.website.dao"/>
+	<context:component-scan base-package="com.website.service.impl"/>
+	<context:component-scan base-package="com.website.service"/>
+	<context:component-scan base-package="com.website.action" />
+	<context:component-scan base-package="com.website.thirdparty" />
+	<context:component-scan base-package="com.website.thirdparty.ali" />
+	<context:component-scan base-package="com.website.thirdparty.wx" />
+	<context:component-scan base-package="com.website.dao"/>
 	
 	<bean
 		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
@@ -48,7 +48,7 @@
 		</property>
 	</bean> -->
 
-	<bean class="com.antke.website.servlet.EncryptPropertyPlaceholderConfigurer" 
+	<bean class="com.website.servlet.EncryptPropertyPlaceholderConfigurer" 
 		p:location="classpath:/config/jdbc.properties">
 	</bean>
 	
@@ -130,7 +130,7 @@
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >  
-        <property name="basePackage" value="com.antke.power.dao;com.antke.promotion.dao;com.antke.website.dao" ></property>  
+        <property name="basePackage" value="com.power.dao;com.promotion.dao;com.website.dao" ></property>  
     </bean>  
 
 	<!-- the config of transaction -->
@@ -154,7 +154,7 @@
 		</tx:attributes>
    </tx:advice>
    <!--<aop:config>
-		<aop:pointcut id="mypointcut" expression="execution(* com.antke.website.service.*.*(..))" />
+		<aop:pointcut id="mypointcut" expression="execution(* com.website.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="mypointcut" />
    </aop:config>
 	-->

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antke.website.dao.AttributeValueDao">
+<mapper namespace="com.website.dao.AttributeValueDao">
 
 	<!-- 新增属性值信息 -->
-	<insert id="insertAttributeValue" parameterType="com.antke.website.model.bean.AttributeValue"  useGeneratedKeys="true" keyProperty="value_id">
+	<insert id="insertAttributeValue" parameterType="com.website.model.bean.AttributeValue"  useGeneratedKeys="true" keyProperty="value_id">
 		INSERT INTO attribute_value
 		(
 		<if test="value_name != null">value_name,</if>
@@ -18,7 +18,7 @@
 	</insert>
 
 	<!-- 更新属性值信息 -->
-	<update id="updateAttributeValue" parameterType="com.antke.website.model.bean.AttributeValue">
+	<update id="updateAttributeValue" parameterType="com.website.model.bean.AttributeValue">
 		update attribute_value
 		<set>
 			<if test="value_name != null and value_name != ''">value_name = #{value_name},</if>
@@ -31,7 +31,7 @@
 	
 	<!-- 查询属性值 -->
 	<select id="queryAttributeValue" parameterType="java.util.Map"
-		resultType="com.antke.website.model.bean.AttributeValue">
+		resultType="com.website.model.bean.AttributeValue">
 		Select
 		value_id,value_name,create_date,update_date,upload_person
 		from attribute_value
@@ -67,7 +67,7 @@
 	</select>
 
 		<select id="deleteAttributeValue" parameterType="java.util.Map"
-			resultType="com.antke.website.model.bean.AttributeValue">
+			resultType="com.website.model.bean.AttributeValue">
 			delete
 			from attribute_value
 			where

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.antke.website.dao.LoginLogMapper">
-	<resultMap id="BaseResultMap" type="com.antke.website.model.bean.LoginLog">
+<mapper namespace="com.website.dao.LoginLogMapper">
+	<resultMap id="BaseResultMap" type="com.website.model.bean.LoginLog">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="chant_id" property="chantId" jdbcType="INTEGER" />
 		<result column="worker_id" property="workerId" jdbcType="VARCHAR" />
@@ -20,7 +20,7 @@
   <!-- ======================================================================================================================= -->
   
   	<!-- 1. 查询登录日志集合 -->
-  	<select id="selectLoginLogs" parameterType="java.util.Map" resultType="com.antke.website.model.bean.LoginLog">
+  	<select id="selectLoginLogs" parameterType="java.util.Map" resultType="com.website.model.bean.LoginLog">
 		SELECT  id,chant_id as chantId,worker_id as workerId,worker_name as workerName,role,status,login_ip as loginIp,
 				create_date as createDate,update_date as updateDate
 		FROM login_log
@@ -34,7 +34,7 @@
   
   	<!-- 2.分页查询 -->
 	<select id="selectLoginLogListByPage" parameterType="java.util.Map"
-		resultType="com.antke.website.model.bean.LoginLog">
+		resultType="com.website.model.bean.LoginLog">
 		SELECT	id,chant_id as chantId,worker_id as workerId,worker_name as workerName,role,status,login_ip as loginIp,
 				create_date as createDate,update_date as updateDate
 		FROM
@@ -68,7 +68,7 @@
 		from login_log
 		where id = #{id,jdbcType=INTEGER}
 	</select>
-	<insert id="insert" parameterType="com.antke.website.model.bean.LoginLog">
+	<insert id="insert" parameterType="com.website.model.bean.LoginLog">
 		insert into login_log (id, chant_id, worker_id,
 		worker_name, role, login_ip,
 		status, create_date, update_date
@@ -80,7 +80,7 @@
 		#{updateDate,jdbcType=TIMESTAMP}
 		)
   </insert>
-	<insert id="insertSelective" parameterType="com.antke.website.model.bean.LoginLog">
+	<insert id="insertSelective" parameterType="com.website.model.bean.LoginLog">
 		insert into login_log
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -141,7 +141,7 @@
       </if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.LoginLog">
+	<update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.LoginLog">
 		update login_log
 		<set>
 			<if test="chantId != null">
@@ -171,7 +171,7 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.LoginLog">
+	<update id="updateByPrimaryKey" parameterType="com.website.model.bean.LoginLog">
 		update login_log
 		set chant_id = #{chantId,jdbcType=INTEGER},
 		worker_id = #{workerId,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antke.website.dao.UserWithdrawMapper">
-  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.UserWithdraw">
+<mapper namespace="com.website.dao.UserWithdrawMapper">
+  <resultMap id="BaseResultMap" type="com.website.model.bean.UserWithdraw">
     <id column="withdraw_id" jdbcType="INTEGER" property="withdrawId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="total" jdbcType="DOUBLE" property="total" />
@@ -36,7 +36,7 @@
     from user_withdraw
     where withdraw_id = #{withdrawId,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.antke.website.model.bean.UserWithdraw">
+  <insert id="insert" parameterType="com.website.model.bean.UserWithdraw">
     insert into user_withdraw (withdraw_id, user_id, total, 
       bank_id, bank_name, cart_num, 
       name, contact, status, 
@@ -54,7 +54,7 @@
       #{bankBranch,jdbcType=VARCHAR}, #{integralId,jdbcType=VARCHAR}, #{integralRatioTotal,jdbcType=DOUBLE}, 
       #{role,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.antke.website.model.bean.UserWithdraw">
+  <insert id="insertSelective" parameterType="com.website.model.bean.UserWithdraw">
     insert into user_withdraw
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="withdrawId != null">
@@ -193,7 +193,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.UserWithdraw">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.UserWithdraw">
     update user_withdraw
     <set>
       <if test="userId != null">
@@ -262,7 +262,7 @@
     </set>
     where withdraw_id = #{withdrawId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.UserWithdraw">
+  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.UserWithdraw">
     update user_withdraw
     set user_id = #{userId,jdbcType=INTEGER},
       total = #{total,jdbcType=DOUBLE},

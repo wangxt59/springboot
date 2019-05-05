@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antke.website.dao.CardInfoMapper">
-  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.CardInfo">
+<mapper namespace="com.website.dao.CardInfoMapper">
+  <resultMap id="BaseResultMap" type="com.website.model.bean.CardInfo">
     <id column="card_id" jdbcType="INTEGER" property="cardId" />
     <result column="sku_id" jdbcType="INTEGER" property="skuId" />
     <result column="card_num" jdbcType="VARCHAR" property="cardNum" />
@@ -21,7 +21,7 @@
     from card_info
     where card_id = #{cardId,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.antke.website.model.bean.CardInfo">
+  <insert id="insert" parameterType="com.website.model.bean.CardInfo">
     insert into card_info (card_id, sku_id, card_num, 
       carmine, create_date, update_date, 
       status, validate, is_delete
@@ -31,7 +31,7 @@
       #{status,jdbcType=INTEGER}, #{validate,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.antke.website.model.bean.CardInfo">
+  <insert id="insertSelective" parameterType="com.website.model.bean.CardInfo">
     insert into card_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cardId != null">
@@ -92,7 +92,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.CardInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.CardInfo">
     update card_info
     <set>
       <if test="skuId != null">
@@ -122,7 +122,7 @@
     </set>
     where card_id = #{cardId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.CardInfo">
+  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.CardInfo">
     update card_info
     set sku_id = #{skuId,jdbcType=INTEGER},
       card_num = #{cardNum,jdbcType=VARCHAR},

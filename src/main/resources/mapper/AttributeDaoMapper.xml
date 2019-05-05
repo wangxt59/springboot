@@ -1,8 +1,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antke.website.dao.AttributeDao">
+<mapper namespace="com.website.dao.AttributeDao">
 
 	<!-- 新增分类信息 -->
-	<insert id="insertAttribute" parameterType="com.antke.website.model.bean.Attribute" useGeneratedKeys="true" keyProperty="attr_id">
+	<insert id="insertAttribute" parameterType="com.website.model.bean.Attribute" useGeneratedKeys="true" keyProperty="attr_id">
 		INSERT INTO attribute
 		(
 		<if test="attr_name != null">attr_name,</if>
@@ -21,7 +21,7 @@
 	</insert>
 
 	<!-- 更新分类信息 -->
-	<update id="updateAttribute" parameterType="com.antke.website.model.bean.Attribute">
+	<update id="updateAttribute" parameterType="com.website.model.bean.Attribute">
 		update attribute
 		<set>
 			<if test="attr_name != null and attr_name != ''">attr_name = #{attr_name},</if>
@@ -63,7 +63,7 @@
 	
 			<!--查询属性信息 -->
 	<select id="queryAttribute" parameterType="java.util.Map"
-		resultType="com.antke.website.model.bean.Attribute">
+		resultType="com.website.model.bean.Attribute">
 		Select
 		attr_name,status,attr_id,create_date,update_date,sort
 		from attribute

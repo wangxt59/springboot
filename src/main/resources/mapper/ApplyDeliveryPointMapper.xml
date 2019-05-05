@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
-	namespace="com.antke.website.dao.ApplyDeliveryPointMapper">
+	namespace="com.website.dao.ApplyDeliveryPointMapper">
 	<resultMap id="BaseResultMap"
-		type="com.antke.website.model.bean.ApplyDeliveryPoint">
+		type="com.website.model.bean.ApplyDeliveryPoint">
 		<id column="id" jdbcType="INTEGER" property="id" />
 		<result column="user_id" jdbcType="INTEGER" property="userId" />
 		<result column="point_name" jdbcType="VARCHAR"
@@ -54,7 +54,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<insert id="insert"
-		parameterType="com.antke.website.model.bean.ApplyDeliveryPoint">
+		parameterType="com.website.model.bean.ApplyDeliveryPoint">
 		insert into apply_delivery_point (id, user_id,
 		point_name,
 		address, longitude, latitude,
@@ -81,7 +81,7 @@
 		#{status,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective"
-		parameterType="com.antke.website.model.bean.ApplyDeliveryPoint">
+		parameterType="com.website.model.bean.ApplyDeliveryPoint">
 		insert into apply_delivery_point
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -203,7 +203,7 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective"
-		parameterType="com.antke.website.model.bean.ApplyDeliveryPoint">
+		parameterType="com.website.model.bean.ApplyDeliveryPoint">
 		update apply_delivery_point
 		<set>
 			<if test="userId != null">
@@ -264,7 +264,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey"
-		parameterType="com.antke.website.model.bean.ApplyDeliveryPoint">
+		parameterType="com.website.model.bean.ApplyDeliveryPoint">
 		update apply_delivery_point
 		set user_id =
 		#{userId,jdbcType=INTEGER},

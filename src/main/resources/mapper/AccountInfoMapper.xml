@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.antke.website.dao.AccountInfoMapper">
-  <resultMap id="BaseResultMap" type="com.antke.website.model.bean.AccountInfo">
+<mapper namespace="com.website.dao.AccountInfoMapper">
+  <resultMap id="BaseResultMap" type="com.website.model.bean.AccountInfo">
     <id column="account_id" jdbcType="INTEGER" property="accountId" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="cash_balance" jdbcType="DOUBLE" property="cashBalance" />
@@ -32,7 +32,7 @@
     from account_info
     where account_id = #{accountId,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.antke.website.model.bean.AccountInfo">
+  <insert id="insert" parameterType="com.website.model.bean.AccountInfo">
     insert into account_info (account_id, user_id, cash_balance, 
       frozen_balance, thawing_balance, sales_rebate_bonus, 
       rebate_bonus, red_bonus, medal_bonus, 
@@ -48,7 +48,7 @@
       #{accountTotal,jdbcType=DOUBLE}, #{salesBalance,jdbcType=DOUBLE}, #{payPassword,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.antke.website.model.bean.AccountInfo">
+  <insert id="insertSelective" parameterType="com.website.model.bean.AccountInfo">
     insert into account_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="accountId != null">
@@ -163,7 +163,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.antke.website.model.bean.AccountInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.AccountInfo">
     update account_info
     <set>
       <if test="userId != null">
@@ -220,7 +220,7 @@
     </set>
     where account_id = #{accountId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.antke.website.model.bean.AccountInfo">
+  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.AccountInfo">
     update account_info
     set user_id = #{userId,jdbcType=VARCHAR},
       cash_balance = #{cashBalance,jdbcType=DOUBLE},
