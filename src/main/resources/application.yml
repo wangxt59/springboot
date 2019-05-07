@@ -4,26 +4,35 @@ server:
 # 拦截器  进入mvc的规则  意思是要在请求前加/**
   servlet-path: /
   
-mybatis:  config-location: classpath:config/mybatis-config.xml
-  mapper-locations:  - classpath:mapper/*.xml
+mybatis:
+  config-location: classpath:config/mybatis-config.xml
+  mapper-locations:
+  - classpath:mapper/*.xml
 
 
 spring:
   devtools:
-    restart:      enabled: true
-      additional-paths:      - src/main/java
-      exclude: WEB-INF/**  mvc:
+    restart:
+      enabled: true
+      additional-paths:
+      - src/main/java
+      exclude: WEB-INF/**
+  mvc:
+    static-path-pattern: /**
     view:
       prefix: /pages/
-#      suffix: .jsp#  datasource:#    url: jdbc:mysql://localhost:3306/social_shopping?useUnicode=true&characterEncoding=utf8
+#      suffix: .jsp
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/social_shopping?useUnicode=true&characterEncoding=utf8
 #    username: root
 #    password: 
 #    driverClassName: com.mysql.jdbc.Driver
 #    type: com.alibaba.druid.pool.DruidDataSource
-  resources:
-    static-locations: 
-    - classpath:/resource/
-  thymeleaf:    cache: false
+#  resources:
+#    static-locations: 
+#    - classpath:/public/
+  thymeleaf:
+    cache: false
     enabled: false
   messages:
     encoding: UTF-8

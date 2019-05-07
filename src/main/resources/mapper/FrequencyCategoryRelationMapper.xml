@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.FrequencyCategoryRelationMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.FrequencyCategoryRelation">
+  <resultMap id="BaseResultMap" type="com.website.bean.FrequencyCategoryRelation">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="frequency_id" jdbcType="INTEGER" property="frequencyId" />
     <result column="category_id" jdbcType="INTEGER" property="categoryId" />
@@ -16,13 +16,13 @@
     from frequency_category_relation
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.website.model.bean.FrequencyCategoryRelation">
+  <insert id="insert" parameterType="com.website.bean.FrequencyCategoryRelation">
     insert into frequency_category_relation (id, frequency_id, category_id, 
       create_date)
     values (#{id,jdbcType=INTEGER}, #{frequencyId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, 
       #{createDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.FrequencyCategoryRelation">
+  <insert id="insertSelective" parameterType="com.website.bean.FrequencyCategoryRelation">
     insert into frequency_category_relation
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -53,7 +53,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.FrequencyCategoryRelation">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.bean.FrequencyCategoryRelation">
     update frequency_category_relation
     <set>
       <if test="frequencyId != null">
@@ -68,7 +68,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.FrequencyCategoryRelation">
+  <update id="updateByPrimaryKey" parameterType="com.website.bean.FrequencyCategoryRelation">
     update frequency_category_relation
     set frequency_id = #{frequencyId,jdbcType=INTEGER},
       category_id = #{categoryId,jdbcType=INTEGER},

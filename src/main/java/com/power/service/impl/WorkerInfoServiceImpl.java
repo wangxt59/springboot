@@ -40,7 +40,8 @@ public class WorkerInfoServiceImpl implements IWorkerInfoService{
 	public int insertWorkerInfo(WorkerInfo worker,WorkerInfo workerInfo) {
 		int count = 0;
 		try {
-			String nowdate = DateUtil.getSysTime();
+//			String nowdate = DateUtil.getSysTime();
+			Date nowdate = new Date();
 			String worker_id = CommonsUtil.getPrimaryKey();
 			/*//		设置默认城市编号（仅供测试使用）
 			worker.setProvince("test");
@@ -49,15 +50,15 @@ public class WorkerInfoServiceImpl implements IWorkerInfoService{
 	//		设置员工初始信息
 //			worker.setPassword(MD5.encode(worker.getPassword(), null));
 			worker.setPassword(worker.getPassword());
-			worker.setWorker_id(worker_id);
+			worker.setWorkerId(worker_id);
 			worker.setStatus("0");
-			worker.setLogin_num(0);
-			worker.setIsfirst("0");
-			worker.setCreate_date(nowdate);
-			worker.setUpdate_date(nowdate);
-			if(!workerInfo.getLogin_name().equals("admin")){
-				System.out.println("**********************"+workerInfo.getLogin_name()+worker.getChant_id());
-				worker.setChant_id(workerInfo.getChant_id());
+			worker.setLoginNum("0");
+			worker.setIsfirst(0);
+			worker.setCreateDate(nowdate);
+			worker.setUpdateDate(nowdate);
+			if(!workerInfo.getLoginName().equals("admin")){
+				System.out.println("**********************"+workerInfo.getLoginName()+worker.getChantId());
+				worker.setChantId(workerInfo.getChantId());
 			}
 			List rolesIdList = worker.getRolesIdList();
 			int rank = -1;
@@ -73,7 +74,7 @@ public class WorkerInfoServiceImpl implements IWorkerInfoService{
 					ruMaping.setUser_id(worker_id);
 					ruMaping.setCreate_date(new Date());//发表时间
 					ruMaping.setUpdate_date(new Date());//更新时间
-					ruMaping.setOperator(workerInfo.getWorker_id());
+					ruMaping.setOperator(workerInfo.getWorkerId());
 					rolesDao.insertRoleUser(ruMaping);
 				}
 			}
@@ -103,17 +104,17 @@ public class WorkerInfoServiceImpl implements IWorkerInfoService{
 	@Override
 	public int updateWorkerInfo(WorkerInfo worker,WorkerInfo workerInfo) {
 		int count = 0;
-		String update_date = DateUtil.getSysTime();//当前时间
-		worker.setUpdate_date(update_date);
+//		String update_date = DateUtil.getSysTime();//当前时间
+		worker.setUpdateDate(new Date());
 		try {
 			if(worker.getPassword()!=null && !"".equals(worker.getPassword()) && !"null".equals(worker.getPassword()) ){
 //				worker.setPassword(MD5.encode(worker.getPassword(), null));
 				worker.setPassword(worker.getPassword());
 			}
 			String roleId = worker.getRoleId();	
-			count = workerInfoDao.updateWorkerInfo(worker);
-			
-			String worker_id = worker.getWorker_id();
+			count = workerInfoDao.updateByPrimaryKeySelective(worker);
+//			count = workerInfoDao.updateWorkerInfo(worker);
+			String worker_id = worker.getWorkerId();
 			String[] roleIds = roleId.split(",");
 			if(roleId!=null){
 				rolesDao.deleteRoleUser(worker_id);
@@ -126,7 +127,7 @@ public class WorkerInfoServiceImpl implements IWorkerInfoService{
 					ruMaping.setUser_id(worker_id);
 					ruMaping.setCreate_date(new Date());//发表时间
 					ruMaping.setUpdate_date(new Date());//更新时间
-					ruMaping.setOperator(workerInfo.getWorker_id());
+					ruMaping.setOperator(workerInfo.getWorkerId());
 					rolesDao.insertRoleUser(ruMaping);
 				}
 			}
@@ -139,7 +140,8 @@ public class WorkerInfoServiceImpl implements IWorkerInfoService{
 	@Override
 	public int updateWorkerInfo(WorkerInfo worker) {
 		
-		return workerInfoDao.updateWorkerInfo(worker);
+		return workerInfoDao.updateByPrimaryKeySelective(worker);
+//		return workerInfoDao.updateWorkerInfo(worker);
 	}
 
 //	查询员工列表信息带分页

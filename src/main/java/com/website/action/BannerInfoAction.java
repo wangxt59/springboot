@@ -45,7 +45,7 @@ public class BannerInfoAction extends BaseAction {
 		WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
  
 		if (worker == null) {
-			return new ModelAndView("redirect:/login/workLogin.action");
+			return new ModelAndView("redirect:/login/workLogin.do");
 		}
 		// 定义返回值Map
 		Map<String, Object> returnMap = new HashMap<String, Object>();
@@ -85,7 +85,7 @@ public class BannerInfoAction extends BaseAction {
 		// 获取商户id
 		try {
 			WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
-			String operator = worker.getWorker_name();
+			String operator = worker.getWorkerName();
 			bannerInfo.setCreateUser(operator);
 			bannerInfo.setCreateDate(new Date());
 			bannerInfo.setIsDelete(1);
@@ -137,7 +137,7 @@ public class BannerInfoAction extends BaseAction {
 		Map<String, Object> map = new HashMap<String, Object>();
 		WorkerInfo workerInfo = (WorkerInfo) request.getSession().getAttribute("workerInfo");
 		if (workerInfo == null) {
-			return new ModelAndView("redirect:/login/workLogin.action");
+			return new ModelAndView("redirect:/login/workLogin.do");
 		}
 		if (id != null) {
 			map.put("id", id);

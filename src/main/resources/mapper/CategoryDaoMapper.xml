@@ -3,7 +3,7 @@
 <mapper namespace="com.website.dao.CategoryDao">
 	
 	<!-- 新增分类信息 -->
-	<insert id="insertCategory" parameterType="com.website.model.bean.Category">
+	<insert id="insertCategory" parameterType="com.website.bean.Category">
 		INSERT INTO goods_category
 		(
 			<if test="category_name != null">category_name,</if>
@@ -31,7 +31,7 @@
 	</insert>
 
 	<!-- 更新分类信息 -->
-	<update id="updateCategory" parameterType="com.website.model.bean.Category">
+	<update id="updateCategory" parameterType="com.website.bean.Category">
 		update goods_category 
 		<set>
 			<if test="category_name != null and category_name != ''">category_name = #{category_name},</if>
@@ -67,7 +67,7 @@
 	
 	<!--查询分类信息 -->
 	<select id="queryCategory" parameterType="java.util.Map"
-		resultType="com.website.model.bean.Category">
+		resultType="com.website.bean.Category">
 			select 
 			category_id,category_name,category_pic,parent_id,rank,status,sort_order,is_show,create_date,update_date,operator
 			from goods_category
@@ -128,7 +128,7 @@
   </select>
   
   <!-- Result Map -->
-    <resultMap id="CategoryResultMap" type="com.website.model.bean.Category">
+    <resultMap id="CategoryResultMap" type="com.website.bean.Category">
         <id column="category_id" jdbcType="VARCHAR" property="category_id" />
     <result column="category_name" jdbcType="VARCHAR" property="category_name" />
     <result column="category_pic" jdbcType="VARCHAR" property="category_pic" />
@@ -143,12 +143,12 @@
     <result column="parent_name" jdbcType="VARCHAR" property="parent_name" />
     <result column="child_id" jdbcType="VARCHAR" property="child_id" />
     <result column="check" jdbcType="VARCHAR" property="check" />
-         <collection property="categoryList"  ofType="com.website.model.bean.Category"  
+         <collection property="categoryList"  ofType="com.website.bean.Category"  
          select="selectByPrimaryKey1" column="category_id"   >  
          </collection> 
     </resultMap>
 
-   <resultMap id="BaseResultMap1" type="com.website.model.bean.Category">
+   <resultMap id="BaseResultMap1" type="com.website.bean.Category">
     <id column="category_id" jdbcType="VARCHAR" property="category_id" />
     <result column="category_name" jdbcType="VARCHAR" property="category_name" />
     <result column="category_pic" jdbcType="VARCHAR" property="category_pic" />
@@ -163,12 +163,12 @@
     <result column="parent_name" jdbcType="VARCHAR" property="parent_name" />
     <result column="child_id" jdbcType="VARCHAR" property="child_id" />
     <result column="check" jdbcType="VARCHAR" property="check" />
-    <collection property="thridList"  ofType="com.website.model.bean.Category"  
+    <collection property="thridList"  ofType="com.website.bean.Category"  
          select="selectByPrimaryKey2" column="category_id"   >  
          </collection>
   </resultMap>
   
-   <resultMap id="BaseResultMap2" type="com.website.model.bean.Category">
+   <resultMap id="BaseResultMap2" type="com.website.bean.Category">
     <id column="category_id" jdbcType="VARCHAR" property="category_id" />
     <result column="category_name" jdbcType="VARCHAR" property="category_name" />
     <result column="category_pic" jdbcType="VARCHAR" property="category_pic" />

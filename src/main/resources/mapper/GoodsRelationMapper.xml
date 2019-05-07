@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.GoodsRelationMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.GoodsRelation">
+  <resultMap id="BaseResultMap" type="com.website.bean.GoodsRelation">
     <id column="relation_id" jdbcType="INTEGER" property="relationId" />
     <result column="category_id" jdbcType="INTEGER" property="categoryId" />
     <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
@@ -17,13 +17,13 @@
     from goods_relation
     where relation_id = #{relationId,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.website.model.bean.GoodsRelation">
+  <insert id="insert" parameterType="com.website.bean.GoodsRelation">
     insert into goods_relation (relation_id, category_id, goods_id, 
       create_date, update_date)
     values (#{relationId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.GoodsRelation">
+  <insert id="insertSelective" parameterType="com.website.bean.GoodsRelation">
     insert into goods_relation
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="relationId != null">
@@ -60,7 +60,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.GoodsRelation">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.bean.GoodsRelation">
     update goods_relation
     <set>
       <if test="categoryId != null">
@@ -78,7 +78,7 @@
     </set>
     where relation_id = #{relationId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.GoodsRelation">
+  <update id="updateByPrimaryKey" parameterType="com.website.bean.GoodsRelation">
     update goods_relation
     set category_id = #{categoryId,jdbcType=INTEGER},
       goods_id = #{goodsId,jdbcType=INTEGER},

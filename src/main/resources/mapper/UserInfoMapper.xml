@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.UserInfoMapper">
-	<resultMap id="BaseResultMap" type="com.website.model.bean.UserInfo">
+	<resultMap id="BaseResultMap" type="com.website.bean.UserInfo">
 		<id column="id" jdbcType="INTEGER" property="id" />
 		<result column="user_code" jdbcType="VARCHAR" property="userCode" />
 		<result column="real_name" jdbcType="VARCHAR" property="realName" />
@@ -61,7 +61,7 @@
 		1=1
 	</select>
 
-	<insert id="insert" parameterType="com.website.model.bean.UserInfo">
+	<insert id="insert" parameterType="com.website.bean.UserInfo">
 		insert into user_info (id,
 		real_name, login_name,
 		password, contact, header, status, create_date,
@@ -83,7 +83,7 @@
 		#{rank,jdbcType=INTEGER}
 		)
 	</insert>
-	<insert id="insertSelective" parameterType="com.website.model.bean.UserInfo">
+	<insert id="insertSelective" parameterType="com.website.bean.UserInfo">
 		insert into user_info
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -165,7 +165,7 @@
 			</if>
 		</trim>
 	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.UserInfo">
+	<update id="updateByPrimaryKeySelective" parameterType="com.website.bean.UserInfo">
 		update user_info
 		<set>
 			<if test="realName != null">
@@ -226,7 +226,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	
-	<update id="updateByPrimaryKey" parameterType="com.website.model.bean.UserInfo">
+	<update id="updateByPrimaryKey" parameterType="com.website.bean.UserInfo">
 		update user_info
 		set real_name = #{realName,jdbcType=VARCHAR},
 		login_name =

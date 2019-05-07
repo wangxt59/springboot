@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.GoodsLabelMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.GoodsLabel">
+  <resultMap id="BaseResultMap" type="com.website.bean.GoodsLabel">
     <id column="label_id" jdbcType="INTEGER" property="labelId" />
     <result column="label_name" jdbcType="VARCHAR" property="labelName" />
     <result column="label_pic" jdbcType="VARCHAR" property="labelPic" />
@@ -29,7 +29,7 @@
     from goods_label
     where label_id = #{labelId,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.website.model.bean.GoodsLabel" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="com.website.bean.GoodsLabel" useGeneratedKeys="true" keyProperty="id">
     insert into goods_label (label_id, label_name, label_pic, 
       status, create_date, update_date, 
       operator)
@@ -37,7 +37,7 @@
       #{status,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{operator,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.GoodsLabel" useGeneratedKeys="true" keyProperty="labelId">
+  <insert id="insertSelective" parameterType="com.website.bean.GoodsLabel" useGeneratedKeys="true" keyProperty="labelId">
     insert into goods_label
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="labelId != null">
@@ -86,7 +86,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.GoodsLabel">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.bean.GoodsLabel">
     update goods_label
     <set>
       <if test="labelName != null">
@@ -110,7 +110,7 @@
     </set>
     where label_id = #{labelId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.GoodsLabel">
+  <update id="updateByPrimaryKey" parameterType="com.website.bean.GoodsLabel">
     update goods_label
     set label_name = #{labelName,jdbcType=VARCHAR},
       label_pic = #{labelPic,jdbcType=VARCHAR},

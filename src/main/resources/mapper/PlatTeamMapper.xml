@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.PlatTeamMapper">
 	<resultMap id="BaseResultMap"
-		type="com.website.model.bean.PlatTeam">
+		type="com.website.bean.PlatTeam">
 		<result column="pteam_id" jdbcType="INTEGER" property="pteamId" />
 		<result column="team_code" jdbcType="VARCHAR"
 			property="teamCode" />
@@ -34,7 +34,7 @@
 
 
 	<insert id="newPlatTeam"
-		parameterType="com.website.model.bean.PlatTeam"
+		parameterType="com.website.bean.PlatTeam"
 		useGeneratedKeys="true" keyProperty="pteamId">
 		insert into plat_team
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -121,7 +121,7 @@
 		</trim>
 	</insert>
 	
-	<update id="updatePlatTeam" parameterType="com.website.model.bean.PlatTeam">
+	<update id="updatePlatTeam" parameterType="com.website.bean.PlatTeam">
 		update plat_team
 		 <set>
 			<if test="teamCode != null and teamCode  !=''">
@@ -273,7 +273,7 @@
 	</select>
 
 	<insert id="insert"
-		parameterType="com.website.model.bean.PlatTeam">
+		parameterType="com.website.bean.PlatTeam">
 		insert into plat_team (pteam_id, team_code, team_name,
 		start_time, end_time, team_type,
 		contact, create_date, update_date,
@@ -291,7 +291,7 @@
 		#{createUser,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective"
-		parameterType="com.website.model.bean.PlatTeam">
+		parameterType="com.website.bean.PlatTeam">
 		insert into plat_team
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="pteamId != null">

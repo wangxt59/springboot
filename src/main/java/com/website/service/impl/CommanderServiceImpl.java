@@ -40,7 +40,7 @@ public class CommanderServiceImpl implements ICommanderService {
 	
 	/* 
 	 * 获取团长列表
-	 * @see com.website.service.ICommanderService#selectCommanderByPages(com.website.model.bean.PageInfo, java.util.Map)
+	 * @see com.website.service.ICommanderService#selectCommanderByPages(com.website.bean.PageInfo, java.util.Map)
 	 */
 	@Override
 	public PageInfo selectCommanderByPages(PageInfo pageInfo, Map<String, Object> map) {

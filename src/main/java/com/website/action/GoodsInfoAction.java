@@ -274,7 +274,7 @@ public class GoodsInfoAction extends BaseAction{
 		try {
 			goodsInfo.setCreateDate(new Date());
 			goodsInfo.setUpdateDate(new Date());
-			goodsInfo.setCreateUserId(worker.getWorker_id());
+			goodsInfo.setCreateUserId(worker.getWorkerId());
 //			goodsInfo.setStatus(1);
 			goodsInfo.setGoodsCode(CommonsUtil.getPrimaryKey());
 			goodsInfo.setSaleCount(0);
@@ -291,7 +291,7 @@ public class GoodsInfoAction extends BaseAction{
 				GoodsLabel goodsLabel=new GoodsLabel();
 				goodsLabel.setCreateDate(new Date());
 				goodsLabel.setUpdateDate(new Date());
-				goodsLabel.setOperator(worker.getWorker_id());
+				goodsLabel.setOperator(worker.getWorkerId());
 				goodsLabel.setStatus(1);
 				goodsLabel.setLabelName(goodsInfo.getLabelName());
 				goodsLabelServise.insertSelective(goodsLabel);
@@ -565,7 +565,7 @@ public class GoodsInfoAction extends BaseAction{
 		WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 		try {
 			goodsInfo.setUpdateDate(new Date());
-			goodsInfo.setCreateUserId(worker.getWorker_id());
+			goodsInfo.setCreateUserId(worker.getWorkerId());
 //			goodsInfo.setStatus(1);
 			goodsInfo.setGoodsCode(CommonsUtil.getPrimaryKey());
 			goodsInfo.setSaleCount(0);

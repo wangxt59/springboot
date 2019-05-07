@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.LanguageMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.Language">
+  <resultMap id="BaseResultMap" type="com.website.bean.Language">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
@@ -17,13 +17,13 @@
     from language
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.website.model.bean.Language">
+  <insert id="insert" parameterType="com.website.bean.Language">
     insert into language (id, name, sort, 
       create_date, status)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
       #{createDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.Language">
+  <insert id="insertSelective" parameterType="com.website.bean.Language">
     insert into language
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -60,7 +60,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.Language">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.bean.Language">
     update language
     <set>
       <if test="name != null">
@@ -78,7 +78,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.Language">
+  <update id="updateByPrimaryKey" parameterType="com.website.bean.Language">
     update language
     set name = #{name,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},

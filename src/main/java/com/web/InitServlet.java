@@ -36,7 +36,7 @@ public class InitServlet extends HttpServlet implements Filter{
 		// 登录  
 		exclusiveUrlMap.put("/pages/login.jsp", "1");//登录页面
 		exclusiveUrlMap.put("//pages/login.jsp", "1");//登录页面
-		exclusiveUrlMap.put("/login/workLogin.action", "1");//登录请求
+		exclusiveUrlMap.put("/login/workLogin.do", "1");//登录请求
 	}
 
 	/**

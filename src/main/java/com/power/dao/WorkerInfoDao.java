@@ -39,7 +39,8 @@ public interface WorkerInfoDao {
 	 * @param workInfo
 	 * @return
 	 */
-	public int updateWorkerInfo(WorkerInfo workerInfo);
+	public int updateByPrimaryKeySelective(WorkerInfo worker);
+//	public int updateWorkerInfo(WorkerInfo workerInfo);
 
 	/**
 	 * 查询单条员工信息

@@ -48,7 +48,7 @@ public class RechargeOrderAction extends BaseAction{
 				@RequestParam(value = "create_date_end", required = false) String create_date_end) {
 			WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 			if (worker == null) {
-				return new ModelAndView("redirect:/login/workLogin.action");
+				return new ModelAndView("redirect:/login/workLogin.do");
 			}
 			// 定义返回值Map
 			Map<String, Object> returnMap = new HashMap<String, Object>();

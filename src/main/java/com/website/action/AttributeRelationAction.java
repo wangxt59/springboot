@@ -174,12 +174,12 @@ public class AttributeRelationAction extends BaseAction{
 			HttpServletRequest request){
 		WorkerInfo workerInfo = (WorkerInfo)request.getSession().getAttribute("workerInfo");
 		if(workerInfo == null){
-			return "redirect:/login/workLogin.action";
+			return "redirect:/login/workLogin.do";
 		}
 		attributeRelation = new AttributeRelation();
 		attributeValue = new AttributeValue();
 		
-		String worker_id = workerInfo.getWorker_id();
+		String worker_id = workerInfo.getWorkerId();
 		attribute.setStatus(1);
 		attribute.setUpload_person(worker_id);
 		attribute.setCreate_date(new Date());
@@ -286,9 +286,9 @@ public class AttributeRelationAction extends BaseAction{
 		//WorkerInfo workerInfo = (WorkerInfo)request.getSession().getAttribute("workerInfo");
 		WorkerInfo workerInfo = (WorkerInfo) session.getAttribute("workerInfo");
 		if(workerInfo == null){
-			return "redirect:/login/workLogin.action";
+			return "redirect:/login/workLogin.do";
 		}
-		String worker_id = workerInfo.getWorker_id();
+		String worker_id = workerInfo.getWorkerId();
 		attribute.setUpdate_date(new Date());
 		if(!"".equals(value_name) && !"".equals(value_id_Str)){
 			String[] strvalue = value_name.split(",");
@@ -341,9 +341,9 @@ public class AttributeRelationAction extends BaseAction{
 			@RequestParam(value="status")String status){     //   更新状态
 		WorkerInfo workerInfo = (WorkerInfo)request.getSession().getAttribute("workerInfo");
 		if(workerInfo == null){
-			return "redirect:/login/workLogin.action";
+			return "redirect:/login/workLogin.do";
 		}
-		String worker_id = workerInfo.getWorker_id();
+		String worker_id = workerInfo.getWorkerId();
 		String nowdate = DateUtil.getSysTime();
 		Map map = new HashMap();
 		
@@ -374,7 +374,7 @@ public class AttributeRelationAction extends BaseAction{
 	public String deleteAttributeRelationStatus(HttpServletRequest request,@RequestParam(value="attr_id")String attr_id){
 		WorkerInfo workerInfo = (WorkerInfo)request.getSession().getAttribute("workerInfo");
 		if(workerInfo == null){
-			return "redirect:/login/workLogin.action";
+			return "redirect:/login/workLogin.do";
 		}
 	/*	goodsAttrInfo = new GoodsAttrInfo();*/
 		Map requestMap = new HashMap();

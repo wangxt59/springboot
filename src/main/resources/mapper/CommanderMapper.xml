@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.CommanderMapper">
 	<resultMap id="BaseResultMap"
-		type="com.website.model.bean.Commander">
+		type="com.website.bean.Commander">
 		<id column="apply_id" jdbcType="INTEGER" property="applyId" />
 		<result column="apply_date" jdbcType="TIMESTAMP"
 			property="applyDate" />
@@ -131,7 +131,7 @@
 		ac.apply_id
 	</select>
 	<update id="saveReasonById"
-		parameterType="com.website.model.bean.Commander">
+		parameterType="com.website.bean.Commander">
 		UPDATE apply_commander ac
 		SET ac.status =
 		#{status},ac.refuse_reason = #{refuseReason}

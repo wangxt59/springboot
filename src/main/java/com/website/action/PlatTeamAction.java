@@ -89,7 +89,7 @@ public class PlatTeamAction  extends BaseAction {
 		
 		WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 		/*if (worker == null) {
-			return new ModelAndView("redirect:/login/workLogin.action");
+			return new ModelAndView("redirect:/login/workLogin.do");
 		}*/
 		String team_name = param.get("team_name")+"";
 		String team_code = param.get("team_code")+"";
@@ -120,7 +120,7 @@ public class PlatTeamAction  extends BaseAction {
 		if (CommonsUtil.isNotEmpty(logistics_type)) {
 			platTeam.setLogisticsType(Integer.valueOf(logistics_type));
 		}
-		platTeam.setCreateUser(worker.getWorker_id());
+		platTeam.setCreateUser(worker.getWorkerId());
 		platTeam.setTeamType(1);
 		platTeam.setCreateDate(new Date());
 		platTeam.setUpdateDate(new Date());
@@ -186,7 +186,7 @@ public class PlatTeamAction  extends BaseAction {
 		
 		WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 		/*if (worker == null) {
-			return new ModelAndView("redirect:/login/workLogin.action");
+			return new ModelAndView("redirect:/login/workLogin.do");
 		}*/
 		
 		
@@ -222,7 +222,7 @@ public class PlatTeamAction  extends BaseAction {
 				if (CommonsUtil.isNotEmpty(logistics_type)) {
 					platTeam.setLogisticsType(Integer.valueOf(logistics_type));
 				}
-				platTeam.setCreateUser(worker.getWorker_id());
+				platTeam.setCreateUser(worker.getWorkerId());
 				platTeam.setTeamType(1);
 				platTeam.setUpdateDate(new Date());
 				int count = platTeamService.updatePlatTeam(platTeam);
@@ -303,7 +303,7 @@ public class PlatTeamAction  extends BaseAction {
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 		/*if (worker == null) {
-			return new ModelAndView("redirect:/login/workLogin.action");
+			return new ModelAndView("redirect:/login/workLogin.do");
 		}*/
 		if(pteamId!=null && !"".equals(pteamId)){
 			PlatTeam platTeam = platTeamService.slectPlatTeamByPlatmId(Integer.valueOf(pteamId));

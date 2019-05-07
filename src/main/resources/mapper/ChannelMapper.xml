@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.ChannelMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.Channel">
+  <resultMap id="BaseResultMap" type="com.website.bean.Channel">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
@@ -16,13 +16,13 @@
     from channel
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.website.model.bean.Channel">
+  <insert id="insert" parameterType="com.website.bean.Channel">
     insert into channel (id, name, create_date, 
       status)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.Channel">
+  <insert id="insertSelective" parameterType="com.website.bean.Channel">
     insert into channel
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -53,7 +53,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.Channel">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.bean.Channel">
     update channel
     <set>
       <if test="name != null">
@@ -68,7 +68,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.Channel">
+  <update id="updateByPrimaryKey" parameterType="com.website.bean.Channel">
     update channel
     set name = #{name,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},

@@ -67,7 +67,7 @@ public class OrderInfoAction extends BaseAction{
 	public ModelAndView orderList(ModelAndView modelAndView,HttpSession session,@RequestParam Map map ) {
 		WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 		if (worker == null) {
-			return new ModelAndView("redirect:/login/workLogin.action");
+			return new ModelAndView("redirect:/login/workLogin.do");
 		}
 		
 		Map<String, Object> returnMap = new HashMap<String, Object>();
@@ -155,7 +155,7 @@ public class OrderInfoAction extends BaseAction{
 		public ModelAndView orderDetails(ModelAndView modelAndView,HttpSession session,@RequestParam String id ) {
 			WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 			if (worker == null) {
-				return new ModelAndView("redirect:/login/workLogin.action");
+				return new ModelAndView("redirect:/login/workLogin.do");
 			}
 			Map<String, Object> requestMap = new HashMap<String, Object>();
 			Map<String, Object> returnMap=new HashMap<String, Object>();
@@ -203,7 +203,7 @@ public class OrderInfoAction extends BaseAction{
 		public ModelAndView afterSaleOrder(ModelAndView modelAndView,HttpSession session,@RequestParam Map map ) {
 			WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 			if (worker == null) {
-				return new ModelAndView("redirect:/login/workLogin.action");
+				return new ModelAndView("redirect:/login/workLogin.do");
 			}
 			
 			Map<String, Object> returnMap = new HashMap<String, Object>();
@@ -276,7 +276,7 @@ public class OrderInfoAction extends BaseAction{
 		public ModelAndView refundOrderDetails(ModelAndView modelAndView,HttpSession session,@RequestParam String id ) {
 			WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 			if (worker == null) {
-				return new ModelAndView("redirect:/login/workLogin.action");
+				return new ModelAndView("redirect:/login/workLogin.do");
 			}
 			Map<String, Object> requestMap = new HashMap<String, Object>();
 			Map<String, Object> returnMap=new HashMap<String, Object>();
@@ -352,7 +352,7 @@ public class OrderInfoAction extends BaseAction{
 				@RequestParam(value = "create_date_end", required = false) String create_date_end) {
 			WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 			if (worker == null) {
-				return new ModelAndView("redirect:/login/workLogin.action");
+				return new ModelAndView("redirect:/login/workLogin.do");
 			}
 			// 定义返回值Map
 			Map<String, Object> returnMap = new HashMap<String, Object>();
@@ -408,7 +408,7 @@ public class OrderInfoAction extends BaseAction{
 				@RequestParam(value = "create_date_end", required = false) String create_date_end) {
 			WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 			if (worker == null) {
-				return new ModelAndView("redirect:/login/workLogin.action");
+				return new ModelAndView("redirect:/login/workLogin.do");
 			}
 			// 定义返回值Map
 			Map<String, Object> returnMap = new HashMap<String, Object>();

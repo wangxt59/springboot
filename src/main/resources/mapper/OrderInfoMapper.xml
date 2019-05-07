@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.OrderInfoMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.OrderInfo">
+  <resultMap id="BaseResultMap" type="com.website.bean.OrderInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
     <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
@@ -30,7 +30,7 @@
     <result column="vip_fee" jdbcType="DOUBLE" property="vipFee" />
     <result column="refund_date" jdbcType="TIMESTAMP" property="refundDate" />
   </resultMap>
-  <resultMap id="OrderBaseResultMap" type="com.website.model.bean.OrderInfo">
+  <resultMap id="OrderBaseResultMap" type="com.website.bean.OrderInfo">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="order_code" jdbcType="VARCHAR" property="orderCode" />
     <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
@@ -59,7 +59,7 @@
     <result column="vip_fee" jdbcType="DOUBLE" property="vipFee" />
     <result column="refund_date" jdbcType="TIMESTAMP" property="refundDate" />
     <collection property="orderItemsList" column="id" 
-		javaType="ArrayList" ofType="com.website.model.bean.OrderItems" select="com.website.dao.OrderItemsMapper.selectOrderItemsById">
+		javaType="ArrayList" ofType="com.website.bean.OrderItems" select="com.website.dao.OrderItemsMapper.selectOrderItemsById">
 	</collection>
   </resultMap>
   
@@ -297,7 +297,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <insert id="insert" parameterType="com.website.model.bean.OrderInfo">
+  <insert id="insert" parameterType="com.website.bean.OrderInfo">
     insert into order_info (id, order_code, trade_no, 
       order_total, goods_count, delivery_type, 
       delivery_fee, user_id, user_name, 
@@ -315,7 +315,7 @@
       #{pointId,jdbcType=VARCHAR}, #{receiveDate,jdbcType=TIMESTAMP}, #{refundAmount,jdbcType=DOUBLE}, 
       #{orderDesc,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.OrderInfo" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertSelective" parameterType="com.website.bean.OrderInfo" useGeneratedKeys="true" keyProperty="id">
     insert into order_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -479,7 +479,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.OrderInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.bean.OrderInfo">
     update order_info
     <set>
       <if test="orderCode != null">
@@ -560,7 +560,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.OrderInfo">
+  <update id="updateByPrimaryKey" parameterType="com.website.bean.OrderInfo">
     update order_info
     set order_code = #{orderCode,jdbcType=VARCHAR},
       trade_no = #{tradeNo,jdbcType=VARCHAR},

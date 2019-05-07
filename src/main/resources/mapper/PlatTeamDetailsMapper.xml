@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.PlatTeamDetailsMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.PlatTeamDetails">
+  <resultMap id="BaseResultMap" type="com.website.bean.PlatTeamDetails">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="pteam_id" jdbcType="INTEGER" property="pteamId" />
     <result column="details_type" jdbcType="INTEGER" property="detailsType" />
@@ -37,7 +37,7 @@
   
   
   
-  <insert id="newPlatTeamDetails" parameterType="com.website.model.bean.PlatTeamDetails">
+  <insert id="newPlatTeamDetails" parameterType="com.website.bean.PlatTeamDetails">
     insert into plat_team_details
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null and id  !=''">
@@ -86,7 +86,7 @@
       </if>
     </trim>
   </insert>
-  <insert id="insert" parameterType="com.website.model.bean.PlatTeamDetails">
+  <insert id="insert" parameterType="com.website.bean.PlatTeamDetails">
     insert into plat_team_details (id, pteam_id, details_type, 
       description, create_date, update_date, 
       sort)
@@ -94,7 +94,7 @@
       #{description,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{sort,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.PlatTeamDetails">
+  <insert id="insertSelective" parameterType="com.website.bean.PlatTeamDetails">
     insert into plat_team_details
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

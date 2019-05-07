@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.PlatTeamGoodsMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.PlatTeamGoods">
+  <resultMap id="BaseResultMap" type="com.website.bean.PlatTeamGoods">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="pteam_id" jdbcType="INTEGER" property="pteamId" />
     <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
   </resultMap>
-  <insert id="insert" parameterType="com.website.model.bean.PlatTeamGoods">
+  <insert id="insert" parameterType="com.website.bean.PlatTeamGoods">
     insert into plat_team_goods (id, pteam_id, goods_id, 
       create_date, update_date)
     values (#{id,jdbcType=INTEGER}, #{pteamId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.PlatTeamGoods">
+  <insert id="insertSelective" parameterType="com.website.bean.PlatTeamGoods">
     insert into plat_team_goods
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

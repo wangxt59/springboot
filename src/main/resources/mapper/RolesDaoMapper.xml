@@ -3,7 +3,7 @@
 <mapper namespace="com.power.dao.RolesDao">
 	
 	<!-- 新增角色信息 -->
-	<insert id="insertRolesInfo" parameterType="com.power.model.bean.RolesInfo">
+	<insert id="insertRolesInfo" parameterType="com.power.bean.RolesInfo">
 		insert bus_role  
 			(
 				<if test="role_id != null and role_id != ''">role_id,</if>
@@ -28,7 +28,7 @@
 	</insert>
 
 	<!-- 更新角色信息 -->
-	<update id="updateRoles" parameterType="com.power.model.bean.RolesInfo">
+	<update id="updateRoles" parameterType="com.power.bean.RolesInfo">
 		update bus_role 
 		<set>
 			<if test="role_name != null and role_name != ''">role_name = #{role_name},</if>
@@ -42,7 +42,7 @@
 	</update>
 	
 	<!--查询角色信息 -->
-	<select id="queryRolesInfo" parameterType="java.util.Map" resultType="com.power.model.bean.RolesInfo">
+	<select id="queryRolesInfo" parameterType="java.util.Map" resultType="com.power.bean.RolesInfo">
 				select 
 				role_id,role_name,discribe,create_date,update_date,status_flg,poerator_id
 			from  bus_role
@@ -66,7 +66,7 @@
 	</select>
 	
 	<!--查询角色列表带分页 -->
-	<select id="queryRolesListByPage" parameterType="java.util.Map"  resultType="com.power.model.bean.RolesInfo">
+	<select id="queryRolesListByPage" parameterType="java.util.Map"  resultType="com.power.bean.RolesInfo">
 			select 
 				role_id,role_name,discribe,create_date,update_date,status_flg,poerator_id
 			from  bus_role
@@ -103,7 +103,7 @@
 	</select>
 	
 	<!--查询角色列表 -->
-	<select id="queryRolesList" parameterType="java.util.Map" resultType="com.power.model.bean.RolesInfo">
+	<select id="queryRolesList" parameterType="java.util.Map" resultType="com.power.bean.RolesInfo">
 		select 
 				role_id,role_name,discribe,create_date,update_date,status_flg,poerator_id,rank
 			from  bus_role
@@ -116,7 +116,7 @@
 	</select>
 	
 	<!--查询角色列表 -->
-	<select id="queryRoleById" parameterType="string" resultType="com.power.model.bean.RolesInfo">
+	<select id="queryRoleById" parameterType="string" resultType="com.power.bean.RolesInfo">
 				select 
 				role_id,role_name,discribe,create_date,update_date,status_flg,poerator_id,rank
 			from  bus_role
@@ -144,7 +144,7 @@
 	</select>
 	
 	<!-- 新增用户角色关系信息 -->
-	<insert id="insertRoleUser" parameterType="com.power.model.bean.RUMaping">
+	<insert id="insertRoleUser" parameterType="com.power.bean.RUMaping">
 		insert bus_rumaping  
 			(
 				<if test="ru_id != null and ru_id != ''">ru_id,</if>
@@ -169,12 +169,12 @@
 	</delete>
 	
 	<!--查询用户对应角色信息 -->
-	<select id="queryRUMapingList" parameterType="java.util.Map" resultType="com.power.model.bean.RUMaping">
+	<select id="queryRUMapingList" parameterType="java.util.Map" resultType="com.power.bean.RUMaping">
 		select ru_id,r_id,user_id from bus_rumaping where user_id = #{user_id}
 	</select>
 	
 	<!-- 根据user_id查询对应的角色信息 -->
-	<select id="selectByUserId" parameterType="String" resultType="com.power.model.bean.RUMaping">
+	<select id="selectByUserId" parameterType="String" resultType="com.power.bean.RUMaping">
 		select ru_id,r_id,user_id 
 		from bus_rumaping 
 		where 
@@ -183,7 +183,7 @@
 	
 	<!-- 更新角色关系信息 -->
 	<!-- 更新角色信息 -->
-	<update id="updateRuMaping" parameterType="com.power.model.bean.RUMaping">
+	<update id="updateRuMaping" parameterType="com.power.bean.RUMaping">
 		update bus_rumaping 
 		<set>
 			<if test="r_id != null and r_id != ''">r_id = #{r_id},</if>

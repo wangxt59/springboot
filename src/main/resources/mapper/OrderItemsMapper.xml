@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.OrderItemsMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.OrderItems">
+  <resultMap id="BaseResultMap" type="com.website.bean.OrderItems">
     <id column="item_id" jdbcType="INTEGER" property="itemId" />
     <result column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
@@ -31,7 +31,7 @@
     from order_items
     where item_id = #{itemId,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.website.model.bean.OrderItems">
+  <insert id="insert" parameterType="com.website.bean.OrderItems">
     insert into order_items (item_id, order_id, goods_id, 
       sku_id, goods_name, goods_num, 
       total_money, create_date, update_date, 
@@ -43,7 +43,7 @@
       #{userId,jdbcType=INTEGER}, #{regionPrice,jdbcType=DOUBLE}, #{vipPrice,jdbcType=DOUBLE}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.OrderItems">
+  <insert id="insertSelective" parameterType="com.website.bean.OrderItems">
     insert into order_items
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="itemId != null">
@@ -122,7 +122,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.OrderItems">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.bean.OrderItems">
     update order_items
     <set>
       <if test="orderId != null">
@@ -161,7 +161,7 @@
     </set>
     where item_id = #{itemId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.OrderItems">
+  <update id="updateByPrimaryKey" parameterType="com.website.bean.OrderItems">
     update order_items
     set order_id = #{orderId,jdbcType=INTEGER},
       goods_id = #{goodsId,jdbcType=INTEGER},

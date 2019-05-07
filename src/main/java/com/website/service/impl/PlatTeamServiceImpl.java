@@ -47,7 +47,7 @@ public class PlatTeamServiceImpl implements IPlatTeamService {
 	
 	/* 
 	 * 查询团购列表
-	 * @see com.website.service.IPlatTeamService#selectAll(java.util.Map, com.website.model.bean.PageInfo)
+	 * @see com.website.service.IPlatTeamService#selectAll(java.util.Map, com.website.bean.PageInfo)
 	 */
 	@Override
 	public PageInfo<Map> selectPlatTeamListByMap(Map map, PageInfo pageInfo) {
@@ -91,7 +91,7 @@ public class PlatTeamServiceImpl implements IPlatTeamService {
 	
 	/* 
 	 * 保存团购信息
-	 * @see com.website.service.IPlatTeamService#savePlatTeam(com.website.model.bean.PlatTeam)
+	 * @see com.website.service.IPlatTeamService#savePlatTeam(com.website.bean.PlatTeam)
 	 */
 	@Override
 	public int savePlatTeam(PlatTeam platTeam)
@@ -100,7 +100,7 @@ public class PlatTeamServiceImpl implements IPlatTeamService {
 	}
 	/* 
 	 *更新团购信息
-	 * @see com.website.service.IPlatTeamService#savePlatTeam(com.website.model.bean.PlatTeam)
+	 * @see com.website.service.IPlatTeamService#savePlatTeam(com.website.bean.PlatTeam)
 	 */
 	@Override
 	public int updatePlatTeam(PlatTeam platTeam){

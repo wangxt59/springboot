@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.GoodsInfoMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.GoodsInfo">
+  <resultMap id="BaseResultMap" type="com.website.bean.GoodsInfo">
     <id column="goods_id" jdbcType="INTEGER" property="goodsId" />
     <result column="goods_code" jdbcType="VARCHAR" property="goodsCode" />
     <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
@@ -27,7 +27,7 @@
     <result column="goods_pic" jdbcType="VARCHAR" property="goodsPic" />
     <result column="vip_price" jdbcType="DOUBLE" property="vipPrice" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.website.model.bean.GoodsInfoWithBLOBs">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.website.bean.GoodsInfoWithBLOBs">
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
     <result column="goods_desc" jdbcType="LONGVARCHAR" property="goodsDesc" />
   </resultMap>
@@ -78,7 +78,7 @@
 	</select>
 	
 	
-  <insert id="insert" parameterType="com.website.model.bean.GoodsInfoWithBLOBs">
+  <insert id="insert" parameterType="com.website.bean.GoodsInfoWithBLOBs">
     insert into goods_info (goods_id, goods_code, goods_name, 
       ad_words, create_user_id, status, 
       spec, sale_count, cost_price, 
@@ -98,7 +98,7 @@
       #{returnType,jdbcType=INTEGER}, #{goodsPic,jdbcType=VARCHAR}, #{vipPrice,jdbcType=DOUBLE}, 
       #{description,jdbcType=LONGVARCHAR}, #{goodsDesc,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.GoodsInfoWithBLOBs" useGeneratedKeys="true" keyProperty="goodsId">
+  <insert id="insertSelective" parameterType="com.website.bean.GoodsInfoWithBLOBs" useGeneratedKeys="true" keyProperty="goodsId">
     insert into goods_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="goodsId != null">
@@ -261,7 +261,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.GoodsInfoWithBLOBs">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.bean.GoodsInfoWithBLOBs">
     update goods_info
     <set>
       <if test="goodsCode != null">
@@ -342,7 +342,7 @@
     </set>
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.website.model.bean.GoodsInfoWithBLOBs">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.website.bean.GoodsInfoWithBLOBs">
     update goods_info
     set goods_code = #{goodsCode,jdbcType=VARCHAR},
       goods_name = #{goodsName,jdbcType=VARCHAR},
@@ -371,7 +371,7 @@
       goods_desc = #{goodsDesc,jdbcType=LONGVARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.GoodsInfo">
+  <update id="updateByPrimaryKey" parameterType="com.website.bean.GoodsInfo">
     update goods_info
     set goods_code = #{goodsCode,jdbcType=VARCHAR},
       goods_name = #{goodsName,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.RefundOrderItemsMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.RefundOrderItems">
+  <resultMap id="BaseResultMap" type="com.website.bean.RefundOrderItems">
     <id column="item_id" jdbcType="INTEGER" property="itemId" />
     <result column="refund_id" jdbcType="INTEGER" property="refundId" />
     <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
@@ -42,7 +42,7 @@
     from refund_order_items
     where item_id = #{itemId,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.website.model.bean.RefundOrderItems">
+  <insert id="insert" parameterType="com.website.bean.RefundOrderItems">
     insert into refund_order_items (item_id, refund_id, goods_id, 
       sku_id, goods_name, goods_num, 
       total_money, create_date, update_date, 
@@ -54,7 +54,7 @@
       #{userId,jdbcType=INTEGER}, #{regionPrice,jdbcType=DOUBLE}, #{vipPrice,jdbcType=DOUBLE}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.RefundOrderItems">
+  <insert id="insertSelective" parameterType="com.website.bean.RefundOrderItems">
     insert into refund_order_items
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="itemId != null">
@@ -133,7 +133,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.RefundOrderItems">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.bean.RefundOrderItems">
     update refund_order_items
     <set>
       <if test="refundId != null">
@@ -172,7 +172,7 @@
     </set>
     where item_id = #{itemId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.RefundOrderItems">
+  <update id="updateByPrimaryKey" parameterType="com.website.bean.RefundOrderItems">
     update refund_order_items
     set refund_id = #{refundId,jdbcType=INTEGER},
       goods_id = #{goodsId,jdbcType=INTEGER},

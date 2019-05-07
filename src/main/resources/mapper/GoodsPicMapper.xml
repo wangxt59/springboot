@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.GoodsPicMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.GoodsPic">
+  <resultMap id="BaseResultMap" type="com.website.bean.GoodsPic">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
     <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
@@ -18,7 +18,7 @@
     from goods_pic
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.website.model.bean.GoodsPic">
+  <insert id="insert" parameterType="com.website.bean.GoodsPic">
     insert into goods_pic (id, goods_id, pic_url, 
       create_date, update_date, is_home
       )
@@ -26,7 +26,7 @@
       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{isHome,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.GoodsPic">
+  <insert id="insertSelective" parameterType="com.website.bean.GoodsPic">
     insert into goods_pic
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -69,7 +69,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.GoodsPic">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.bean.GoodsPic">
     update goods_pic
     <set>
       <if test="goodsId != null">
@@ -90,7 +90,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.GoodsPic">
+  <update id="updateByPrimaryKey" parameterType="com.website.bean.GoodsPic">
     update goods_pic
     set goods_id = #{goodsId,jdbcType=INTEGER},
       pic_url = #{picUrl,jdbcType=VARCHAR},

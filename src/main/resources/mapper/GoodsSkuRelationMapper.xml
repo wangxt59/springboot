@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.GoodsSkuRelationMapper">
-  <resultMap id="BaseResultMap" type="com.website.model.bean.GoodsSkuRelation">
+  <resultMap id="BaseResultMap" type="com.website.bean.GoodsSkuRelation">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="sku_id" jdbcType="INTEGER" property="skuId" />
     <result column="relation_id" jdbcType="INTEGER" property="relationId" />
@@ -19,7 +19,7 @@
     from goods_sku_relation
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.website.model.bean.GoodsSkuRelation">
+  <insert id="insert" parameterType="com.website.bean.GoodsSkuRelation">
     insert into goods_sku_relation (id, sku_id, relation_id, 
       img, create_date, update_date, 
       goods_id)
@@ -27,7 +27,7 @@
       #{img,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
       #{goodsId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.website.model.bean.GoodsSkuRelation">
+  <insert id="insertSelective" parameterType="com.website.bean.GoodsSkuRelation">
     insert into goods_sku_relation
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -76,7 +76,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.website.model.bean.GoodsSkuRelation">
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.bean.GoodsSkuRelation">
     update goods_sku_relation
     <set>
       <if test="skuId != null">
@@ -100,7 +100,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.website.model.bean.GoodsSkuRelation">
+  <update id="updateByPrimaryKey" parameterType="com.website.bean.GoodsSkuRelation">
     update goods_sku_relation
     set sku_id = #{skuId,jdbcType=INTEGER},
       relation_id = #{relationId,jdbcType=INTEGER},

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.DeliveryPointMapper">
 	<resultMap id="BaseResultMap"
-		type="com.website.model.bean.DeliveryPoint">
+		type="com.website.bean.DeliveryPoint">
 		<id column="id" jdbcType="INTEGER" property="id" />
 		<result column="user_id" jdbcType="INTEGER" property="userId" />
 		<result column="point_name" jdbcType="VARCHAR"
@@ -45,7 +45,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<insert id="insert"
-		parameterType="com.website.model.bean.DeliveryPoint">
+		parameterType="com.website.bean.DeliveryPoint">
 		insert into delivery_point (id, user_id, point_name,
 		address, longitude, latitude,
 		contact, create_date, update_date,
@@ -65,7 +65,7 @@
 		#{status,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective"
-		parameterType="com.website.model.bean.DeliveryPoint">
+		parameterType="com.website.bean.DeliveryPoint">
 		insert into delivery_point
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -169,7 +169,7 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective"
-		parameterType="com.website.model.bean.DeliveryPoint">
+		parameterType="com.website.bean.DeliveryPoint">
 		update delivery_point
 		<set>
 			<if test="userId != null">
@@ -224,7 +224,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey"
-		parameterType="com.website.model.bean.DeliveryPoint">
+		parameterType="com.website.bean.DeliveryPoint">
 		update delivery_point
 		set user_id =
 		#{userId,jdbcType=INTEGER},

@@ -29,7 +29,7 @@ import javassist.ClassPath;
 //exclude={}用来排除不用的依赖
 @Controller // 标明这是一个SpringMVC的Controller控制器
 //@ImportResource(value={"classpath:config/applicationContext.xml"})//引入xml配置文件
-@MapperScan({"com.*.dao"})
+@MapperScan({"com.power.dao","com.website.dao"})
 @ServletComponentScan
 public class Application {
 //public class Application extends WebMvcConfigurationSupport{

@@ -48,7 +48,7 @@ public class UserWithdrawAction extends BaseAction {
 			@RequestParam(value = "trade_no", required = false) String trade_no) {
 		WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 		if (worker == null) {
-			return new ModelAndView("redirect:/login/workLogin.action");
+			return new ModelAndView("redirect:/login/workLogin.do");
 		}
 		// 定义返回值Map
 		Map<String, Object> returnMap = new HashMap<String, Object>();

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.website.dao.UserFansMapper">
 	<resultMap id="BaseResultMap"
-		type="com.website.model.bean.UserFans">
+		type="com.website.bean.UserFans">
 		<id column="id" jdbcType="INTEGER" property="id" />
 		<result column="commander_id" jdbcType="INTEGER"
 			property="commanderId" />
@@ -24,7 +24,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<insert id="insert"
-		parameterType="com.website.model.bean.UserFans">
+		parameterType="com.website.bean.UserFans">
 		insert into user_fans (id, commander_id, user_id,
 		user_name, header, create_date
 		)
@@ -34,7 +34,7 @@
 		)
 	</insert>
 	<insert id="insertSelective"
-		parameterType="com.website.model.bean.UserFans">
+		parameterType="com.website.bean.UserFans">
 		insert into user_fans
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -78,7 +78,7 @@
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective"
-		parameterType="com.website.model.bean.UserFans">
+		parameterType="com.website.bean.UserFans">
 		update user_fans
 		<set>
 			<if test="commanderId != null">
@@ -100,7 +100,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey"
-		parameterType="com.website.model.bean.UserFans">
+		parameterType="com.website.bean.UserFans">
 		update user_fans
 		set commander_id = #{commanderId,jdbcType=INTEGER},
 		user_id = #{userId,jdbcType=INTEGER},

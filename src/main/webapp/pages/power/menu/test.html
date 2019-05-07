@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jquery tree table demo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/jquery.treeTable.css" rel="stylesheet" type="text/css"/>
+<script language='javascript' src="/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/website/power/menu/js/jquery.treetable.js"></script>
+
+<link href="/treetable/css/jquery.treeTable.css" rel="stylesheet" type="text/css"/>
+<script src="/treetable/javascripts/jquery.js" type="text/javascript"></script>
+<script src="/treetable/javascripts/jquery.treeTable.js" type="text/javascript"></script>
+
+<style>
+td,th{border:1px solid;}
+</style>
+<script>
+//用于构建动态表格的数据集
+var datastore=[
+            {name:'节点1',id:'node1',parent:null},
+            {name:'节点8',id:'node8',parent:null},
+            {name:'节点2',id:'node2',parent:'node1'},
+            {name:'节点3',id:'node3',parent:'node2'},
+            {name:'节点4',id:'node4',parent:'node3'},
+            {name:'节点5',id:'node5',parent:'node4'},
+            {name:'节点6',id:'node6',parent:'node5'},
+            {name:'节点7',id:'node7',parent:'node3'},
+            {name:'节点9',id:'node9',parent:'node1'},
+            {name:'节点10',id:'node10',parent:'node9'}];
+$(function(){
+$("#tree_table").treeTable({expandable:true,clickableNodeNames:true,childPrefix:'child-of-',treeColumn:1});//treeColumn：0表示表格第二列显示树形结构。但是会影响此表单之后的树形表单显示
+for(var i=0;i<datastore.length;i++){
+filltr($("#tree_table"),datastore[i]);
+}
+//$("#tree_table2").treeTable({clickableNodeNames:true});//此处注意，由于第一个表格是第二列作为树形展现，不能在同一个界面里同时使用两个以上表格操作。
+ 
+});
+function filltr(apendtotable,ddataitem){
+    if(ddataitem.parent==null){
+        $("tbody",apendtotable).append("<tr id='"+ddataitem.id+"' class='parentnode'><td>"+ddataitem.name+"</td><td>操作</td></tr>");
+    }else{
+        $("#"+ddataitem.parent,apendtotable).after("<tr id='"+ddataitem.id+"' class='child-of-"+ddataitem.parent+"'><td>"+ddataitem.name+"</td><td>操作</td></tr>");
+    }
+}
+</script>
+</head>
+<body>
+<table id="tree_table" width="300px">
+<thead><tr><th>名称</th><th width="50px">操作</th></tr></thead>
+<tbody>
+<tr id="node-MN00002013040116244821"> <td>第一级1</td><td>&nbsp;&nbsp;操作</td></tr>
+<tr id="node-MN00002013040116244822" class="child-of-node-MN00002013040116244821"> <td>第二级</td><td>&nbsp;&nbsp;操作</td></tr>
+<tr id="node-MN00002013040116244823" class="child-of-node-MN00002013040116244822"> <td>第三级</td><td>&nbsp;&nbsp;操作</td></tr>
+<tr id="node-MN00002013040116244824" class="child-of-node-MN00002013040116244823"> <td>第四级</td><td>&nbsp;&nbsp;操作</td></tr>
+<tr id="node-MN00002013040116244825" class="child-of-node-MN00002013040116244824"> <td>第五级</td><td>&nbsp;&nbsp;操作</td></tr>
+<tr id="node-MN00002013040116244826"> <td>第一级2</td><td>&nbsp;&nbsp;操作</td></tr>
+</tbody>
+<tfoot>
+</tfoot>
+</table>
+<hr>
+动态表单加载
+<table id="tree_table2" width="300px">
+<thead><tr><th>名称</th><th width="50px">操作</th></tr></thead>
+<tbody></tbody>
+</table>
+</body>
+</html>

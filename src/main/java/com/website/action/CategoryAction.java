@@ -87,7 +87,7 @@ public class CategoryAction extends BaseAction {
 	public String insertCategory(HttpServletRequest request,Category category, HttpSession session) {
 		
 		WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
-		String operator = worker.getWorker_name();
+		String operator = worker.getWorkerName();
 		
 		String parent_id = category.getParent_id();
 		category.setCreate_date(new Date());//发表时间
@@ -214,7 +214,7 @@ public class CategoryAction extends BaseAction {
 		String images_path = FileUtil.getProperty("images_path");
 		WorkerInfo worker = (WorkerInfo) session.getAttribute("workerInfo");
 		category_id=category.getCategory_id();
-		category.setOperator(worker.getWorker_name());
+		category.setOperator(worker.getWorkerName());
 		category.setUpdate_date(new Date());
 		
 		//判断二级分类是否选中如果选中了则添加的是三级分类信息
