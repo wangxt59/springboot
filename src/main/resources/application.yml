@@ -1,5 +1,5 @@
 server:
-  port: 8070
+  port: 80
   context-path: /
 # 拦截器  进入mvc的规则  意思是要在请求前加/**
   servlet-path: /
